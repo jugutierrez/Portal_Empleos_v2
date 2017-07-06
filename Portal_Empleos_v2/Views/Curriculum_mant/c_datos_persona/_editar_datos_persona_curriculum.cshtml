@@ -1,0 +1,215 @@
+﻿<div class="well" ng-controller="data1">
+    <h1 class="text-center">DATOS PERSONALES</h1>
+    <hr><form ng-submit="actualizar_datos_persona()" data-ng-controller="data1" ng-init="listar_datos_personas()" >
+    <div class="row">
+
+
+
+
+        <div ng-show="ver_datos">
+            <img src="~/Images/indicator.white.gif" /> Cargando ...
+        </div>
+        <div ng-show="!ver_datos && !error_datos && datos_per == null">
+            No se Encontraron resultados ...
+
+        </div>
+        <div ng-show="!ver_datos && error_datos ">
+            error viejo no cargo ...
+
+        </div>
+
+        <div ng-show="!ver_datos && !error_datos && datos_per != null">
+            <div class="col-md-12">
+                <div class="well">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="exampleInputEmail1">Nombre:</label>
+                                <input class="form-control input-lg" id="nombre_persona" name="nombre_persona" ng-model="update_nombre_persona"  placeholder="EJ:Juan"
+                                       type="text">
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="exampleInputPassword1">Apellido Paterno:</label>
+                                <input class="form-control input-lg" id="apellido_paterno_persona" name="apellido_paterno_persona" ng-model="update_apellido_paterno_persona"
+                                       placeholder="EJ: Gutierrez" type="text" >
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="exampleInputPassword1">Apellido Materno:</label>
+                                <input class="form-control input-lg" id="apellido_materno_persona" name="apellido_materno_persona"
+                                       placeholder="EJ: Ascencio" type="text" ng-model="update_apellido_materno_persona" >
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="exampleInputPassword1"> Identificacion:</label>
+                                <input class="form-control input-lg" id="identificacion_persona" name="identificacion_persona"
+                                       placeholder="EJ: 18356397-1" type="text" ng-model="update_identificacion_persona" >
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                        
+                            <div class="form-group" ng-init="identificacion_persona()">
+                                <label class="control-label" for="exampleInputPassword1">Tipo de Identificacion</label>
+                                <select ng-model="update_id_tipo_identificacion_persona"  class="form-control input-lg" ng-options="t_c.id_tipo_identificacion_persona as t_c.nombre_tipo_identificacion_persona for t_c in tipo_identificacion">
+                                    <option value="">---Seleccione---</option>
+                                    <option value=""></option>
+                                </select>
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="exampleInputPassword1">Region</label>
+                                    @Html.DropDownList("id_region", null, "Seleccione...", new { @class = "form-control input-lg" })
+
+                            </div>
+                        
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="exampleInputPassword1">Ciudad</label>
+                                    @Html.DropDownList("id_ciudad", null, "Seleccione...", new { @class = "form-control input-lg", @readonly = "readonly" })
+
+                            </div>
+                         
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="exampleInputPassword1">Comuna</label>
+                                    @Html.DropDownList("id_comuna", null, "Seleccione...", new { @class = "form-control input-lg", @readonly = "readonly" })
+
+                            </div>
+                          
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="exampleInputPassword1">Direccion:</label>
+                                <input class="form-control input-lg" id="direccion_curriculum" name="direccion_curriculum"
+                                       placeholder="EJ: Bahia mansa 0798" type="text" ng-model="update_direccion_curriculum" >
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label class="control-label" for="exampleInputPassword1"> Fecha de Nacimiento:</label>
+
+                                <input type="datetime" class="form-control input-lg" id="exampleInput" name="input" ng-model="update_fecha_nacimiento_persona" 
+                                       placeholder="yyyy-MM-dd" min="1950-01-01" max="{{currentdate}}"  />
+                           
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-6">
+
+                            <div class="form-group" ng-init="rellenar_genero()">
+
+                                <label class="control-label" for="exampleInputPassword1">Genero:</label>
+                                <select ng-model="update_id_tipo_persona" class="form-control input-lg" ng-options="r_gen.id_tipo_persona as r_gen.nombre_tipo_persona for r_gen in rellenar_ge">
+                                    <option value="">---Seleccione---</option>
+                                    <option value=""></option>
+                                </select>
+
+                    
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <div class="form-group ">
+                                <label class="control-label" for="exampleInputPassword1">Sueldo esperado:</label>
+                                <div class="input-group form-inline">
+                                    <div class="input-group-addon">$</div>
+                                    <input class="form-control input-lg" id="sueldo_esperado" name="sueldo_esperado"
+                                           placeholder="EJ: 800000" type="text" ng-model="update_sueldo_esperado" >
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                  
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="exampleInputPassword1">Correo Electronico:</label>
+                                <input class="form-control input-lg" id="correo_electronico_persona" name="correo_electronico_persona"
+                                       placeholder="EJ: maipu@maipu.cl" type="email" ng-model="update_correo_electronico_persona">
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="exampleInputPassword1"> Telefono de Contacto:</label>
+                                <input class="form-control input-lg" id="telefono_curriculum_1" name="telefono_curriculum_1"
+                                       placeholder="EJ: 02-5555555" type="text" ng-model="update_telefono_curriculum_1" >
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="exampleInputPassword1">Telefono de Contacto(Celular):</label>
+                                <input class="form-control input-lg" id="telefono_curriculum_2" name="telefono_curriculum_2"
+                                       placeholder="EJ: +569-77777777" type="text" ng-model="update_telefono_curriculum_2">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="well">
+            <div class="form-group ">
+
+                <button type="submit"  class="btn btn-block  btn-lg btn-info">
+                    <i class="fa fa-fw fa-spin fa-star"></i>Actualizar
+                </button>
+
+
+            </div>
+            <div class="form-group ">
+                <div ng-controller="data1">
+
+                    <a href="" class="btn  btn-block btn-danger btn-lg" ng-click="cerrarmodal()">Cancelar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+    </div>

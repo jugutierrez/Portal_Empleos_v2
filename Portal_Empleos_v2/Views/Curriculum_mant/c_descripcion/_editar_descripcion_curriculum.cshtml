@@ -1,0 +1,66 @@
+﻿<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <form name="mainForm" data-ng-submit="actualiza_descripcion()" data-ng-controller="data1" ng-model="actualizar_descripcion" novalidate>
+            <div class="well">
+                <h2 class="text-center">Descripcion y presentacion Curriculum</h2>
+                <hr>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <h3 class="text-center">Modifique su presentacion&nbsp;</h3>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="col-md-12">
+
+
+
+                            <div ng-show="ver_desc">
+                                <img src="~/Images/indicator.white.gif" /> Cargando ...
+                            </div>
+                            <div ng-show="!ver_desc && desc_curriculum.length <= 0">
+                                No se Encontraron resultados ...
+                                {{ver_desc}}
+                                {{desc_curriculum.length}}
+                            </div>
+                            <div ng-show="!ver_desc && error_desc">
+                                baia ...
+                          
+                            </div>
+                            <div ng-show="desc_curriculum.length > 0">
+                                <ul class="list-group">
+                                    <li class="list-group-item list-group-item-info"><h5 class="text-muted">{{desc_curriculum}}</h5></li>
+                                </ul>
+
+                            </div>
+
+
+                        </div>
+                        <h3>Mi Presentacion (Maximo De Caracteres: 500)</h3>
+                        @Html.TextArea("descripcion_curriculum", "{{desc_curriculum}}", new
+                   {
+                       @class = " form-control default",
+                       placeholder = "EJ: hola  nombre es...",
+                       maxlength = "500",
+                       rows = "5",
+                       style = "resize:none;",
+                       @ng_model = "actualizar_descripcion.descripcion_curriculum",
+                       @ng_init = "actualizar_descripcion.descripcion_curriculum = desc_curriculum"
+                   })
+
+
+                    </li>
+                    <li class="list-group-item">
+                        <button type="submit" class="btn btn-block btn-info btn-lg">Actualizar</button>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="form-group ">
+                            <div ng-controller="data1">
+
+                                <a href="" class="btn  btn-block btn-danger btn-lg" ng-click="cerrarmodal()">Cancelar</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            </form>
+</div>
+    </div>

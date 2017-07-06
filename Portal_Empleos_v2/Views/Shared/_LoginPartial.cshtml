@@ -1,0 +1,82 @@
+﻿@using Microsoft.AspNet.Identity
+
+<div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+  
+   @if (Request.IsAuthenticated)
+   {
+        <a href='@Url.Action("Index", "Curriculum_mant")' class="navbar-brand" >
+            <div class="row">
+                <div class="col-xs-2">
+                <img height="25" alt="Inicio" src='@Url.Content("~/Images/logo_muni.png")' class="center-block">
+            </div>
+                <div class="col-xs-10">
+                    <span class="label label-info"> Portal De Empleos</span>
+                </div>
+            </div>
+        </a>
+   }
+   else
+   {
+    <a href='@Url.Action("Index", "inicio")' class="navbar-brand">
+        <div class="row">
+            <div class="col-xs-2">
+                <img height="25" alt="Inicio" src='@Url.Content("~/Images/logo_muni.png")' class="center-block">
+            </div>
+            <div class="col-xs-10">
+                <span class="label label-info"> Portal De Empleos</span>
+            </div>
+        </div>
+    </a>
+   }
+
+</div>
+<div class="navbar-collapse collapse">
+  
+
+
+    @if (Request.IsAuthenticated)
+    {
+        <ul class="nav navbar-nav">
+           
+            <li>@Html.ActionLink("Mi Curriculum", "vista_curriculum", "Curriculum_mant")</li>
+            <li>@Html.ActionLink("Mis Postulaciones", "vista_postulaciones", "Curriculum_mant")</li>
+            <li>@Html.ActionLink("Listado de Ofertas", "Index", "Ofertas_control")</li>
+             <li>@Html.ActionLink("Preguntas Frecuentes", "Index", "faq")</li>
+       
+        </ul>
+        using (Html.BeginForm("LogOff", "login", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+          
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>@Html.ActionLink("Soporte", "index", "soporte")</li>
+
+                <li>
+                    @Html.ActionLink("Hola " + User.Identity.GetUserName() + "!", "index", "cuenta", routeValues: null, htmlAttributes: new { title = "Manage" })
+                </li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a></li>
+            </ul>
+        }
+    }
+    else
+    {
+        <ul class="nav navbar-nav">
+            <li>@Html.ActionLink("Listado de Ofertas", "filtrar_basico", "Ofertas_Control")</li>
+
+            <li>@Html.ActionLink("Preguntas Frecuentes", "Index", "faq")</li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          
+                <li>@Html.ActionLink("Soporte", "index", "soporte")</li>
+            
+                <li ><a href="@Url.Action("index","login" , new {returnUrl="a" })"  >Iniciar Sesion</a></li>
+               @* <li>@Html.ActionLink("Registrate", "vista_registro", "login", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
+           
+</ul>
+    }
+</div>

@@ -1,0 +1,40 @@
+﻿<div class="panel panel-primary">
+    <div class="panel-heading clearfix">
+
+        <div class="pull-right">
+            
+            <div ng-controller="data1">
+                <a href="" ng-click="abremodal('../Curriculum_mant/editar_vista_descripcion_curriculum' ,'')" class="btn btn-default "><i class="fa fa-fw fa-lg fa-plus-circle text-warning"></i>Editar</a>
+            </div>
+            </div>
+        <div class="pull-left">
+            <h3> Mi Presentación</h3>
+        </div>
+    </div>
+    <div class="panel-body" style="word-break: break-word">
+        <div class="col-md-12">
+     
+          
+         
+            <div ng-show="ver_desc">
+                <img src="~/Images/indicator.white.gif" /> Cargando ...
+            </div>
+            <div ng-show="!ver_desc && desc_curriculum.length <= 0">
+                No se Encontraron resultados ...
+                {{ver_desc}}
+                {{desc_curriculum.length}}
+            </div>
+            <div ng-show="!ver_desc && error_desc">
+               <span class="text-center"> Ingrese Una Presentacion Acorde a usted mismo</span>
+            </div>
+                <div ng-show="desc_curriculum.length > 0">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-info"><h5 class="text-muted">{{desc_curriculum}}</h5></li>
+                        </ul>
+                      
+</div>
+               
+               
+            </div>
+    </div>
+</div>

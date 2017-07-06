@@ -1,0 +1,45 @@
+﻿<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <form name="mainForm" data-ng-submit="agregar_profesion()" data-ng-controller="data1" ng-model="agrega_profesion" >
+            <div class="text-center well">
+                <h1 class="text-center">Profesiones preferenciales</h1>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <h3>Seleccione una Profesion</h3>
+                    </li>
+                    <li class="list-group-item">
+                   
+                        <div class="form-group" ng-init="rellenar_profesiones()">
+
+                            <select ng-model="agrega_profesion.id_profesion" class="form-control input-lg" ng-options="r_pro.id_profesion as r_pro.nombre_profesion for r_pro in rellenar_pro" required>
+                                <option value="">---Seleccione---</option>
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-block btn-info btn-lg">Agregar</button>
+                            </div>
+
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group ">
+                                
+
+                                        <a href="" class="btn  btn-block btn-danger btn-lg" ng-click="cerrarmodal()">Cancelar</a>
+                                   
+                                </div>
+                            </div>
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            </form>
+</div>
+</div>
