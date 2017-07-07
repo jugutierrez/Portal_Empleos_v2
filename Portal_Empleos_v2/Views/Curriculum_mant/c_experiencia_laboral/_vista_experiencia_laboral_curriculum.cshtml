@@ -26,7 +26,7 @@
 
             </div>
             <div ng-show="exp_curriculum.length > 0">
-                <div ng-repeat="exp_c in exp_curriculum">
+                <div ng-repeat="exp_c in exp_curriculum track by $index">
                  
                     <div class="well">
                         <div class="row" style="border:dashed;margin-bottom:5px;">
@@ -41,7 +41,7 @@
                                         <h4 class="text-center">Desde:</h4>
                                     </div>
                                     <div class="col-xs-12">
-                                        <h4 class="text-info text-center">{{exp_c.ano_inicio_experiencia_laboral.replace('/Date(','').replace(')/','') | date:'dd-MM-yyyy'}}</h4>
+                                        <h4 class="text-info text-center">{{::exp_c.ano_inicio_experiencia_laboral.replace('/Date(','').replace(')/','') | date:'dd-MM-yyyy'}}</h4>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -50,7 +50,7 @@
                                         <h4 class="text-center">Hasta:</h4>
                                     </div>
                                     <div class="col-xs-12">
-                                        <h4 class="text-info text-center"> {{exp_c.ano_termino_experiencia_laboral.replace('/Date(','').replace(')/','') | date:'dd-MM-yyyy'}}</h4>
+                                        <h4 class="text-info text-center"> {{::exp_c.ano_termino_experiencia_laboral.replace('/Date(','').replace(')/','') | date:'dd-MM-yyyy'}}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -58,7 +58,7 @@
                                 <div class="row" >
                                     <div class="col-xs-8">
                                        
-                                            <h4>Cargo Ejercido:</h4> <h4 class="text-info">{{exp_c.nombre_experiencia_laboral}}</h4>
+                                            <h4>Cargo Ejercido:</h4> <h4 class="text-info">{{::exp_c.nombre_experiencia_laboral}}</h4>
                                         
                                     </div>
                                     <div class="col-xs-4">
@@ -71,18 +71,18 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-4">
-                                        Responsabilidad Cargo: <h4 class="text-info">{{exp_c.nombre_cargo_experiencia_laboral}}</h4>
+                                        Responsabilidad Cargo: <h4 class="text-info">{{::exp_c.nombre_cargo_experiencia_laboral}}</h4>
                                     </div>
                                     <div class="col-xs-4">
-                                        Empresa: <h4 class="text-info">{{exp_c.empresa_experiencia_laboral}}</h4>
+                                        Empresa: <h4 class="text-info">{{::exp_c.empresa_experiencia_laboral}}</h4>
                                     </div>
                                     <div class="col-xs-4">
-                                        Area: <h4 class="text-info">{{exp_c.nombre_area_experiencia_laboral}}</h4>
+                                        Area: <h4 class="text-info">{{::exp_c.nombre_area_experiencia_laboral}}</h4>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        Descripcion de tareas realizadas:<h4 class="text-info">{{exp_c.detalle_experiencia_laboral}}</h4>
+                                        Descripcion de tareas realizadas:<h4 class="text-info">{{::exp_c.detalle_experiencia_laboral}}</h4>
                                     </div>
                                 </div>
                                 
@@ -107,18 +107,18 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-6">
-                                                    <h4> Nombre:</h4><h4 class="text-info">{{exp_c.referencia_laboral.nombre_referencia_laboral}}</h4>
+                                                    <h4> Nombre:</h4><h4 class="text-info">{{::exp_c.referencia_laboral.nombre_referencia_laboral}}</h4>
                                                 </div>
                                                 <div class="col-xs-6">
-                                                    <h4> Cargo:</h4><h4 class="text-info">{{exp_c.referencia_laboral.cargo_referencia_laboral}}</h4>
+                                                    <h4> Cargo:</h4><h4 class="text-info">{{::exp_c.referencia_laboral.cargo_referencia_laboral}}</h4>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-6">
-                                                    <h4> Telefono:</h4><h4 class="text-info">{{exp_c.referencia_laboral.contacto_referencia_laboral}}</h4>
+                                                    <h4> Telefono:</h4><h4 class="text-info">{{::exp_c.referencia_laboral.contacto_referencia_laboral}}</h4>
                                                 </div>
                                                 <div class="col-xs-6">
-                                                    <h4> Email:</h4><h4 class="text-info">{{exp_c.referencia_laboral.correo_referencia_laboral}}</h4>
+                                                    <h4> Email:</h4><h4 class="text-info">{{::exp_c.referencia_laboral.correo_referencia_laboral}}</h4>
                                                 </div>
                                             </div>
                                         </div>

@@ -30,12 +30,12 @@
             </div>
             <div ng-show="idioma_curriculum.length > 0">
                 <div ng-controller="data1">
-                    <div ng-repeat="idioma_c in idioma_curriculum">
+                    <div ng-repeat="idioma_c in idioma_curriculum track by $index">
 
 
                         <h3>
                             <span class="label label-info item-select">
-                                {{idioma_c.nombre_idioma}} ({{idioma_c.nombre_nivel_idioma}}) 
+                                {{::idioma_c.nombre_idioma}} ({{::idioma_c.nombre_nivel_idioma}}) 
                                 <a ng-click="abremodal('../Curriculum_mant/eliminar_vista_idiomas_curriculum/' , idioma_c.id_idioma_curriculum)">
 
                                     <i class="fa  fa-close"></i>

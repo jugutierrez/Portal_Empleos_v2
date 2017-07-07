@@ -17,37 +17,39 @@ namespace Portal_Empleos_v2
 
             // Utilice la versión de desarrollo de Modernizr para desarrollar y obtener información. De este modo, estará
             // preparado para la producción y podrá utilizar la herramienta de compilación disponible en http://modernizr.com para seleccionar solo las pruebas que necesite.
-            // bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-            //           "~/Scripts/modernizr-*"));
-            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
-                           "~/Scripts/angular.js",
-                           "~/Scripts/angular-route.js",
-                           "~/Scripts/ngDialog.js"));
+            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+                     "~/Scripts/modernizr-*"));
+
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/angularUiDirectives")
-    .Include("~/Scripts/angular-ui/ui-bootstrap.min.js",
-    "~/Scripts/angular-ui/ui-bootstrap.js",
-    "~/Scripts/angular-ui/ui-bootstrap-tpls.js",
-    "~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/testscript")
-.Include("~/Scripts/control_angular/ajaxjs.js",
- "~/Scripts/controles_jasc.js"));
+
+
+            bundles.Add(new ScriptBundle("~/bundles/otrojs").Include(
+        "~/Scripts/controles_jasc.js"));
+
+
+            bundles.Add(new ScriptBundle("~/bundles/angular1").Include(
+
+                     "~/Scripts/control_angular/modulo.js",
+                     "~/Scripts/control_angular/services.js",
+                      "~/Scripts/control_angular/controller.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
+                "~/Scripts/angular.js",
+                "~/Scripts/angular-animate.js",
+                "~/Scripts/angular-aria.js",
+                "~/Scripts/angular-material.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                    "~/Content/font-awesome.css",
+                        "~/Content/font-awesome.css",
                     "~/Content/font-awesome.min.css",
+                      "~/Content/angular-material.css",
                       "~/Content/site.css"));
-
-            bundles.Add(new StyleBundle("~/Content/css2").Include(
-                    "~/Content/ngDialog-theme-default.css",
-                  "~/Content/ngDialog.css",
-                    "~/Content/ngDialog.min.css"));
         }
     }
 }

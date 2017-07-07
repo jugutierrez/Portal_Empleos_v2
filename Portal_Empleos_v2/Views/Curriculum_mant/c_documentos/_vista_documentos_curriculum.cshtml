@@ -29,7 +29,7 @@
             </div>
             <div ng-show="doc_curriculum.length > 0">
                 <div ng-controller="data1">
-                    <div ng-repeat="doc_c in doc_curriculum">
+                    <div ng-repeat="doc_c in doc_curriculum track by $index">
 
 
                         <h3>

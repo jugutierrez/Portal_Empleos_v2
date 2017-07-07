@@ -1,15 +1,7 @@
-﻿$(".btn1").on("click", function () {
-    var url = $(this).data('url');
-    $(".modaldiv").html("Cargando...");
-    $.get(url, function (data) {
+﻿
 
+ 
 
-        $(".modaldiv").html(data);
-
-
-    });
-
-});
 
 function soloNumeros(e) {
     var key = window.Event ? e.which : e.keyCode
@@ -19,6 +11,7 @@ function soloNumeros(e) {
 
 $(document).ready(function (e) {
 
+ 
 
     $('[data-toggle="tooltip"]').tooltip();
     $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
@@ -57,6 +50,7 @@ function nextTab(elem) {
 function prevTab(elem) {
     $(elem).prev().find('a[data-toggle="tab"]').click();
 }
+
 $(document).ready(function (e) {
     $('#id_ciudad').empty();
     $('#id_ciudad').append('<option selected="selected" value="">Seleccione...</option>');

@@ -14,24 +14,24 @@
     <div class="panel-body">
         <div class="col-md-12">
      
-            <div ng-show="ver_foto">
+            <div ng-if="ver_foto">
                 <img src="~/Images/indicator.white.gif" /> Cargando ...
             </div>
-            <div ng-show="!ver_foto && !error_foto && foto_per.foto_curriculum == null">
+            <div ng-if="!ver_foto && error_foto && foto_per === undefined">
                 No se Encontraron resultados ...
 
 
             </div>
-            <div ng-show="!ver_foto && error_foto">
+            <div ng-if="!error_foto">
                 error viejo no cargo ...
 
             </div>
 
-            <div ng-show="!ver_foto && !error_foto && foto_per.foto_curriculum != null">
+            <div ng-if="foto_per">
 
-                <img data-ng-src="data:image/png;base64,{{foto_per.foto_curriculum}}" data-err-src="http://k15.kn3.net/05DC618D2.jpg" class="center-block img-responsive img-thumbnail" />
-             
-      
+                <img data-ng-src="data:image/png;base64,{{::foto_per.foto_curriculum}}" data-err-src="http://k15.kn3.net/05DC618D2.jpg" class="center-block img-responsive img-thumbnail" />
+
+
             </div>
 
 

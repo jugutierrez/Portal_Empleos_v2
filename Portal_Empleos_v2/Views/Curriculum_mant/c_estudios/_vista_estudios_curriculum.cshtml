@@ -28,7 +28,7 @@
 
             </div>
             <div ng-show="est_curriculum.length > 0">
-                <div ng-repeat="est_c in est_curriculum">
+                <div ng-repeat="est_c in est_curriculum track by $index">
 
                   
                     <div class="well">
@@ -44,7 +44,7 @@
                                         <h4 class="text-center">Desde:</h4>
                                     </div>
                                     <div class="col-xs-12">
-                                        <h4 class="text-info text-center">{{est_c.ano_inicio_estudio_curriculum.replace('/Date(','').replace(')/','') | date:'dd-MM-yyyy'}}</h4>
+                                        <h4 class="text-info text-center">{{::est_c.ano_inicio_estudio_curriculum.replace('/Date(','').replace(')/','') | date:'dd-MM-yyyy'}}</h4>
                                     </div>
 
                                 </div>
@@ -53,14 +53,14 @@
                                         <h4 class="text-center">Hasta:</h4>
                                     </div>
                                     <div class="col-xs-12">
-                                        <h4 class="text-info text-center">{{est_c.ano_termino_estudio_curriculum.replace('/Date(','').replace(')/','') | date:'dd-MM-yyyy'}}</h4>
+                                        <h4 class="text-info text-center">{{::est_c.ano_termino_estudio_curriculum.replace('/Date(','').replace(')/','') | date:'dd-MM-yyyy'}}</h4>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xs-8">
                                 <div class="row">
                                     <div class="col-xs-8">
-                                        <h4>  Titulo: </h4>  <h4 class="text-info"> {{est_c.nombre_estudio}}</h4>
+                                        <h4>  Titulo: </h4>  <h4 class="text-info"> {{::est_c.nombre_estudio}}</h4>
                                     </div>
                                     <div class="col-xs-4">
                                         <div class="text-center well-sm">
@@ -75,10 +75,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-6">
-                                        <h4>  Institucion: </h4>     <h4 class="text-info"> {{est_c.nombre_institucion}}</h4>
+                                        <h4>  Institucion: </h4>     <h4 class="text-info"> {{::est_c.nombre_institucion}}</h4>
                                     </div>
                                     <div class="col-xs-6">
-                                        <h4>  Tipo de Estudio: </h4>     <h4 class="text-info"> {{est_c.nombre_tipo_estudio}}</h4>
+                                        <h4>  Tipo de Estudio: </h4>     <h4 class="text-info"> {{::est_c.nombre_tipo_estudio}}</h4>
                                     </div>
                                 </div>
                             </div>

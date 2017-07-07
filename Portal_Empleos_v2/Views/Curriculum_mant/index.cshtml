@@ -3,9 +3,9 @@
 }
 <div class="container" ng-controller="inicio_portal">
 
-        <div class="row" ng-init="p_i()">
+        <div class="row" ng-init="p_i()" ng-controller="HomeCtrl">
             <div class="col-md-12">
-                <div class="well">
+              
                     <h1 class="text-center">Inicio</h1>
                     <hr>
                     <div class="row">
@@ -18,52 +18,51 @@
                                                 <h3 class="text-muted">Mi Perfil</h3>
                                             </div>
                                             <div class="panel-body" ng-controller="HomeCtrl">
-                                                
 
-
-                                                            <div class="row"  ng-init="datos_persona()">
+                                                            <div class="row" ng-init="datos_persona()" >
                                                                 <div class="col-md-5" ng-init="foto_persona()">
-                                                                    <div ng-show="ver_foto">
+                                                                    <div ng-if="ver_foto" >
                                                                         <img src="~/Images/indicator.white.gif" /> Cargando ...
                                                                     </div>
-                                                                    <div ng-show="!ver_foto && !error_foto && foto_per == null">
+                                                                    <div ng-if="!ver_foto && error_foto && foto_per === undefined">
                                                                         No se Encontraron resultados ...
 
 
                                                                     </div>
-                                                                    <div ng-show="!ver_foto && error_foto">
+                                                                    <div ng-if="!error_foto">
                                                                         error viejo no cargo ...
 
                                                                     </div>
 
-                                                                    <div ng-show="!ver_foto && !error_foto && foto_per != null">
+                                                                    <div ng-if="foto_per">
 
-                                                                        <img data-ng-src="data:image/png;base64,{{foto_per.foto_curriculum}}" data-err-src="http://k15.kn3.net/05DC618D2.jpg" class="center-block img-responsive img-thumbnail" />
+                                                                        <img data-ng-src="data:image/png;base64,{{::foto_per.foto_curriculum}}" data-err-src="http://k15.kn3.net/05DC618D2.jpg" class="center-block img-responsive img-thumbnail" />
 
 
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-7">
                                                                     
-                                                                        <div ng-show="ver_datos">
+                                                                        <div ng-if="load_datos">
                                                                             <img src="~/Images/indicator.white.gif" /> Cargando ...
                                                                         </div>
-                                                                        <div ng-show="!ver_datos && !error_datos && datos_per == null">
+                                                                        <div ng-if="!load_datos &&  error_datos && datos_per === undefined">
                                                                             No se Encontraron resultados ...
 
                                                                         </div>
-                                                                        <div ng-show="!ver_datos && error_datos ">
+                                                                        <div ng-if="!error_datos">
                                                                             error viejo no cargo ...
 
                                                                         </div>
 
-                                                                        <div ng-show="!ver_datos && !error_datos && datos_per != null">
+                                                                        <div ng-if="datos_per">
                                                                             <ul class="list-group">
-                                                                                <li class="list-group-item"> {{datos_per.nombre_persona}} {{datos_per.apellido_paterno_persona}} {{datos_per.apellido_materno_persona}}</li>
-                                                                                <li class="list-group-item">{{datos_per.correo_electronico_persona}}</li>
-                                                                                <li class="list-group-item">{{datos_per.identificacion_persona}}</li>
+                                                                                <li class="list-group-item"> {{datos_per.nombre_persona}} {{::datos_per.apellido_paterno_persona}} {{::datos_per.apellido_materno_persona}}</li>
+                                                                                <li class="list-group-item">{{::datos_per.correo_electronico_persona}}</li>
+                                                                                <li class="list-group-item">{{::datos_per.identificacion_persona}}</li>
 
                                                                             </ul>
+                                                                          
                                                                 </div>
                                                                 </div>
                                                             </div>
@@ -79,26 +78,26 @@
                                             <div class="panel-heading">
                                                 <h3 class="text-muted">Estado postulaciones</h3>
                                             </div>
-                                            <div ng-show="ver_p_i">
+                                            <div ng-if="ver_p_i">
                                                 <img src="~/Images/indicator.white.gif" /> Cargando ...
                                             </div>
-                                            <div ng-show="!ver_p_i && !ver_error_p_i && postulaciones_inicio == null">
+                                            <div ng-if="!ver_p_i &&ver_error_p_i && postulaciones_inicio === undefined">
                                                 No se Encontraron resultados ...
 
                                             </div>
-                                            <div ng-show="!ver_p_i&& ver_error_p_i ">
+                                            <div ng-if="!ver_error_p_i">
                                                 error viejo no cargo ...
 
                                             </div>
 
-                                            <div ng-show="!ver_p_i && !ver_error_p_i && postulaciones_inicio != null">
+                                            <div ng-if="postulaciones_inicio">
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <ul class="list-group">
-                                                                <li class="list-group-item">Te has postulado en:<span class="label label-info"> {{postulaciones_inicio.cantidad_postulaciones}} Ofertas </span> </li>
-                                                                <li class="list-group-item">Veces que se ha visto tu curriculum: <span class="label label-info"> {{postulaciones_inicio.evaluacion_postulaciones}} Ofertas </span></li>
-                                                                <li class="list-group-item">Ofertas en que te estan evaluando:<span class="label label-info"> {{postulaciones_inicio.finalista_postulaciones}} Ofertas </span></li>
+                                                                <li class="list-group-item">Te has postulado en:<span class="label label-info"> {{::postulaciones_inicio.cantidad_postulaciones}} Ofertas </span> </li>
+                                                                <li class="list-group-item">Veces que se ha visto tu curriculum: <span class="label label-info"> {{::postulaciones_inicio.evaluacion_postulaciones}} Ofertas </span></li>
+                                                                <li class="list-group-item">Ofertas en que te estan evaluando:<span class="label label-info"> {{::postulaciones_inicio.finalista_postulaciones}} Ofertas </span></li>
                                                               
                                                             </ul>
                                                         </div>
@@ -147,23 +146,23 @@
                                             </div>
                                             <div class="panel-body" >
                                                 
-                                                        <div ng-show="ver_p_o">
+                                                        <div ng-if="ver_p_o">
                                                             <img src="~/Images/indicator.white.gif" /> Cargando ...
                                                         </div>
-                                                        <div ng-show="!ver_p_o && !ver_error_p_o && postulaciones_inicio_ofertas.length <= 0">
+                                                        <div ng-if="!ver_p_o  && ver_error_p_o && postulaciones_inicio_ofertas === undefined">
                                                             No se Encontraron resultados ...
 
                                                         </div>
-                                                        <div ng-show="!ver_p_o && ver_error_p_o ">
+                                                        <div ng-if="!ver_error_p_o ">
                                                             error viejo no cargo ...
 
                                                         </div>
 
-                                                <div ng-show="!ver_p_o && !ver_error_p_o && postulaciones_inicio_ofertas.length > 0">
+                                                <div ng-if="postulaciones_inicio_ofertas">
                                                     <ul class="list-group">
-                                                        <li class="list-group-item" ng-repeat="p_o in postulaciones_inicio_ofertas">
+                                                        <li class="list-group-item" ng-repeat="p_o in postulaciones_inicio_ofertas track by $index">
                                                         
-                                                            <h3>   <a href="~/Ofertas_Control/vista_detalle_oferta/{{p_o.id_oferta}}">{{p_o.nombre_oferta}}</a></h3>
+                                                            <h3>   <a href="~/Ofertas_Control/vista_detalle_oferta/{{::p_o.id_oferta}}">{{::p_o.nombre_oferta}}</a></h3>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -183,4 +182,4 @@
                 </div>
             </div>
         </div>
-    </div>
+

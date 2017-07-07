@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="app">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
@@ -11,33 +11,35 @@
 
 
     <title>@ViewBag.Title - Portal Empleos Maipu</title>
+
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/angular1")
     @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/css2")
+    @Scripts.Render("~/bundles/modernizr")
 
 
 
-
-
-    <script type="text/javascript" src="@Url.Content("~/Scripts/face_script/face_script.js")"></script>
+   @*<script type="text/javascript" src="@Url.Content("~/Scripts/face_script/face_script.js")"></script>*@ 
 
    
 
 
 </head>
-<body ng-app="app">
+<body ng-cloak>
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             @Html.Partial("_LoginPartial")
         </div>
     </div>
-  
-        <div class="cover">
-            <div class="background-image-fixed cover-image" style="background-image : url('https://unsplash.imgix.net/photo-1423347834838-5162bb452ca7?w=1024&amp;q=50&amp;fm=jpg&amp;s=c255e589621f06513c1d123c7323fe9c')"></div>
+
+
+       
 
             @RenderBody()
-        </div>
+    
 
-  
+
+
     <hr />
     <footer class="section section-info">
         <div class="container">
@@ -91,22 +93,12 @@
             </div>
         </div>
     </footer>
-    <div class="fade modal" id="mdmain">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div id="modaldiv" class="modaldiv">
-                       
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    @Scripts.Render("~/bundles/angular")
+
+    @*  @Scripts.Render("~/bundles/otrojs")*@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/testscript")
-    @Scripts.Render("~/bundles/angularUiDirectives")
-   
+    @RenderSection("scripts", required: false)
+
+
 </body>
 </html>

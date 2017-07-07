@@ -13,21 +13,20 @@
 
 
 
-                            <div ng-show="ver_desc">
+                            <div ng-if="ver_desc">
                                 <img src="~/Images/indicator.white.gif" /> Cargando ...
                             </div>
-                            <div ng-show="!ver_desc && desc_curriculum.length <= 0">
+                            <div ng-if="!ver_desc && desc_curriculum.length <= 0">
                                 No se Encontraron resultados ...
-                                {{ver_desc}}
-                                {{desc_curriculum.length}}
+                               
                             </div>
-                            <div ng-show="!ver_desc && error_desc">
+                            <div ng-if="!ver_desc && error_desc">
                                 baia ...
                           
                             </div>
                             <div ng-show="desc_curriculum.length > 0">
                                 <ul class="list-group">
-                                    <li class="list-group-item list-group-item-info"><h5 class="text-muted">{{desc_curriculum}}</h5></li>
+                                    <li class="list-group-item list-group-item-info"><h5 class="text-muted">{{::desc_curriculum}}</h5></li>
                                 </ul>
 
                             </div>
@@ -35,7 +34,7 @@
 
                         </div>
                         <h3>Mi Presentacion (Maximo De Caracteres: 500)</h3>
-                        @Html.TextArea("descripcion_curriculum", "{{desc_curriculum}}", new
+                        @Html.TextArea("descripcion_curriculum", "{{::desc_curriculum}}", new
                    {
                        @class = " form-control default",
                        placeholder = "EJ: hola  nombre es...",

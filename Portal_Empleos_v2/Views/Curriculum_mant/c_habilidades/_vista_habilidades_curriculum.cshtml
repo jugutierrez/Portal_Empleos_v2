@@ -30,12 +30,12 @@
             </div>
             <div ng-show="hab_curriculum.length > 0">
                 <div ng-controller="data1">
-                    <div ng-repeat="hab_c in hab_curriculum">
+                    <div ng-repeat="hab_c in hab_curriculum track by $index">
 
 
                         <h3>
                             <span class="label label-info item-select">
-                                {{hab_c.nombre_habilidad}} ({{hab_c.nombre_grado_habilidad}}) 
+                                {{::hab_c.nombre_habilidad}} ({{::hab_c.nombre_grado_habilidad}}) 
                                 <a ng-click="abremodal('../Curriculum_mant/eliminar_vista_habilidades_curriculum/' , hab_c.id_habilidad_curriculum)">
 
                                     <i class="fa  fa-close"></i>

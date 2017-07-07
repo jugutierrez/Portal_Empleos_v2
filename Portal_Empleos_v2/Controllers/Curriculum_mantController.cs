@@ -27,7 +27,7 @@ namespace Portal_Empleos_v2.Controllers
             }
             catch (Exception ex)
             {
-                return View("Error");
+                return RedirectToAction("LogOff", "login");
             }
          
 
