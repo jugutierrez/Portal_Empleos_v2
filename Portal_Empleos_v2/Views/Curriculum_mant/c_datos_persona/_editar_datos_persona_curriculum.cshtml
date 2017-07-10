@@ -1,6 +1,6 @@
 ﻿
 
-<md-dialog aria-label="Mango (Fruit)">
+<md-dialog >
     
         <md-toolbar>
             <div class="md-toolbar-tools">
@@ -9,17 +9,16 @@
         </md-toolbar>
 
         <md-dialog-content>
-            <div class="md-dialog-content">
-                <div class="well" ng-controller="data1">
+            <div class="md-dialog-content" ng-controller="data1"> 
+                
                     <h1 class="text-center">DATOS PERSONALES</h1>
                     <hr>
                     <form ng-submit="actualizar_datos_persona()" data-ng-controller="data1" ng-init="listar_datos_personas()" >
                         <div class="row">
-
-
-
                             <div ng-if="load_datos">
-                                <img src="~/Images/indicator.white.gif" /> Cargando ...
+                                <div layout="row" layout-sm="column" layout-align="space-around">
+                                    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                                </div>
                             </div>
                             <div ng-if="!load_datos &&  error_datos && datos_per === undefined">
                                 No se Encontraron resultados ...
@@ -32,7 +31,7 @@
 
                             <div ng-if="datos_per">
                                 <div class="col-md-12">
-                                    <div class="well">
+                                 
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
@@ -73,17 +72,24 @@
                                             </div>
                                             <div class="col-md-6">
 
-                                                <div class="form-group" ng-init="identificacion_persona()">
-                                                    <label class="control-label" for="exampleInputPassword1">Tipo de Identificacion</label>
-                                                    <select ng-model="update_id_tipo_identificacion_persona" class="form-control input-lg" ng-options="t_c.id_tipo_identificacion_persona as t_c.nombre_tipo_identificacion_persona for t_c in tipo_identificacion ">
-                                                        <option value="">---Seleccione---</option>
-                                                        <option value=""></option>
-                                                    </select>
-
-
+                                                <div ng-if="carga_i_p">
+                                                    <div layout="row" layout-sm="column" layout-align="space-around">
+                                                        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                                                    </div>
+                                                </div>
+                                                <div ng-if="!error_ip">
+                                                    error viejo no cargo ...
 
                                                 </div>
-
+                                                <div ng-show="dif">
+                                                    <div class="form-group" ng-init="identificacion_persona()">
+                                                        <label class="control-label" for="exampleInputPassword1">Tipo de Identificacion</label>
+                                                        <select ng-model="update_id_tipo_identificacion_persona" class="form-control input-lg" ng-options="t_c.id_tipo_identificacion_persona as t_c.nombre_tipo_identificacion_persona for t_c in tipo_identificacion ">
+                                                            <option value="">---Seleccione---</option>
+                                                            <option value=""></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -199,14 +205,14 @@
 
                                             </div>
                                         </div>
-                                    </div>
+
                                 </div>
 
 
                             </div>
                         </div>
                         <div class="row">
-                            <div class="well">
+                           
                                 <div class="form-group ">
 
                                     <button type="submit" class="btn btn-block  btn-lg btn-info">
@@ -218,14 +224,13 @@
                                 <div class="form-group ">
                                     <div ng-controller="data1">
 
-                                        <a href="" class="btn  btn-block btn-danger btn-lg" ng-click="cerrarmodal()">Cancelar</a>
+                                        <a href="" class="btn  btn-block btn-danger btn-lg" ng-click="closeDialog()">Cancelar</a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                       
                     </form>
-                </div>
-            </div>
+           </div>
         </md-dialog-content>
 
       

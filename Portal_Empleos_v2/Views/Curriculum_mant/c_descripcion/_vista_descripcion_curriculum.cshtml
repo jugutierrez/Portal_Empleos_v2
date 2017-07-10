@@ -17,7 +17,9 @@
           
          
             <div ng-show="ver_desc">
-                <img src="~/Images/indicator.white.gif" /> Cargando ...
+                <div layout="row" layout-sm="column" layout-align="space-around">
+                    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                </div>
             </div>
             <div ng-show="!ver_desc && desc_curriculum.length <= 0">
                 No se Encontraron resultados ...
@@ -28,9 +30,17 @@
                <span class="text-center"> Ingrese Una Presentacion Acorde a usted mismo</span>
             </div>
                 <div ng-show="desc_curriculum.length > 0">
-                    <ul class="list-group">
-                        <li class="list-group-item list-group-item-info"><h5 class="text-muted">{{desc_curriculum}}</h5></li>
-                        </ul>
+                    <md-input-container class="md-block">
+                      
+                           
+                                <textarea ng-model="desc_curriculum" md-maxlength="500" rows="5" md-select-on-focus disabled></textarea>
+                         
+                        
+</md-input-container>
+
+                    
+                     
+                 
                       
 </div>
                

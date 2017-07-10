@@ -67,48 +67,36 @@ app.controller('HomeCtrl', ['$scope', '$http', 'mantenedor_total', function ($sc
         });
     };
     $scope.identificacion_persona = function () {
-
-
-        $http.get('/Curriculum_mant/listar_tipo_identificacion_persona').then(
-        function (successResponse) {
-            if (successResponse.data.success == true) {
-                console.log('successwerwer');
+        $scope.carga_i_p = true;
+        $scope.error_ip = true;
+        $scope.dif = false;
+        var i_p = mantenedor_total.obtener_datos('/Curriculum_mant/listar_tipo_identificacion_persona');
+       i_p.then(function (successResponse) {
                 $scope.tipo_identificacion = successResponse.data.tipo_i;
-                console.log(successResponse.data.tipo_i);
-
-            }
-            else {
-                $scope.tipo_identificacion = null;
-
-                console.log("bla bla blawerwer");
-            }
+                $scope.carga_i_p = false;
+                $scope.dif = true;
         },
         function (errorResponse) {
 
-            console.log("error my friendwerwer");
+            $scope.carga_i_p = false;
+            $scope.error_ip = false;
         });
     };
 
     $scope.rellenar_habilidad = function () {
 
-
-        $http.get('/Curriculum_mant/rellenar_habilidad').then(
-        function (successResponse) {
-            if (successResponse.data.success == true) {
-                console.log('successwerwer');
-                $scope.rellenar_h = successResponse.data.rellenar_ha;
-                console.log(successResponse.data.rellenar_h);
-
-            }
-            else {
-                $scope.rellenar_h = null;
-
-                console.log("bla bla blawerwer");
-            }
+        $scope.carga_r_h = true;
+        $scope.error_r_h = true;
+        $scope.dif_r_h = false;
+        var r_h = mantenedor_total.obtener_datos('/Curriculum_mant/rellenar_habilidad');
+        r_h.then(function (successResponse) {
+            $scope.rellenar_h = successResponse.data.rellenar_ha;
+            $scope.carga_r_h = false;
+                $scope.dif_r_h = true;
         },
         function (errorResponse) {
-
-            console.log("error my friendwerwer");
+            $scope.carga_r_h = false;
+            $scope.error_r_h = false;
         });
     };
     $scope.rellenar_grado_habilidad = function () {
@@ -745,7 +733,7 @@ app.controller('HomeCtrl', ['$scope', '$http', 'mantenedor_total', function ($sc
 
 
 
-app.controller('data1', ['$scope', '$http','$filter', '$mdDialog', function ($scope, $http,$filter ,$mdDialog) {
+app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_total', function ($scope, $http, $filter, $mdDialog, mantenedor_total) {
 
     $scope.respuesta_cuestionario_multiple = [];
     $scope.update_p = {};
@@ -754,14 +742,13 @@ app.controller('data1', ['$scope', '$http','$filter', '$mdDialog', function ($sc
     $scope.newEmployee2 = [];
     $scope.agrega_idioma = {};
     $scope.elimina_idioma = {};
-    $scope.chequeo = false;
+   
 
     $scope.abremodal = function (url, id) {
         $mdDialog.show({
             clickOutsideToClose: true,
             scope: $scope,
             preserveScope: true,
-            //parent: angular.element(document.body),
             fullscreen: true,
             templateUrl: url + id,
             controller: function DialogController($scope, $mdDialog) {
@@ -772,32 +759,17 @@ app.controller('data1', ['$scope', '$http','$filter', '$mdDialog', function ($sc
         });
     };
 
-    $scope.cambiacheck = function () {
-
-        if ($scope.chequeo == false) {
-            $scope.chequeo = true;
-            console.log("si");
-        }
-        else {
-            $scope.chequeo = false;
-            console.log("no");
-        }
-    };
 
     $scope.addEmployee = function () {
-        console.log($scope.respuesta_cuestionario_multiple);
-        console.log($scope.datos_oferta);
+
         var respuestas_cuestionario = { 'respuesta_cuestionario_multiple': $scope.respuesta_cuestionario_multiple, 'datos_oferta': $scope.datos_oferta };
-        $http.post('/Ofertas_Control/create_postulacion', respuestas_cuestionario).then(
-        function (successResponse) {
-            console.log('success3');
+        var add_emp = mantenedor_total.agregar_datos('/Ofertas_Control/create_postulacion', respuestas_cuestionario);
+        add_emp.then(function (successResponse) {
             $scope.newEmployee2 = successResponse.data.employee;
-            //$scope.$modalInstance.close();
-            //$scope.abremodal("../../Home/vista_parcial", "");
             window.location.reload();
         },
         function (errorResponse) {
-            // handle errors here
+            console.log("error añadir empleado")
         });
     };
 
@@ -844,386 +816,252 @@ app.controller('data1', ['$scope', '$http','$filter', '$mdDialog', function ($sc
         console.log("plop");
         });*/
     };
+
     $scope.agregar_idioma = function () {
-        console.log($scope.agrega_idioma);
-
         var add_idioma = { 'nuevo_idioma': $scope.agrega_idioma };
-
-        $http.post('/Curriculum_mant/agregar_idiomas_curriculum', add_idioma).then(
-        function (successResponse) {
-            console.log('success3');
-            $scope.$modalInstance.close();
+        var add_emp = mantenedor_total.agregar_datos('/Curriculum_mant/agregar_idiomas_curriculum', add_idioma);
+        add_emp.then(function (successResponse) {
             $scope.respuesta = successResponse.data.respuesta;
-            $scope.cerrarmodal();
-            //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
-
+            $scope.closeDialog();
             $scope.idiomas_curriculum();
         },
         function (errorResponse) {
-            // handle errors here
-            console.log(':C');
+            console.log('error agregar idioma');
         });
     };
+
     $scope.eliminar_idioma = function () {
-        console.log($scope.elimina_idioma);
-
-        //var del_idioma = { 'id': $scope.elimina_idioma.id };
         var id_idioma = $scope.elimina_idioma.id;
-        $http.post('/Curriculum_mant/eliminar_idiomas_curriculum/' + id_idioma).then(
-        function (successResponse) {
-            console.log('success3');
-            $scope.$modalInstance.close();
+        var del_idi = mantenedor_total.borrar_datos('/Curriculum_mant/eliminar_idiomas_curriculum', id_idioma);
+        del_idi.then(function (successResponse) {
             $scope.respuesta = successResponse.data.respuesta;
-            $scope.cerrarmodal();
-            //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
-
+            $scope.closeDialog();
             $scope.idiomas_curriculum();
         },
         function (errorResponse) {
-            // handle errors here
-            console.log(':C');
+            console.log('error eliminar idioma');
         });
     };
+
     $scope.agregar_habilidad = function () {
-        console.log($scope.agrega_habilidad);
-
         var add_habilidad = { 'nueva_habilidad': $scope.agrega_habilidad };
-
-        $http.post('/Curriculum_mant/agregar_habilidades_curriculum', add_habilidad).then(
-        function (successResponse) {
-            console.log('success3');
-            $scope.$modalInstance.close();
+        var add_hab = mantenedor_total.agregar_datos('/Curriculum_mant/agregar_habilidades_curriculum', add_habilidad);
+        add_hab.then(function (successResponse) {
             $scope.respuesta = successResponse.data.respuesta;
-            $scope.cerrarmodal();
-            //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
-
+            $scope.closeDialog();
             $scope.habilidades_curriculum();
         },
         function (errorResponse) {
-            // handle errors here
-            console.log(':C');
+            console.log('error agregar habilidad');
         });
     };
+
     $scope.eliminar_habilidad = function () {
-        console.log($scope.elimina_habilidad);
 
-        //var del_idioma = { 'id': $scope.elimina_idioma.id };
-        //[{ id: 1, name: "Ben", age: 28 }];
         var id_habilidad = $scope.elimina_habilidad.id;
-        $http.post('/Curriculum_mant/eliminar_habilidades_curriculum/' + id_habilidad).then(
-        function (successResponse) {
-            console.log('success3');
-            $scope.$modalInstance.close();
+        var del_hab = mantenedor_total.borrar_datos('/Curriculum_mant/eliminar_habilidades_curriculum/', id_habilidad);
+        del_hab.then(function (successResponse) {
             $scope.respuesta = successResponse.data.respuesta;
-            $scope.cerrarmodal();
-            //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
-
+            $scope.closeDialog();
             $scope.habilidades_curriculum();
         },
         function (errorResponse) {
-            // handle errors here
-            console.log(':C');
+            console.log('error eliminar habilidad');
         });
     };
+
     $scope.agregar_software = function () {
         console.log($scope.agrega_software);
-
         var add_software = { 'nuevo_software': $scope.agrega_software };
-
-        $http.post('/Curriculum_mant/agregar_softwares_curriculum', add_software).then(
-        function (successResponse) {
-            console.log('success3');
-            $scope.$modalInstance.close();
+        var add_soft = mantenedor_total.agregar_datos('/Curriculum_mant/agregar_softwares_curriculum', add_software);
+        add_soft.then(function (successResponse) {
             $scope.respuesta = successResponse.data.respuesta;
-            $scope.cerrarmodal();
-            //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
-
+            $scope.closeDialog();
             $scope.softwares_curriculum();
         },
         function (errorResponse) {
-            // handle errors here
-            console.log(':C');
+            console.log('error agrega software');
         });
     };
+
     $scope.eliminar_software = function () {
-        console.log($scope.elimina_software);
-
-        //var del_idioma = { 'id': $scope.elimina_idioma.id };
-        //[{ id: 1, name: "Ben", age: 28 }];
         var id_software = $scope.elimina_software.id;
-        $http.post('/Curriculum_mant/eliminar_softwares_curriculum/' + id_software).then(
-        function (successResponse) {
-            console.log('success3');
-            $scope.$modalInstance.close();
+        var del_soft = mantenedor_total.borrar_datos('/Curriculum_mant/eliminar_softwares_curriculum/', id_software);
+        del_soft.then(function (successResponse) {
             $scope.respuesta = successResponse.data.respuesta;
-            $scope.cerrarmodal();
-            //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
-
+            $scope.closeDialog();
             $scope.softwares_curriculum();
         },
         function (errorResponse) {
-            // handle errors here
-            console.log(':C');
+
+            console.log('error elimina software');
         });
     };
+
     $scope.agregar_profesion = function () {
-        console.log($scope.agrega_profesion);
-
         var add_profesion = { 'nueva_profesion': $scope.agrega_profesion };
-
-        $http.post('/Curriculum_mant/agregar_profesiones_curriculum', add_profesion).then(
-        function (successResponse) {
-            console.log('success3');
-            $scope.$modalInstance.close();
+        var add_prof = mantenedor_total.agregar_datos('/Curriculum_mant/agregar_profesiones_curriculum', add_profesion);
+        add_prof.then(function (successResponse) {
             $scope.respuesta = successResponse.data.respuesta;
-            $scope.cerrarmodal();
-            //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
-
+            $scope.closeDialog();
             $scope.profesion_curriculum();
         },
         function (errorResponse) {
-            // handle errors here
-            console.log(':C');
+            console.log('error agregar profesion');
         });
     };
+
     $scope.eliminar_profesion = function () {
-        console.log($scope.elimina_profesion);
-
-        //var del_idioma = { 'id': $scope.elimina_idioma.id };
-        //[{ id: 1, name: "Ben", age: 28 }];
         var id_profesion = $scope.elimina_profesion.id;
-        $http.post('/Curriculum_mant/eliminar_profesiones_curriculum/' + id_profesion).then(
-        function (successResponse) {
-            console.log('success3');
-            $scope.$modalInstance.close();
+        var del_prof = mantenedor_total.borrar_datos('/Curriculum_mant/eliminar_profesiones_curriculum/', id_profesion);
+        del_prof.then(function (successResponse) {
             $scope.respuesta = successResponse.data.respuesta;
-            $scope.cerrarmodal();
-            //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
-
+            $scope.closeDialog();
             $scope.profesion_curriculum();
         },
         function (errorResponse) {
-            // handle errors here
-            console.log(':C');
+            console.log('error elimina profesion');
         });
     };
+
     $scope.agregar_experiencia_laboral = function () {
-        console.log($scope.agrega_experiencia_laboral);
-
         var add_experiencia_laboral = { 'nueva_experiencia_laboral': $scope.agrega_experiencia_laboral };
-
-        $http.post('/Curriculum_mant/agregar_experiencias_laborales_curriculum', add_experiencia_laboral).then(
-        function (successResponse) {
-            console.log('success3');
-            $scope.$modalInstance.close();
+        var add_exp = mantenedor_total.agregar_datos('/Curriculum_mant/agregar_experiencias_laborales_curriculum', add_experiencia_laboral);
+        add_exp.then(function (successResponse) {
             $scope.respuesta = successResponse.data.respuesta;
-            $scope.cerrarmodal();
-            //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
-
+            $scope.closeDialog();
             $scope.experiencias_laborales_curriculum();
         },
         function (errorResponse) {
-            // handle errors here
-            console.log(':C');
+            console.log('error agregar experiencia laboral');
         });
     };
+
     $scope.eliminar_experiencia_laboral = function () {
-        console.log($scope.elimina_experiencia_laboral);
-
-        //var del_idioma = { 'id': $scope.elimina_idioma.id };
-        //[{ id: 1, name: "Ben", age: 28 }];
         var id_experiencia_laboral = $scope.elimina_experiencia_laboral.id;
-        $http.post('/Curriculum_mant/eliminar_experiencias_laborales_curriculum/' + id_experiencia_laboral).then(
-        function (successResponse) {
-            console.log('success3');
-            $scope.$modalInstance.close();
+        var del_exp = mantenedor_total.borrar_datos('/Curriculum_mant/eliminar_experiencias_laborales_curriculum/', id_experiencia_laboral);
+        del_exp.then( function (successResponse) {
             $scope.respuesta = successResponse.data.respuesta;
-            $scope.cerrarmodal();
-            //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
-
+            $scope.closeDialog();
             $scope.experiencias_laborales_curriculum();
         },
         function (errorResponse) {
-            // handle errors here
-            console.log(':C');
+            console.log('error eliminar experiencia laboral');
         });
     };
+
     $scope.agregar_estudio = function () {
-        console.log($scope.agrega_estudio);
-
         var add_estudio = { 'nuevo_estudio': $scope.agrega_estudio };
-
-        $http.post('/Curriculum_mant/agregar_estudios_curriculum', add_estudio).then(
-        function (successResponse) {
-            console.log('success3');
-            $scope.$modalInstance.close();
+        var add_est = mantenedor_total.agregar_datos('/Curriculum_mant/agregar_estudios_curriculum', add_estudio);
+        add_est.then(function (successResponse) {
             $scope.respuesta = successResponse.data.respuesta;
-            $scope.cerrarmodal();
-            //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
-
+            $scope.closeDialog();
             $scope.estudios_curriculum();
         },
         function (errorResponse) {
-            // handle errors here
-            console.log(':C');
+            console.log('error agrega estudio');
         });
     };
+
     $scope.eliminar_estudio = function () {
-        console.log($scope.elimina_estudio);
-
-        //var del_idioma = { 'id': $scope.elimina_idioma.id };
-        //[{ id: 1, name: "Ben", age: 28 }];
         var id_estudio = $scope.elimina_estudio.id;
-        $http.post('/Curriculum_mant/eliminar_estudios_curriculum/' + id_estudio).then(
-        function (successResponse) {
-            console.log('success3');
-            $scope.$modalInstance.close();
+        var del_est = mantenedor_total.borrar_datos('/Curriculum_mant/eliminar_estudios_curriculum/', id_estudio);
+        del_est.then(function (successResponse) {
             $scope.respuesta = successResponse.data.respuesta;
-            $scope.cerrarmodal();
-            //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
-
+            $scope.closeDialog();
             $scope.estudios_curriculum();
         },
         function (errorResponse) {
-            // handle errors here
-            console.log(':C');
+            console.log('error eliminar estudios');
         });
     };
+
     $scope.agregar_documento = function () {
-        console.log($scope.agrega_documento);
-
         var add_documento = { 'nuevo_documento': $scope.agrega_documento };
-
-        $http.post('/Curriculum_mant/agregar_documentos_curriculum', add_documento).then(
-        function (successResponse) {
-            console.log('success3');
-            $scope.$modalInstance.close();
+        var add_doc = mantenedor_total.agregar_datos('/Curriculum_mant/agregar_documentos_curriculum', add_documento);
+        add_doc.then(function (successResponse) {
             $scope.respuesta = successResponse.data.respuesta;
-            $scope.cerrarmodal();
-            //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
-
+            $scope.closeDialog();
             $scope.documentos_curriculum();
         },
         function (errorResponse) {
-            // handle errors here
-            console.log(':C');
+            console.log('error agregar documento');
         });
     };
+
     $scope.eliminar_documento = function () {
-        console.log($scope.elimina_documento);
-
-        //var del_idioma = { 'id': $scope.elimina_idioma.id };
-        //[{ id: 1, name: "Ben", age: 28 }];
         var id_documento = $scope.elimina_documento.id;
-        $http.post('/Curriculum_mant/eliminar_documentos_curriculum/' + id_documento).then(
-        function (successResponse) {
-            console.log('success3');
-            $scope.$modalInstance.close();
+        var del_doc = mantenedor_total.borrar_datos('/Curriculum_mant/eliminar_documentos_curriculum/', id_documento);
+        del_doc.then(function (successResponse) {
             $scope.respuesta = successResponse.data.respuesta;
-            $scope.cerrarmodal();
-            //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
-
+            $scope.closeDialog();
             $scope.documentos_curriculum();
         },
         function (errorResponse) {
-            // handle errors here
-            console.log(':C');
+            console.log('error eliminar documento');
         });
     };
+
     $scope.agregar_capacitacion = function () {
-        console.log($scope.agrega_capacitacion);
-
         var add_capacitacion = { 'nueva_capacitacion': $scope.agrega_capacitacion };
-
-        $http.post('/Curriculum_mant/agregar_capacitaciones_curriculum', add_capacitacion).then(
-        function (successResponse) {
-            console.log('success3');
-            $scope.$modalInstance.close();
+        var add_cap = mantenedor_total.agregar_datos('/Curriculum_mant/agregar_capacitaciones_curriculum', add_capacitacion);
+        add_cap.then(function (successResponse) {
             $scope.respuesta = successResponse.data.respuesta;
-            $scope.cerrarmodal();
-            //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
-
+            $scope.closeDialog();
             $scope.capacitaciones_curriculum();
         },
         function (errorResponse) {
-            // handle errors here
-            console.log(':C');
+            console.log('error agregar capacitacion');
         });
     };
+
     $scope.eliminar_capacitacion = function () {
-        console.log($scope.elimina_capacitacion);
-
-        //var del_idioma = { 'id': $scope.elimina_idioma.id };
-        //[{ id: 1, name: "Ben", age: 28 }];
         var id_capacitacion = $scope.elimina_capacitacion.id;
-        $http.post('/Curriculum_mant/eliminar_capacitaciones_curriculum/' + id_capacitacion).then(
-        function (successResponse) {
-            console.log('success3');
-            $scope.$modalInstance.close();
-            $scope.respuesta = successResponse.data.respuesta;
-            $scope.cerrarmodal();
-            //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
-
-            $scope.capacitaciones_curriculum();
+        var del_cap = mantenedor_total.borrar_datos('/Curriculum_mant/eliminar_capacitaciones_curriculum/', id_capacitacion);
+       del_cap.then(function (successResponse) {
+           $scope.respuesta = successResponse.data.respuesta;
+           $scope.closeDialog();
+           $scope.capacitaciones_curriculum();
         },
         function (errorResponse) {
-            // handle errors here
-            console.log(':C');
+            console.log('error eliminar capacitacion');
         });
     };
+
     $scope.crear_cuenta_persona = function () {
-        console.log($scope.datos_cuenta_persona);
-
         var add_cuenta = { 'datos_cuenta_personas': $scope.datos_cuenta_persona };
-
-        $http.post('/cuenta/agregar_cuenta_persona', add_cuenta).then(
-        function (successResponse) {
-
+        var add_cuen = mantenedor_total.agregar_datos('/cuenta/agregar_cuenta_persona', add_cuenta);
+        add_cuen.then(function (successResponse) {
             if (successResponse.data.success == true) {
-                console.log('success3');
-                //$scope.$modalInstance.close();
                 $scope.respuesta = successResponse.data.respuesta;
-                //$scope.cerrarmodal();
-                //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
                 var $active = $('.nav-tabs li.active');
                 $active.addClass('disabled');
                 $active.next().removeClass('disabled');
                 nextTab($active);
-
-            } else {
-
-                console.log("bla bla bla");
             }
-        }
-
-        ,
+            else {
+                console.log("error no agrego ");
+            }
+        },
         function (errorResponse) {
-            //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
-            console.log(':C');
+            console.log('error crear cuenta persona');
         });
-
-
     };
+
     $scope.recordar_cuenta_persona = function () {
         console.log($scope.recordar_cuenta_personas);
-
-        var add_cuenta = { 'recordar_cuenta_personas': $scope.recordar_cuenta_personas };
-
-        $http.post('/cuenta/recordar_cuenta_persona', add_cuenta).then(
-        function (successResponse) {
-            console.log('success3');
-            $scope.$modalInstance.close();
+        var rec_cuenta = { 'recordar_cuenta_personas': $scope.recordar_cuenta_personas };
+        var rec_cuen = mantenedor_total.agregar_datos('/cuenta/recordar_cuenta_persona', rec_cuenta);
+        rec_cuen.then(function (successResponse) {
             $scope.respuesta = successResponse.data.respuesta;
-            $scope.cerrarmodal();
-            //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
-
+            $scope.closeDialog();
             $scope.capacitaciones_curriculum();
         },
         function (errorResponse) {
-            // handle errors here
-            console.log(':C');
+            console.log('error recordar cuenta');
         });
     };
+
     $scope.actualizar_pass = function () {
         console.log($scope.actualiza_pass);
 
@@ -1231,17 +1069,12 @@ app.controller('data1', ['$scope', '$http','$filter', '$mdDialog', function ($sc
 
         $http.post('/cuenta/actualiza_pass', add_pass).then(
         function (successResponse) {
-            console.log('success3');
-            $scope.$modalInstance.close();
             $scope.respuesta = successResponse.data.respuesta;
-            $scope.cerrarmodal();
-            //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
-
 
         },
         function (errorResponse) {
             // handle errors here
-            console.log(':C');
+            console.log('error actualiza_pass');
         });
     };
     $scope.desactivar_cuenta = function () {
@@ -1397,43 +1230,27 @@ app.controller('data1', ['$scope', '$http','$filter', '$mdDialog', function ($sc
         });
     };
     $scope.detalle_capacitaciones = function (a) {
-
-        $http.get('/Curriculum_mant/detalle_capacitaciones_curriculum/' + a).then(
-        function (successResponse) {
-            if (successResponse.data.success == true) {
-                console.log('success');
-
+        var d_c = mantenedor_total.obtener_datos('/Curriculum_mant/detalle_capacitaciones_curriculum/' + a);
+        d_c.then(function (successResponse) {
+          
                 var record2 = successResponse.data.ca_c;
-
-
                 $scope.update_descripcion_capacitacion = record2.descripcion_capacitacion;
-
                 $scope.update_id_capacitacion = record2.id_capacitacion;
-
                 $scope.fecha_inicio = record2.ano_inicio_capacitacion_curriculum.replace('/Date(', '').replace(')/', '');
-                $scope.update_ano_inicio_capacitacion_curriculum = $filter('date')($scope.fecha_inicio, 'dd-MM-yyyy');
-
+                $scope.update_ano_inicio_capacitacion_curriculum = new Date($scope.fecha_inicio, 'dd-MM-yyyy');
                 $scope.fecha_termino = record2.ano_termino_capacitacion_curriculum.replace('/Date(', '').replace(')/', '');
                 $scope.update_ano_termino_capacitacion_curriculum = $filter('date')($scope.fecha_termino, 'dd-MM-yyyy');
-
                 $scope.update_id_estado_capacitacion = record2.id_estado_capacitacion;
                 $scope.update_horas_capacitacion = record2.horas_capacitacion;
                 $scope.update_id_tipo_capacitacion = record2.id_tipo_capacitacion;
                 $scope.update_id_institucion = record2.id_institucion;
-
-            }
-            else {
-
-            }
         },
         function (errorResponse) {
-
-            console.log("error my friend");
+            console.log("error detalle capacitaciones");
         });
     };
 
-    $scope.editar_experiencia_laboral = function (a) {
-        // console.log($scope.edita_experiencia_laboral);
+    $scope.editar_experiencia_laboral = function (id) {
         var edita_experiencia_laboral = {
             nombre_experiencia_laboral: $scope.update_nombre_experiencia_laboral,
             empresa_experiencia_laboral: $scope.update_empresa_experiencia_laboral,
@@ -1443,35 +1260,13 @@ app.controller('data1', ['$scope', '$http','$filter', '$mdDialog', function ($sc
             id_area_experiencia_laboral: $scope.update_id_area_experiencia_laboral,
             detalle_experiencia_laboral: $scope.update_detalle_experiencia_laboral
         };
-
-
-
-
-
-
         var edit_exp = { 'edita_experiencia_laboral': edita_experiencia_laboral };
-
-        $http.post('/Curriculum_mant/edita_experiencia_laboral/' + a, edit_exp).then(
-        function (successResponse) {
-
-            if (successResponse.data.success == true) {
-                console.log('success3');
-                //$scope.$modalInstance.close();
+        var upd_exp = mantenedor_total.actualizar_datos('/Curriculum_mant/edita_experiencia_laboral/', id, edit_exp);
+        upd_exp.then(function (successResponse) {
                 $scope.respuesta = successResponse.data.respuesta;
-                //$scope.cerrarmodal();
-                //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
-
-
-            } else {
-
-                console.log("bla bla bla");
-            }
-        }
-
-        ,
+        },
         function (errorResponse) {
-            //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
-            console.log(':C');
+            console.log('error edita experiencia laboral');
         });
 
 

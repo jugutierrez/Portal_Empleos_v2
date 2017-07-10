@@ -37,3 +37,11 @@ textarea {
 .label {
      white-space: normal !important;
 }
+.md-dialog-container {
+  position: absolute;
+}
+
+md-dialog {
+  max-width: 90%;
+  max-height: 90%;
+}

@@ -1,46 +1,60 @@
 ﻿
+<md-dialog>
 
-<div class="row">
-    <div class="col-md-6 col-md-offset-3">
-        <form name="mainForm" data-ng-submit="eliminar_estudio()" data-ng-controller="data1" ng-model="elimina_estudio" novalidate>
-            <div class="text-center well">
-                <h1 class="text-center">Eliminar Estudio </h1>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <h3>Desea eliminar este estudio:</h3>
-                    </li>
-                    <li class="list-group-item">
-                        <h2>
-                            @Html.Hidden("id_estudio_curriculum", (Int32)ViewBag.id_estudio, new { @ng_model = "elimina_estudio.id", ng_init = "elimina_estudio.id = " + (Int32)ViewBag.id_estudio })
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+        <div class="md-dialog-content">
+
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <form name="mainForm" data-ng-submit="eliminar_estudio()" data-ng-controller="data1" ng-model="elimina_estudio" novalidate>
+                        <div class="text-center well">
+                            <h1 class="text-center">Eliminar Estudio </h1>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <h3>Desea eliminar este estudio:</h3>
+                                </li>
+                                <li class="list-group-item">
+                                    <h2>
+                                        @Html.Hidden("id_estudio_curriculum", (Int32)ViewBag.id_estudio, new { @ng_model = "elimina_estudio.id", ng_init = "elimina_estudio.id = " + (Int32)ViewBag.id_estudio })
 
 
-                            <span class="label label-danger">@ViewBag.nombre_estudio</span>
-                        </h2>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <button type="submit" class="btn btn-block btn-danger btn-lg">Eliminar</button>
+                                        <span class="label label-danger">@ViewBag.nombre_estudio</span>
+                                    </h2>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-block btn-danger btn-lg">Eliminar</button>
 
 
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-md-12">
-
-                                <div class="form-group ">
-                                    <div ng-controller="data1">
-
-                                        <a href="" class="btn  btn-block btn-info btn-lg" ng-click="cerrarmodal()">Cancelar</a>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <div class="form-group ">
+                                                <div ng-controller="data1">
+
+                                                    <a href="" class="btn  btn-block btn-info btn-lg" ng-click="cerrarmodal()">Cancelar</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
-                    </li>
-                </ul>
+                    </form>
+
+                </div>
             </div>
-            </form>
-</div>
-</div>
+        </div>
+    </md-dialog-content>
+</md-dialog>
