@@ -40,15 +40,8 @@ namespace Portal_Empleos_v2.Controllers
                 
                     vSessionValue.id_persona = Convert.ToInt32(Session["persona_id"]);
                     vSessionValue.id_curriculum = Convert.ToInt32(Session["curriculum_id"]);
-                   
-                    if (returnUrl == "a")
-                    {
-                       
-                        return RedirectToAction("index", "Curriculum_mant");
-                    }
-                    else {
-                        return Redirect(Request.UrlReferrer.ToString());
-                    }
+                 return RedirectToAction("index", "Curriculum_mant");
+                
                 }
                 else
                 {
@@ -113,7 +106,6 @@ namespace Portal_Empleos_v2.Controllers
             Session.Abandon();
             Session.Clear();
             Response.Cookies.Clear();
-          
             Session.RemoveAll();
             AuthenticationManager.SignOut();
             return RedirectToAction("Index", "inicio");

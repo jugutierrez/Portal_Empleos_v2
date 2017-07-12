@@ -7,13 +7,14 @@
     </md-toolbar>
 
     <md-dialog-content>
-        <div class="md-dialog-content">
+        <div class="lg-dialog-content">
             <div class="well">
                 <h1 class="text-center"> AGREGAR REFERENCIA LABORAL</h1>
                 <hr>
                 <form name="mainForm" data-ng-submit="agregar_referencia_laboral()" data-ng-controller="data1" ng-model="agrega_referencia_laboral">
                     <div class="row">
                         <div class="col-md-6">
+                            @Html.Hidden("id_experiencia_laboral_curriculum", (Int32)ViewBag.id_experiencia_laboral_curriculum, new { @ng_model = "agrega_referencia_laboral.id_experiencia_laboral_curriculum", ng_init = "agrega_referencia_laboral.id_experiencia_laboral_curriculum = " + (Int32)ViewBag.id_experiencia_laboral_curriculum })
 
                             <div class="form-group">
                                 <label class="control-label" for="exampleInputEmail1">Nombre Referente:</label>
@@ -23,7 +24,7 @@
                             <div class="form-group">
                                 <label class="control-label" for="exampleInputPassword1">Numero Contacto:</label>
                                 <input class="form-control input-lg" id="empresa_experiencia_laboral" name="empresa_experiencia_laboral_curriculum"
-                                       placeholder="EJ: Desarrollador de sistemas " type="text" ng-model="agrega_referencia_laboral.numero_referencia_laboral" required>
+                                       placeholder="EJ: Desarrollador de sistemas " type="text" ng-model="agrega_referencia_laboral.contacto_referencia_laboral" required>
                             </div>
 
                         </div>

@@ -7,7 +7,7 @@
     </md-toolbar>
 
     <md-dialog-content>
-        <div class="md-dialog-content">
+        <div class="lg-dialog-content">
             <div class="well">
                 <h1 class="text-center"> AGREGAR EXPERIENCIA LABORAL</h1>
                 <hr>
@@ -28,8 +28,12 @@
                             <div class="form-group">
                                 <label class="control-label" for="exampleInputPassword1">Fecha inicio</label>
 
-                                <input type="datetime" class="form-control input-lg" id="exampleInput" name="input" ng-model="update_ano_inicio_experiencia_laboral"
-                                       placeholder="yyyy-MM-dd" min="1950-01-01" max="{{currentdate}}" required />
+                             
+                                  <div flex-gt-xs>
+                                    <label class="control-label" for="exampleInputPassword1"> Fecha inicio:</label>
+                                    <md-datepicker ng-model="update_ano_inicio_experiencia_laboral" md-placeholder="Ingrese fecha de inicio"
+                                                   md-min-date="ctrl.minDate" max="{{currentdate}}"></md-datepicker>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -78,7 +82,7 @@
                                     <div class="form-group ">
                                         <div ng-controller="data1">
 
-                                            <a href="" class="btn  btn-block btn-danger btn-lg" ng-click="cerrarmodal()">Cancelar</a>
+                                            <a href="" class="btn  btn-block btn-danger btn-lg" ng-click="closeDialog()">Cancelar</a>
                                         </div>
                                     </div>
                                 </div>

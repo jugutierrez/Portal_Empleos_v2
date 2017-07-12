@@ -413,6 +413,11 @@ namespace Portal_Empleos_v2.Controllers
             }
        
         }
+
+
+
+
+
         public ActionResult vista_experiencias_laborales_curriculum()
         {
             try
@@ -472,10 +477,15 @@ namespace Portal_Empleos_v2.Controllers
         {
             try
             {
-                
 
+                db.Database.ExecuteSqlCommand("exec sp_actualiza_experiencias_laborales_curriculum @id_experiencia_laboral_curriculum = {0} , "+
+                    "@id_cargo_experiencia_laboral = {1} ,  @id_area_experiencia_laboral = {2} , @nombre_experiencia_laboral = {3} ," +
+                    "@empresa_experiencia_laboral = {4} , @ano_inicio_experiencia_laboral = {5} , @ano_termino_experiencia_laboral = {6}, @detalle_experiencia_laboral = {7}", 
+                    id ,edita_experiencia_laboral.id_cargo_experiencia_laboral , edita_experiencia_laboral.id_area_experiencia_laboral,
+                    edita_experiencia_laboral.nombre_experiencia_laboral , edita_experiencia_laboral.empresa_experiencia_laboral , edita_experiencia_laboral.ano_inicio_experiencia_laboral,
+                    edita_experiencia_laboral.ano_termino_experiencia_laboral , edita_experiencia_laboral.detalle_experiencia_laboral);
                 
-                    return Json(new { success = false, exp_c = new {caca ="caca" } }, JsonRequestBehavior.AllowGet);
+                    return Json(new { success = true, exp_c = new {caca ="caca" } }, JsonRequestBehavior.AllowGet);
                 
             }
             catch (Exception ex)
@@ -494,13 +504,33 @@ namespace Portal_Empleos_v2.Controllers
 
             try
             {
-                db.Database.ExecuteSqlCommand("insert into experiencias_laborales_curriculums (id_curriculum ,id_experiencia_laboral ,"+
-                    " id_cargo_experiencia_laboral , id_area_experiencia_laboral ,nombre_experiencia_laboral ,empresa_experiencia_laboral ,"+
-                    " ano_inicio_experiencia_laboral , ano_termino_experiencia_laboral , detalle_experiencia_laboral) values({0},0,{1},{2},{3},{4},{5},{6},{7})",
+                db.Database.ExecuteSqlCommand(" exec sp_inserta_experiencias_laborales_curriculum @id_curriculum = {0} , @id_cargo_experiencia_laboral = {1} , @id_area_experiencia_laboral = {2} , "+
+                    " @nombre_experiencia_laboral = {3}, @empresa_experiencia_laboral ={4}, @ano_inicio_experiencia_laboral = {5}, @ano_termino_experiencia_laboral = {6}, @detalle_experiencia_laboral = {7} ",
                     Convert.ToInt32(Session["curriculum_id"]), nueva_experiencia_laboral.id_cargo_experiencia_laboral , nueva_experiencia_laboral.id_area_experiencia_laboral , nueva_experiencia_laboral.nombre_experiencia_laboral,
                     nueva_experiencia_laboral.empresa_experiencia_laboral , nueva_experiencia_laboral.ano_inicio_experiencia_laboral , nueva_experiencia_laboral.ano_termino_experiencia_laboral , nueva_experiencia_laboral.detalle_experiencia_laboral);
 
                 return Json(new { success = true, respuesta = nueva_experiencia_laboral }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+
+            }
+
+
+        }
+        public ActionResult agregar_referencias_laborales_curriculum(modelo_agregar_referencia_laboral_curriculum nueva_referencia_laboral)
+        {
+
+
+
+            try
+            {
+               
+
+                return Json(new { success = true, respuesta = "ccaca" }, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception ex)
@@ -520,6 +550,27 @@ namespace Portal_Empleos_v2.Controllers
             try
             {
                 db.Database.ExecuteSqlCommand("delete from experiencias_laborales_curriculums  where id_experiencia_laboral_curriculum = {0}", id);
+                return Json(new { success = true, respuesta = new { caca = "caca" } }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+
+            }
+
+
+        }
+
+        public ActionResult eliminar_referencias_laborales_curriculum(int id)
+        {
+
+
+
+            try
+            {
+               // db.Database.ExecuteSqlCommand("delete from experiencias_laborales_curriculums  where id_experiencia_laboral_curriculum = {0}", id);
                 return Json(new { success = true, respuesta = new { caca = "caca" } }, JsonRequestBehavior.AllowGet);
 
             }
@@ -589,7 +640,7 @@ namespace Portal_Empleos_v2.Controllers
     
         }
         [Authorize]
-        public ActionResult agregar_vista_referencias_laborales_curriculum(int? id)
+        public ActionResult eliminar_vista_referencias_laborales_curriculum(int? id)
         {
             try
             {
@@ -599,6 +650,25 @@ namespace Portal_Empleos_v2.Controllers
                 }
 
                 ViewBag.id_experiencia_laboral = id;
+                return PartialView("c_experiencia_laboral/referencia_laboral/_eliminar_referencia_laboral_curriculum");
+            }
+            catch (Exception ex)
+            {
+                return PartialView("Error");
+            }
+
+        }
+        [Authorize]
+        public ActionResult agregar_vista_referencias_laborales_curriculum(int? id)
+        {
+            try
+            {
+                if (Session.Contents.Count < 1)
+                {
+                    return RedirectToAction("LogOff", "login");
+                }
+
+                ViewBag.id_experiencia_laboral_curriculum = id;
                 return PartialView("c_experiencia_laboral/referencia_laboral/_agregar_referencia_laboral_curriculum");
             }
             catch (Exception ex)
@@ -607,6 +677,12 @@ namespace Portal_Empleos_v2.Controllers
             }
 
         }
+
+
+
+
+
+
 
         public ActionResult vista_estudios_curriculum()
         {

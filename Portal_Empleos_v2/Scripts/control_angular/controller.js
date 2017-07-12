@@ -950,6 +950,32 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
         });
     };
 
+    $scope.agregar_referencia_laboral = function () {
+        var add_referencia_laboral = { 'nueva_referencia_laboral': $scope.agrega_referencia_laboral };
+        var add_ref = mantenedor_total.agregar_datos('/Curriculum_mant/agregar_referencias_laborales_curriculum', add_referencia_laboral);
+        add_ref.then(function (successResponse) {
+            $scope.respuesta = successResponse.data.respuesta;
+            $scope.closeDialog();
+            $scope.experiencias_laborales_curriculum();
+        },
+        function (errorResponse) {
+            console.log('error agregar referencia laboral');
+        });
+    };
+
+    $scope.eliminar_referencia_laboral = function () {
+        var id_experiencia_laboral = $scope.elimina_referencia_laboral.id;
+        var del_ref = mantenedor_total.borrar_datos('/Curriculum_mant/eliminar_referencias_laborales_curriculum/', id_experiencia_laboral);
+        del_ref.then(function (successResponse) {
+            $scope.respuesta = successResponse.data.respuesta;
+            $scope.closeDialog();
+            $scope.experiencias_laborales_curriculum();
+        },
+        function (errorResponse) {
+            console.log('error eliminar referencia laboral');
+        });
+    };
+
     $scope.agregar_estudio = function () {
         var add_estudio = { 'nuevo_estudio': $scope.agrega_estudio };
         var add_est = mantenedor_total.agregar_datos('/Curriculum_mant/agregar_estudios_curriculum', add_estudio);
@@ -1102,11 +1128,12 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
         function (successResponse) {
 
             if (successResponse.data.success == true) {
-                console.log('success3');
-                $scope.$modalInstance.close();
+                
+                $scope.actualizar_descripcion = {};
+                $scope.desc_curriculum = {};
                 $scope.respuesta = successResponse.data.respuesta;
-                $scope.cerrarmodal();
-                //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
+                $scope.closeDialog();
+
 
                 $scope.descripcion_curriculum();
 
@@ -1118,8 +1145,8 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
 
         ,
         function (errorResponse) {
-            //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
-            console.log(':C');
+
+            console.log('error actualizar descripcion');
         });
 
 
@@ -1151,6 +1178,7 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
                 $scope.update_id_comuna = record.id_comuna;
                 $scope.update_id_ciudad = record.id_ciudad;
                 $scope.update_id_region = record.id_region;
+            
 
             }
             else {
@@ -1180,11 +1208,11 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
                 $scope.update_id_cargo_experiencia_laboral = record2.id_cargo_experiencia_laboral;
 
                 $scope.fecha_inicio = record2.ano_inicio_experiencia_laboral.replace('/Date(', '').replace(')/', '');
-                $scope.update_ano_inicio_experiencia_laboral = $filter('date')($scope.fecha_inicio, 'dd-MM-yyyy');
+                $scope.update_ano_inicio_experiencia_laboral = $filter('date')($scope.fecha_inicio, 'dd/MM/yyyy');
 
                 $scope.fecha_termino = record2.ano_termino_experiencia_laboral.replace('/Date(', '').replace(')/', '');
-                $scope.update_ano_termino_experiencia_laboral = $filter('date')($scope.fecha_termino, 'dd-MM-yyyy');
-
+                $scope.update_ano_termino_experiencia_laboral = $filter('date')($scope.fecha_termino, 'dd/MM/yyyy');
+     
                 $scope.update_id_area_experiencia_laboral = record2.id_area_experiencia_laboral;
 
                 $scope.update_detalle_experiencia_laboral = record2.detalle_experiencia_laboral;
@@ -1263,7 +1291,9 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
         var edit_exp = { 'edita_experiencia_laboral': edita_experiencia_laboral };
         var upd_exp = mantenedor_total.actualizar_datos('/Curriculum_mant/edita_experiencia_laboral/', id, edit_exp);
         upd_exp.then(function (successResponse) {
-                $scope.respuesta = successResponse.data.respuesta;
+            $scope.respuesta = successResponse.data.respuesta;
+            $scope.closeDialog();
+            $scope.experiencias_laborales_curriculum();
         },
         function (errorResponse) {
             console.log('error edita experiencia laboral');
@@ -1371,14 +1401,9 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
 
     };
     $scope.actualizar_foto = function (a) {
-        console.log($scope.actualiza_fotos);
-
-
         var up_foto = new FormData();
         up_foto.append('id_foto', a);
         up_foto.append('file', $scope.actualiza_fotos.fotos);
-        //up_foto.append('file', $scope.actualiza_fotos.foto_curriculums);
-
         $http.post('/curriculum_mant/actualiza_foto_curriculum', up_foto
         , {
             transformRequest: angular.identity,
@@ -1386,20 +1411,14 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
         }
         ).then(
         function (successResponse) {
-            if (successResponse.data.success == true) {
-                console.log('success');
+            
                 $scope.datos_per = successResponse.data.datos_p;
-                $scope.cerrarmodal();
+                $scope.closeDialog();
                 $scope.foto_persona();
-            }
-            else {
-
-                console.log("bla bla bla");
-            }
         },
         function (errorResponse) {
 
-            console.log("error my friend");
+            console.log("error actualizar foto");
         });
     };
 

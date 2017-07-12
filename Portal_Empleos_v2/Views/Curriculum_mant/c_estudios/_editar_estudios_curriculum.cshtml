@@ -7,7 +7,7 @@
     </md-toolbar>
 
     <md-dialog-content>
-        <div class="md-dialog-content">
+        <div class="lg-dialog-content">
             <form name="mainForm" data-ng-submit="editar_estudios(@ViewBag.id_estudio)" data-ng-controller="data1" ng-init="detalle_estudios(@ViewBag.id_estudio)">
                 <div class="well">
                     <h1 class="text-center"> Editar Estudio @ViewBag.id_estudio</h1>
@@ -63,9 +63,9 @@
                                        placeholder="yyyy-MM-dd" min="1950-01-01" max="{{currentdate}}" required />
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
 
+
+                    <div class="col-lg-12">
                         <div class="well">
 
                             <div class="form-group ">
@@ -76,7 +76,7 @@
                             <div class="form-group ">
                                 <div ng-controller="data1">
 
-                                    <a href="" class="btn  btn-block btn-danger btn-lg" ng-click="cerrarmodal()">Cancelar</a>
+                                    <a href="" class="btn  btn-block btn-danger btn-lg" ng-click="closeDialog()">Cancelar</a>
                                 </div>
                             </div>
 

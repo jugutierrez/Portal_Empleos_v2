@@ -8,19 +8,17 @@
 
     <md-dialog-content>
         <div class="lg-dialog-content">
-
-
-            <form name="mainForm" data-ng-submit="eliminar_capacitacion()" data-ng-controller="data1" ng-model="elimina_capacitacion" novalidate>
+            <form name="mainForm" data-ng-submit="eliminar_referencia_laboral()" data-ng-controller="data1" ng-model="elimina_referencia_laboral" novalidate>
                 <div class="text-center well">
-                    <h1 class="text-center">Eliminar Capacitacion </h1>
+                    <h1 class="text-center">Eliminar referencia Laboral </h1>
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <h3>Desea eliminar esta Capacitacion:</h3>
+                            <h3>Desea eliminar esta referencia laboral:</h3>
                         </li>
                         <li class="list-group-item">
                             <h2>
-                                @Html.Hidden("id_capacitaciones_curriculum", (Int32)ViewBag.id_capacitacion, new { @ng_model = "elimina_capacitacion.id", ng_init = "elimina_capacitacion.id = " + (Int32)ViewBag.id_capacitacion })
-                                <span class="label label-danger">@ViewBag.nombre_capacitacion</span>
+                                @Html.Hidden("id_experiencia_laboral", (Int32)ViewBag.id_experiencia_laboral, new { @ng_model = "elimina_referencia_laboral.id", ng_init = "elimina_referencia_laboral.id = " + (Int32)ViewBag.id_experiencia_laboral })
+                                <span class="label label-danger">@ViewBag.nombre_referencia_laboral</span>
                             </h2>
                         </li>
                         <li class="list-group-item">
@@ -49,5 +47,6 @@
                 </div>
             </form>
         </div>
+
     </md-dialog-content>
 </md-dialog>

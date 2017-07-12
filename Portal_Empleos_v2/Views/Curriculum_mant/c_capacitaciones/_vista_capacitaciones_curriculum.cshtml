@@ -15,7 +15,9 @@
         <div class="col-md-12">
            
             <div ng-show="ver_cap">
-                <img src="~/Images/indicator.white.gif" /> Cargando ...
+                <div layout="row" layout-sm="column" layout-align="space-around">
+                    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                </div>
             </div>
             <div ng-show="!ver_cap && !error_cap && cap_curriculum <= 0">
                 No se Encontraron resultados ...

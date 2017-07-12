@@ -30,7 +30,8 @@ namespace Portal_Empleos_v2
 
             bundles.Add(new ScriptBundle("~/bundles/otrojs").Include(
         "~/Scripts/controles_jasc.js"));
-
+            bundles.Add(new ScriptBundle("~/bundles/face").Include(
+    "~/Scripts/face_script/face_script.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/angular1").Include(
 

@@ -9,12 +9,8 @@
     </md-toolbar>
 
     <md-dialog-content>
-        <div class="md-dialog-content">
-            <div class="row">
-                <div class="col-xs-12">
 
-
-                    <div class="md-dialog-content">
+                    <div class="lg-dialog-content">
                         <div class="well">
                             <h1 class="text-center">Capacitaciones</h1>
                             <hr>
@@ -70,8 +66,8 @@
                                                    placeholder="yyyy-MM-dd" min="1950-01-01" max="{{currentdate}}" required />
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
+
+
                                     <div class="col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="exampleInputEmail1">Descripcion de la capacitacion</label>
@@ -79,35 +75,33 @@
                                                       rows="5" placeholder="EJ: control de los sistemas informaticos" required></textarea>
                                         </div>
 
-                                    </div>
-
-                                </div>
-                                <div class="row">
-                                    <div class="well">
-                                        <div class="form-group ">
-                                            <button type="submit" class="btn btn-block btn-lg btn-info">
-                                                Agregar Capacitacion
-                                            </button>
 
 
 
+
+                                        <div class="well">
+                                            <div class="form-group ">
+                                                <button type="submit" class="btn btn-block btn-lg btn-info">
+                                                    Agregar Capacitacion
+                                                </button>
+
+
+
+                                            </div>
+                                            <div class="form-group ">
+
+
+                                                <a href="" class="btn  btn-block btn-danger btn-lg" ng-click="closeDialog()">Cancelar</a>
+
+                                            </div>
                                         </div>
-                                        <div class="form-group ">
-
-
-                                            <a href="" class="btn  btn-block btn-danger btn-lg" ng-click="cerrarmodal()">Cancelar</a>
-
-                                        </div>
                                     </div>
-
                                 </div>
                             </form>
                         </div>
                     </div>
-
-                </div>
-            </div>
-           </div>
+       
+         
     </md-dialog-content>
 
  

@@ -286,6 +286,7 @@
     <Compile Include="Models\listado_fecha_actualizacion.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\modelo_agregar_profesion_curriculum.cs" />
+    <Compile Include="Models\modelo_agregar_referencia_laboral_curriculum.cs" />
     <Compile Include="Models\modelo_agregar_softwares_curriculum.cs" />
     <Compile Include="Models\modelo_datos_soporte.cs" />
     <Compile Include="Models\modelo_descarga_curriculum.cs" />
@@ -1244,6 +1245,7 @@
     <Content Include="Views\Curriculum_mant\c_experiencia_laboral\referencia_laboral\_agregar_referencia_laboral_curriculum.cshtml" />
     <Content Include="Views\Emails\_ViewStart.cshtml" />
     <Content Include="Views\Emails\Web.config" />
+    <Content Include="Views\Curriculum_mant\c_experiencia_laboral\referencia_laboral\_eliminar_referencia_laboral_curriculum.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

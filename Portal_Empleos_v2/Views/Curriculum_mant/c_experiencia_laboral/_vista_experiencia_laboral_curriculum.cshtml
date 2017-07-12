@@ -15,7 +15,9 @@
         <div class="col-md-12">
          
             <div ng-show="ver_exp">
-                <img src="~/Images/indicator.white.gif" /> Cargando ...
+                <div layout="row" layout-sm="column" layout-align="space-around">
+                    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                </div>
             </div>
             <div ng-show="!ver_exp && exp_curriculum.length <= 0">
                 No se Encontraron resultados ...
@@ -101,8 +103,12 @@
                                     <div class="row" ng-if="exp_c.id_referencia_laboral != 0">
                                         <div class="col-xs-12">
                                             <div class="row">
-                                                <div class="col-xs-12">
+                                                <div class="col-xs-8">
                                                     <h4>Referencia Laboral:</h4> 
+                                                   
+                                                </div>
+                                                <div class="col-xs-4" ng-controller="data1">
+                                                    <a href="" ng-click="abremodal('../Curriculum_mant/eliminar_vista_referencias_laborales_curriculum/' , exp_c.id_experiencia_laboral_curriculum)" class="btn btn-block btn-info btn-sm"><i class="fa fa-star fa-fw"></i>Eliminar</a>
                                                 </div>
                                             </div>
                                             <div class="row">

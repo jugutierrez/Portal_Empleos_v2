@@ -16,10 +16,10 @@
     @Scripts.Render("~/bundles/angular1")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+  
 
 
 
-   @*<script type="text/javascript" src="@Url.Content("~/Scripts/face_script/face_script.js")"></script>*@ 
 
    
 
@@ -93,10 +93,12 @@
             </div>
         </div>
     </footer>
-
-    @*  @Scripts.Render("~/bundles/otrojs")*@
+   
+      @Scripts.Render("~/bundles/face")
+    @Scripts.Render("~/bundles/otrojs")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
     @RenderSection("scripts", required: false)
 
 

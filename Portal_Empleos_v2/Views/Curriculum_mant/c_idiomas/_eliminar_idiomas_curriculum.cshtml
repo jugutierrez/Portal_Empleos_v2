@@ -8,10 +8,8 @@
     </md-toolbar>
 
     <md-dialog-content>
-        <div class="md-dialog-content">
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3">
-
+        <div class="lg-dialog-content">
+    
                     <div class="text-center well">
                         <form name="mainForm" data-ng-submit="eliminar_idioma()" data-ng-controller="data1" ng-model="elimina_idioma" novalidate>
                             <h1 class="text-center">Eliminar idioma</h1>
@@ -42,7 +40,7 @@
                                             <div class="form-group ">
                                                 <div ng-controller="data1">
 
-                                                    <a href="" class="btn  btn-block btn-info btn-lg" ng-click="cerrarmodal()">Cancelar</a>
+                                                    <a href="" class="btn  btn-block btn-info btn-lg" ng-click="closeDialog()">Cancelar</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -52,7 +50,6 @@
                         </form>
                     </div>
                 </div>
-            </div>
-        </div>
+      
     </md-dialog-content>
 </md-dialog>

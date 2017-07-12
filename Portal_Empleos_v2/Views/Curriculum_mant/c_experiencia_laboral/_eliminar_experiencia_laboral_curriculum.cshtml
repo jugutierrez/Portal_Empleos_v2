@@ -7,10 +7,7 @@
     </md-toolbar>
 
     <md-dialog-content>
-        <div class="md-dialog-content">
-
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3">
+        <div class="lg-dialog-content">
                     <form name="mainForm" data-ng-submit="eliminar_experiencia_laboral()" data-ng-controller="data1" ng-model="elimina_experiencia_laboral" novalidate>
                         <div class="text-center well">
                             <h1 class="text-center">Eliminar Experiencia Laboral </h1>
@@ -20,7 +17,7 @@
                                 </li>
                                 <li class="list-group-item">
                                     <h2>
-                                        @Html.Hidden("id_experiencia_laboral_curriculum", (Int32)ViewBag.id_experiencia_laboral, new { @ng_model = "elimina_experiencia_laboral.id", ng_init = "elimina_experiencia_laboral.id = " + (Int32)ViewBag.id_experiencia_laboral })
+                                        @Html.Hidden("id_experiencia_laboral", (Int32)ViewBag.id_experiencia_laboral, new { @ng_model = "elimina_experiencia_laboral.id", ng_init = "elimina_experiencia_laboral.id = " + (Int32)ViewBag.id_experiencia_laboral })
                                         <span class="label label-danger">@ViewBag.nombre_experiencia_laboral</span>
                                     </h2>
                                 </li>
@@ -40,7 +37,7 @@
                                             <div class="form-group ">
                                                 <div ng-controller="data1">
 
-                                                    <a href="" class="btn  btn-block btn-info btn-lg" ng-click="cerrarmodal()">Cancelar</a>
+                                                    <a href="" class="btn  btn-block btn-info btn-lg" ng-click="closeDialog()">Cancelar</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -50,7 +47,6 @@
                         </div>
                     </form>
                 </div>
-            </div>
-        </div>
+    
     </md-dialog-content>
 </md-dialog>

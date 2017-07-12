@@ -8,9 +8,9 @@
     </md-toolbar>
 
     <md-dialog-content>
-        <div class="md-dialog-content">
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
+        <div class="lg-dialog-content">
+
+
                     <form name="mainForm" data-ng-submit="actualiza_descripcion()" data-ng-controller="data1" ng-model="actualizar_descripcion" novalidate>
                         <div class="well">
                             <h2 class="text-center">Descripcion y presentacion Curriculum</h2>
@@ -64,7 +64,7 @@
                                     <div class="form-group ">
                                         <div ng-controller="data1">
 
-                                            <a href="" class="btn  btn-block btn-danger btn-lg" ng-click="cerrarmodal()">Cancelar</a>
+                                            <a href="" class="btn  btn-block btn-danger btn-lg" ng-click="closeDialog()">Cancelar</a>
                                         </div>
                                     </div>
                                 </li>
@@ -72,7 +72,6 @@
                         </div>
                     </form>
                 </div>
-            </div>
-        </div>
+          
     </md-dialog-content>
 </md-dialog>

@@ -13,7 +13,7 @@
         return b;
     };
     this.agregar_datos = function (url , datos) {
-        var a= $http.post(url);
+        var a= $http.post(url , datos);
         return a;
     };
   
