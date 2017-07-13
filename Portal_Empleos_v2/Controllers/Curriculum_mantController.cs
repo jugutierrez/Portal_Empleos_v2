@@ -240,9 +240,7 @@ namespace Portal_Empleos_v2.Controllers
                     return RedirectToAction("LogOff", "login");
                 }
 
-                ViewBag.id_region = new SelectList(db.regiones, "id_region", "nombre_region");
-                ViewBag.id_comuna = new SelectList(db.comunas, "id_comuna", "nombre_comuna");
-                ViewBag.id_ciudad = new SelectList(db.ciudades, "id_ciudad", "nombre_ciudad");
+
 
                 return PartialView("c_datos_persona/_editar_datos_persona_curriculum");
             }
@@ -256,6 +254,7 @@ namespace Portal_Empleos_v2.Controllers
         {
             try
             {
+                db.Database.ExecuteSqlCommand("");
 
                 return Json(new { success = true, datos_p = datos_per }, JsonRequestBehavior.AllowGet);
 
@@ -528,9 +527,11 @@ namespace Portal_Empleos_v2.Controllers
 
             try
             {
-               
+                db.Database.ExecuteSqlCommand("exec sp_inserta_referencia_laboral @id_experiencia_laboral_curriculum = {0} ,@nombre_referencia_laboral = {1} , "+
+                    "@cargo_referencia_laboral = {2} ,@contacto_referencia_laboral = {3} , @correo_referencia_laboral = {4}"
+                    , nueva_referencia_laboral.id_experiencia_laboral_curriculum,nueva_referencia_laboral.nombre_referencia_laboral ,nueva_referencia_laboral.cargo_referencia_laboral ,nueva_referencia_laboral.contacto_referencia_laboral,nueva_referencia_laboral.correo_referencia_laboral);
 
-                return Json(new { success = true, respuesta = "ccaca" }, JsonRequestBehavior.AllowGet);
+                return Json(new { success = true, respuesta = nueva_referencia_laboral }, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception ex)
@@ -549,6 +550,11 @@ namespace Portal_Empleos_v2.Controllers
 
             try
             {
+               var k = db.Database.SqlQuery<long>("select id_referencia_laboral from experiencias_laborales_curriculums where id_experiencia_laboral_curriculum = {0}", id).Single();
+                if (k != 0)
+                {
+                    db.Database.ExecuteSqlCommand("exec sp_eliminar_referencia_laboral @a = {0} , @id_experiencia_laboral_curriculum = {1}", null, id);
+                }
                 db.Database.ExecuteSqlCommand("delete from experiencias_laborales_curriculums  where id_experiencia_laboral_curriculum = {0}", id);
                 return Json(new { success = true, respuesta = new { caca = "caca" } }, JsonRequestBehavior.AllowGet);
 
@@ -570,7 +576,11 @@ namespace Portal_Empleos_v2.Controllers
 
             try
             {
-               // db.Database.ExecuteSqlCommand("delete from experiencias_laborales_curriculums  where id_experiencia_laboral_curriculum = {0}", id);
+                var k = db.Database.SqlQuery<long>("select id_referencia_laboral from experiencias_laborales_curriculums where id_experiencia_laboral_curriculum = {0}", id).Single();
+                if (k != 0)
+                {
+                    db.Database.ExecuteSqlCommand("exec sp_eliminar_referencia_laboral @a = {0} , @id_experiencia_laboral_curriculum = {1}", null, id);
+                }
                 return Json(new { success = true, respuesta = new { caca = "caca" } }, JsonRequestBehavior.AllowGet);
 
             }
@@ -779,7 +789,7 @@ namespace Portal_Empleos_v2.Controllers
             try
             {
 
-
+                db.Database.ExecuteSqlCommand("");
 
                 return Json(new { success = false, exp_c = new { caca = "caca" } }, JsonRequestBehavior.AllowGet);
 
@@ -925,7 +935,7 @@ namespace Portal_Empleos_v2.Controllers
             try
             {
 
-
+                db.Database.ExecuteSqlCommand("");
 
                 return Json(new { success = false, exp_c = new { caca = "caca" } }, JsonRequestBehavior.AllowGet);
 

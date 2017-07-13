@@ -17,13 +17,10 @@
                                 <li class="list-group-item">
                                     <h3>Desea eliminar este idioma:</h3>
                                 </li>
-                                <li class="list-group-item">
-                                    <h2>
+                             
 
                                         @Html.Hidden("id_idioma_curriculum", (Int32)ViewBag.id_idioma, new { @ng_model = "elimina_idioma.id", ng_init = "elimina_idioma.id = " + (Int32)ViewBag.id_idioma })
-                                        <span class="label label-danger">@ViewBag.id_nombre_idioma</span>
-                                    </h2>
-                                </li>
+                                  
                                 <li class="list-group-item">
                                     <div class="row">
                                         <div class="col-md-12">

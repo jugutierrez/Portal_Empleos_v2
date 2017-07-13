@@ -18,12 +18,9 @@
                                 <li class="list-group-item">
                                     <h3>Desea eliminar este Documento</h3>
                                 </li>
-                                <li class="list-group-item">
-                                    <h2>
+                             
                                         @Html.Hidden("id_documento_curriculum", (Int32)ViewBag.id_documento, new { @ng_model = "elimina_documento.id", ng_init = "elimina_documento.id = " + (Int32)ViewBag.id_documento })
-                                        <span class="label label-danger"> @ViewBag.nombre_documento</span>
-                                    </h2>
-                                </li>
+                                   
                                 <li class="list-group-item">
                                     <div class="row">
                                         <div class="col-md-12">

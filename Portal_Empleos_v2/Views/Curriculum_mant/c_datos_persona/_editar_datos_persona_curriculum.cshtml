@@ -92,28 +92,35 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row" ng-controller="PopupCtrl">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label class="control-label" for="exampleInputPassword1">Region</label>
-                                                    @Html.DropDownList("id_region", null, "Seleccione...", new { @class = "form-control input-lg" })
-
+                                             
+                                                    <select name="selectPais" id="selectPais" ng-model="update_id_region"  ng-options="pais.id_region as pais.nombre_region for pais in paises " ng-change="updateDropDownDepartamentos(update_id_region)" ng-init="updateDropDownDepartamentos(update_id_region)" class = "form-control input-lg">
+                                                        <option value="">Seleccione Comuna</option>
+                                                    </select>
+                                                 
                                                 </div>
 
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label class="control-label" for="exampleInputPassword1">Ciudad</label>
-                                                    @Html.DropDownList("id_ciudad", null, "Seleccione...", new { @class = "form-control input-lg", @readonly = "readonly" })
-
+                                           
+                                                    <select name="selectDepartamento" id="selectDepartamento"  ng-model="update_id_ciudad" ng-disabled="update_id_region" ng-options="departamento.id_ciudad as departamento.nombre_ciudad for departamento in departamentos_filter " ng-change="updateDropDownProvincias(update_id_ciudad)" ng-init="updateDropDownProvincias(update_id_ciudad)" class = "form-control input-lg">
+                                                        <option value="">Seleccione Ciudad</option>
+                                                    </select>
                                                 </div>
 
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label class="control-label" for="exampleInputPassword1">Comuna</label>
-                                                    @Html.DropDownList("id_comuna", null, "Seleccione...", new { @class = "form-control input-lg", @readonly = "readonly" })
-
+                                               
+                                                    <select name="selectProvincias" id="selectProvincias" ng-model="update_id_comuna" ng-disabled="update_id_ciudad" ng-options="provincia.id_comuna as provincia.nombre_comuna for provincia in provincias_filter"  class = "form-control input-lg">
+                                                        <option value="">Seleccione Region</option>
+                                                    </select>
                                                 </div>
 
                                             </div>

@@ -9,7 +9,7 @@
     <md-dialog-content>
         <div class="lg-dialog-content">
             <div class="well">
-                <h1 class="text-center"> AGREGAR EXPERIENCIA LABORAL</h1>
+                <h1 class="text-center"> EDITAR EXPERIENCIA LABORAL</h1>
                 <hr>
                 <form name="mainForm" data-ng-submit="editar_experiencia_laboral(@ViewBag.id_experiencia_laboral)" data-ng-controller="data1" ng-init="detalle_experiencia_laboral(@ViewBag.id_experiencia_laboral)">
                     <div class="row">
@@ -30,7 +30,7 @@
 
                              
                                   <div flex-gt-xs>
-                                    <label class="control-label" for="exampleInputPassword1"> Fecha inicio:</label>
+                                  
                                     <md-datepicker ng-model="update_ano_inicio_experiencia_laboral" md-placeholder="Ingrese fecha de inicio"
                                                    md-min-date="ctrl.minDate" max="{{currentdate}}"></md-datepicker>
                                 </div>

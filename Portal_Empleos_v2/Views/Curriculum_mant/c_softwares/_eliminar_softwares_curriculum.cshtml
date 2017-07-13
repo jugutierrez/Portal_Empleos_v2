@@ -16,12 +16,9 @@
                                 <li class="list-group-item">
                                     <h3>Desea eliminar el uso de software:</h3>
                                 </li>
-                                <li class="list-group-item">
-                                    <h2>
+                               
                                         @Html.Hidden("id_software_curriculum", (Int32)ViewBag.id_software, new { @ng_model = "elimina_software.id", ng_init = "elimina_software.id = " + (Int32)ViewBag.id_software })
-                                        <span class="label label-danger">@ViewBag.nombre_software</span>
-                                    </h2>
-                                </li>
+                                 
                                 <li class="list-group-item">
                                     <div class="row">
                                         <div class="col-md-12">

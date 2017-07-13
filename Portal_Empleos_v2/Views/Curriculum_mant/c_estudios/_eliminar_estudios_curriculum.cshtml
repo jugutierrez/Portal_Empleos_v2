@@ -18,14 +18,11 @@
                                 <li class="list-group-item">
                                     <h3>Desea eliminar este estudio:</h3>
                                 </li>
-                                <li class="list-group-item">
-                                    <h2>
+                            
                                         @Html.Hidden("id_estudio_curriculum", (Int32)ViewBag.id_estudio, new { @ng_model = "elimina_estudio.id", ng_init = "elimina_estudio.id = " + (Int32)ViewBag.id_estudio })
 
 
-                                        <span class="label label-danger">@ViewBag.nombre_estudio</span>
-                                    </h2>
-                                </li>
+                                  
                                 <li class="list-group-item">
                                     <div class="row">
                                         <div class="col-md-12">

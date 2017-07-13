@@ -10,7 +10,7 @@
         <div class="lg-dialog-content">
             <form name="mainForm" data-ng-submit="editar_capacitacion(@ViewBag.id_capacitacion)" data-ng-controller="data1" ng-init="detalle_capacitaciones(@ViewBag.id_capacitacion)">
                 <div class="well">
-                    <h1 class="text-center"> Editar Capacitaciones @ViewBag.id_capacitacion</h1>
+                    <h1 class="text-center"> Editar Capacitaciones</h1>
                     <hr>
                     <div class="row">
                         <div class="col-md-6">
@@ -23,15 +23,15 @@
                                     <option value=""></option>
                                 </select>
 
-                                <md-input-container>
+                               @* <md-input-container>
 
-                                    <md-select ng-model="update_id_capacitacion" md-placeholder="Seleccione...">
-                                        <md-option><em>---Seleccione---</em></md-option>
-                                        <md-option ng-repeat="r_t_c in rellenar_capa track by $index" ng-value="r_t_c.id_capacitacion" ng-disabled="$index === 1">
-                                            {{r_t_c.nombre_capacitacion}}
-                                        </md-option>
-                                    </md-select>
-                                </md-input-container>
+        <md-select ng-model="update_id_capacitacion" md-placeholder="Seleccione...">
+            <md-option><em>---Seleccione---</em></md-option>
+            <md-option ng-repeat="r_t_c in rellenar_capa track by $index" ng-value="r_t_c.id_capacitacion" ng-disabled="$index === 1">
+                {{r_t_c.nombre_capacitacion}}
+            </md-option>
+        </md-select>
+    </md-input-container>*@
                             </div>
 
                             <div class="form-group" ng-init="rellenar_estado_capacitacion()">
@@ -43,15 +43,12 @@
                             </div>
 
                             <div class="form-group">
-                                <div flex-gt-xs>
-                                    <label class="control-label" for="exampleInputPassword1"> Fecha inicio:</label>
-                                    <md-datepicker ng-model="update_ano_inicio_capacitacion_curriculum " md-placeholder="Ingrese fecha de inicio"
-                                                   md-min-date="ctrl.minDate" md-max-date="currentdate"></md-datepicker>
-                                </div>
-
+                           
+                                <label class="control-label" for="exampleInputPassword1"> Fecha Inicio:</label>
 
                                 <input type="datetime" class="form-control input-lg" id="exampleInput" name="input" ng-model="update_ano_inicio_capacitacion_curriculum"
                                        placeholder="yyyy-MM-dd" min="1950-01-01" max="{{currentdate}}" required />
+                     
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -62,15 +59,15 @@
                                     <option value="">---Seleccione---</option>
                                     <option value=""></option>
                                 </select>
-                                <md-input-container>
-                                    <label>Institucion</label>
-                                    <md-select ng-model="update_id_institucion">
-                                        <md-option><em>---Seleccione---</em></md-option>
-                                        <md-option ng-repeat="r_in in rellenar_insti track by $index" ng-value="r_in.id_institucion" ng-disabled="$index === 1">
-                                            {{r_in.nombre_institucion}}
-                                        </md-option>
-                                    </md-select>
-                                </md-input-container>
+                               @*<md-input-container>
+        <label>Institucion</label>
+        <md-select ng-model="update_id_institucion">
+            <md-option><em>---Seleccione---</em></md-option>
+            <md-option ng-repeat="r_in in rellenar_insti track by $index" ng-value="r_in.id_institucion" ng-disabled="$index === 1">
+                {{r_in.nombre_institucion}}
+            </md-option>
+        </md-select>
+    </md-input-container>*@ 
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="exampleInputPassword1">Horas Capacitacion:</label>

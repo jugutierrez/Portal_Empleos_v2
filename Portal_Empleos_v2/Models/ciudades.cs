@@ -15,6 +15,7 @@ namespace Portal_Empleos_v2.Models
         public int id_ciudad { get; set; }
 
         public string nombre_ciudad { get; set; }
+        public int id_region { get; set; }
 
     }
 }

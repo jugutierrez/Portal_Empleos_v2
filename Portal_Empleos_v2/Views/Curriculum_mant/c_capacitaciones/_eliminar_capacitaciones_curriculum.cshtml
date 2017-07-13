@@ -17,12 +17,9 @@
                         <li class="list-group-item">
                             <h3>Desea eliminar esta Capacitacion:</h3>
                         </li>
-                        <li class="list-group-item">
-                            <h2>
+                    
                                 @Html.Hidden("id_capacitaciones_curriculum", (Int32)ViewBag.id_capacitacion, new { @ng_model = "elimina_capacitacion.id", ng_init = "elimina_capacitacion.id = " + (Int32)ViewBag.id_capacitacion })
-                                <span class="label label-danger">@ViewBag.nombre_capacitacion</span>
-                            </h2>
-                        </li>
+                          
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col-md-12">

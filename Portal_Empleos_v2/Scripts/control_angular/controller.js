@@ -1,4 +1,69 @@
 ﻿
+app.controller('PopupCtrl', ['$scope', '$filter', '$http', 'mantenedor_total', function ($scope, $filter, $http, mantenedor_total) {
+
+
+    var r_r = mantenedor_total.obtener_datos('/faq/rellenar_regiones');
+    r_r.then(function (successResponse) {
+        if (successResponse.data.success == true) {
+            $scope.paises = successResponse.data.regiones;
+            console.log($scope.paises);
+
+            //$scope.load_datos = false;
+        }
+        else {
+            //$scope.load_datos = false;
+        }
+    },
+    function (errorResponse) {
+        //$scope.error_datos = false;
+        //$scope.load_datos = false;
+    });
+
+   
+
+    $scope.updateDropDownDepartamentos = function (pais) {
+        var r_c = mantenedor_total.obtener_datos('/faq/rellenar_ciudades');
+        r_c.then(function (successResponse) {
+            if (successResponse.data.success == true) {
+                $scope.departamentos = successResponse.data.ciudades;
+              
+                $scope.departamentos_filter = $filter('filter')($scope.departamentos, { id_region: pais });
+                //$scope.load_datos = false;
+            }
+            else {
+                //$scope.load_datos = false;
+            }
+        },
+        function (errorResponse) {
+            //$scope.error_datos = false;
+            //$scope.load_datos = false;
+        });
+
+       
+       
+    }
+
+    $scope.updateDropDownProvincias = function (depto) {
+        var r_co = mantenedor_total.obtener_datos('/faq/rellenar_comunas');
+        r_co.then(function (successResponse) {
+            if (successResponse.data.success == true) {
+                $scope.provincias = successResponse.data.comunas;
+                $scope.provincias_filter = $filter('filter')($scope.provincias, { id_ciudad: depto });
+            }
+            else {
+                //$scope.load_datos = false;
+            }
+        },
+        function (errorResponse) {
+            //$scope.error_datos = false;
+            //$scope.load_datos = false;
+        });
+      
+        
+    }
+
+
+}]);
 
 app.controller('HomeCtrl', ['$scope', '$http', 'mantenedor_total', function ($scope, $http, mantenedor_total) {
 
@@ -792,13 +857,13 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
             telefono_curriculum_1: $scope.update_telefono_curriculum_1,
             telefono_curriculum_2: $scope.update_telefono_curriculum_2,
             id_comuna: $scope.update_id_comuna
-
+            
         };
-
+   
 
 
         console.log(Employee);
-
+        $scope.closeDialog();
         /* console.log($scope.datos_per);
         var update = { 'datos_per': $scope.update_p};
         $http.post('/Curriculum_mant/actualiza_datos_persona_curriculum', update).then(
@@ -1171,14 +1236,14 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
                 $scope.update_direccion_curriculum = record.direccion_curriculum;
                 $scope.update_id_tipo_persona = record.id_tipo_persona;
                 $scope.update_sueldo_esperado = record.sueldo_esperado;
-                $scope.update_id_discapacidad_persona = record.id_discapacidad_persona;
                 $scope.update_correo_electronico_persona = record.correo_electronico_persona;
                 $scope.update_telefono_curriculum_1 = record.telefono_curriculum_1;
                 $scope.update_telefono_curriculum_2 = record.telefono_curriculum_2;
                 $scope.update_id_comuna = record.id_comuna;
                 $scope.update_id_ciudad = record.id_ciudad;
                 $scope.update_id_region = record.id_region;
-            
+      
+          
 
             }
             else {
@@ -1188,7 +1253,7 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
         function (errorResponse) {
             $scope.error_datos = true;
             $scope.ver_datos = false;
-            console.log("error my friend");
+            console.log("error listar datos persona");
         });
     };
 
@@ -1225,7 +1290,7 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
         },
         function (errorResponse) {
 
-            console.log("error my friend");
+            console.log("error detalle experiencia laboral");
         });
     };
     $scope.detalle_estudios = function (a) {
@@ -1236,7 +1301,6 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
                 console.log('success');
 
                 var record3 = successResponse.data.estudios_c;
-
                 $scope.update_id_estudio = record3.id_estudio;
                 $scope.update_id_tipo_estudio = record3.id_tipo_estudio;
                 $scope.update_id_estado_estudio = record3.id_estado_estudio;
@@ -1254,7 +1318,7 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
         },
         function (errorResponse) {
 
-            console.log("error my friend");
+            console.log("error detalle estudios");
         });
     };
     $scope.detalle_capacitaciones = function (a) {
@@ -1265,7 +1329,7 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
                 $scope.update_descripcion_capacitacion = record2.descripcion_capacitacion;
                 $scope.update_id_capacitacion = record2.id_capacitacion;
                 $scope.fecha_inicio = record2.ano_inicio_capacitacion_curriculum.replace('/Date(', '').replace(')/', '');
-                $scope.update_ano_inicio_capacitacion_curriculum = new Date($scope.fecha_inicio, 'dd-MM-yyyy');
+                $scope.update_ano_inicio_capacitacion_curriculum = $filter('date')($scope.fecha_inicio, 'dd-MM-yyyy');
                 $scope.fecha_termino = record2.ano_termino_capacitacion_curriculum.replace('/Date(', '').replace(')/', '');
                 $scope.update_ano_termino_capacitacion_curriculum = $filter('date')($scope.fecha_termino, 'dd-MM-yyyy');
                 $scope.update_id_estado_capacitacion = record2.id_estado_capacitacion;
@@ -1302,7 +1366,7 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
 
     };
     $scope.editar_estudios = function (a) {
-        // console.log($scope.edita_experiencia_laboral);
+    
         var edita_estudios = {
 
 
@@ -1314,23 +1378,16 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
             ano_termino_estudio_curriculum: $scope.update_ano_termino_estudio_curriculum
         };
 
-
-
-
-
-
         var edit_es = { 'edita_estudios': edita_estudios };
 
         $http.post('/Curriculum_mant/edita_estudios/' + a, edit_es).then(
         function (successResponse) {
 
             if (successResponse.data.success == true) {
-                console.log('success3');
-                //$scope.$modalInstance.close();
+              
                 $scope.respuesta = successResponse.data.respuesta;
-                $scope.cerrarmodal();
-                //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
-
+                $scope.closeDialog();
+                $scope.estudios_curriculum();
 
             } else {
 
@@ -1340,8 +1397,8 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
 
         ,
         function (errorResponse) {
-            //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
-            console.log(':C');
+           
+            console.log('error editar estudios');
         });
 
 
@@ -1349,19 +1406,10 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
     $scope.editar_capacitacion = function (a) {
         // console.log($scope.edita_experiencia_laboral);
         var edita_capacitacion = {
-
-
-
-
             descripcion_capacitacion: $scope.update_descripcion_capacitacion,
-
             id_capacitacion: $scope.update_id_capacitacion,
-
-
             ano_inicio_capacitacion_curriculum: $scope.update_ano_inicio_capacitacion_curriculum,
-
             ano_termino_capacitacion_curriculum: $scope.update_ano_termino_capacitacion_curriculum,
-
             id_estado_capacitacion: $scope.update_id_estado_capacitacion,
             horas_capacitacion: $scope.update_horas_capacitacion,
             id_tipo_capacitacion: $scope.update_id_tipo_capacitacion,
@@ -1380,10 +1428,10 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
 
             if (successResponse.data.success == true) {
                 console.log('success3');
-                //$scope.$modalInstance.close();
+              
                 $scope.respuesta = successResponse.data.respuesta;
-                $scope.cerrarmodal();
-                //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
+                $scope.closeDialog();
+                $scope.capacitaciones_curriculum();
 
 
             } else {
@@ -1394,8 +1442,8 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
 
         ,
         function (errorResponse) {
-            //$scope.abremodal("../Curriculum_mant/agregar_vista_habilidades_curriculum/", '');
-            console.log(':C');
+        
+            console.log('error capacitaciones curriculum');
         });
 
 
