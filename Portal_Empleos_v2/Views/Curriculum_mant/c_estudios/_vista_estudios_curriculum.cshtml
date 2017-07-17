@@ -46,7 +46,7 @@
                                         <h4 class="text-center">Desde:</h4>
                                     </div>
                                     <div class="col-xs-12">
-                                        <h4 class="text-info text-center">{{::est_c.ano_inicio_estudio_curriculum.replace('/Date(','').replace(')/','') | date:'dd-MM-yyyy'}}</h4>
+                                        <h4 class="text-info text-center">{{est_c.ano_inicio_estudio_curriculum.replace('/Date(','').replace(')/','') | date:'dd-MM-yyyy'}}</h4>
                                     </div>
 
                                 </div>
@@ -55,19 +55,19 @@
                                         <h4 class="text-center">Hasta:</h4>
                                     </div>
                                     <div class="col-xs-12">
-                                        <h4 class="text-info text-center">{{::est_c.ano_termino_estudio_curriculum.replace('/Date(','').replace(')/','') | date:'dd-MM-yyyy'}}</h4>
+                                        <h4 class="text-info text-center">{{est_c.ano_termino_estudio_curriculum.replace('/Date(','').replace(')/','') | date:'dd-MM-yyyy'}}</h4>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xs-8">
                                 <div class="row">
                                     <div class="col-xs-8">
-                                        <h4>  Titulo: </h4>  <h4 class="text-info"> {{::est_c.nombre_estudio}}</h4>
+                                        <h4>  Titulo: </h4>  <h4 class="text-info"> {{est_c.nombre_estudio}}</h4>
                                     </div>
                                     <div class="col-xs-4">
                                         <div class="text-center well-sm">
                                             <div ng-controller="data1">
-
+           
                                                 <a href="" ng-click="abremodal('../Curriculum_mant/editar_vista_estudios_curriculum/' , est_c.id_estudio_curriculum)" class="btn btn-block btn-info btn-sm"><i class="fa fa-star fa-fw"></i>Editar</a>
                                                 <a href="" ng-click="abremodal('../Curriculum_mant/eliminar_vista_estudios_curriculum/' , est_c.id_estudio_curriculum)" class="btn btn-block btn-info btn-sm"><i class="fa fa-star fa-fw"></i>Eliminar</a>
                                             </div>
@@ -77,10 +77,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-6">
-                                        <h4>  Institucion: </h4>     <h4 class="text-info"> {{::est_c.nombre_institucion}}</h4>
+                                        <h4>  Institucion: </h4>     <h4 class="text-info"> {{est_c.nombre_institucion}}</h4>
                                     </div>
                                     <div class="col-xs-6">
-                                        <h4>  Tipo de Estudio: </h4>     <h4 class="text-info"> {{::est_c.nombre_tipo_estudio}}</h4>
+                                        <h4>  Tipo de Estudio: </h4>     <h4 class="text-info"> {{est_c.nombre_tipo_estudio}}</h4>
                                     </div>
                                 </div>
                             </div>

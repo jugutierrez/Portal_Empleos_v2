@@ -484,7 +484,7 @@ namespace Portal_Empleos_v2.Controllers
                     edita_experiencia_laboral.nombre_experiencia_laboral , edita_experiencia_laboral.empresa_experiencia_laboral , edita_experiencia_laboral.ano_inicio_experiencia_laboral,
                     edita_experiencia_laboral.ano_termino_experiencia_laboral , edita_experiencia_laboral.detalle_experiencia_laboral);
                 
-                    return Json(new { success = true, exp_c = new {caca ="caca" } }, JsonRequestBehavior.AllowGet);
+                    return Json(new { success = true, respuesta = new {caca ="caca" } }, JsonRequestBehavior.AllowGet);
                 
             }
             catch (Exception ex)
@@ -749,7 +749,7 @@ namespace Portal_Empleos_v2.Controllers
 
             try
             {
-                db.Database.ExecuteSqlCommand("insert into estudios_curriculums (id_estudio,id_curriculum , id_estado_estudio, id_institucion , id_tipo_estudio, ano_inicio_estudio_curriculum ,ano_termino_estudio_curriculum) values({0},{1},{2},{3},{4}, {5},{6})", 
+                db.Database.ExecuteSqlCommand(" execsp_agregar_estudios_curriculum  @id_estudio = {0} , @id_curriculum = {1} , @id_estado_estudio = {2} , @id_institucion = {3} , @id_tipo_estudio = {4}, @ano_inicio_estudio_curriculum = {5} , @ano_termino_estudio_curriculum = {6}", 
                    nuevo_estudio.id_estudio, Convert.ToInt32(Session["curriculum_id"]), nuevo_estudio.id_estado_estudio,nuevo_estudio.id_institucion , nuevo_estudio.id_tipo_estudio , nuevo_estudio.ano_inicio_estudio_curriculum , nuevo_estudio.ano_termino_estudio_curriculum);
 
                 return Json(new { success = true, respuesta = nuevo_estudio }, JsonRequestBehavior.AllowGet);
@@ -789,9 +789,12 @@ namespace Portal_Empleos_v2.Controllers
             try
             {
 
-                db.Database.ExecuteSqlCommand("");
+                db.Database.ExecuteSqlCommand("exec sp_actualiza_estudios_curriculums @id_estudio_curriculum = {0} , @id_estudio = {1} , @id_estado_estudio = {2} , "+
+                    "@id_institucion = {3} ,@id_tipo_estudio = {4} , @ano_inicio_estudio_curriculum  = {5} , @ano_termino_estudio_curriculum = {6}" ,
+                   id , edita_estudios.id_estudio , edita_estudios.id_estado_estudio , edita_estudios.id_institucion , edita_estudios.id_tipo_estudio,
+                    edita_estudios.ano_inicio_estudio_curriculum , edita_estudios.ano_termino_estudio_curriculum);
 
-                return Json(new { success = false, exp_c = new { caca = "caca" } }, JsonRequestBehavior.AllowGet);
+                return Json(new { success = true, exp_c = new { caca = "caca" } }, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception ex)
@@ -935,9 +938,12 @@ namespace Portal_Empleos_v2.Controllers
             try
             {
 
-                db.Database.ExecuteSqlCommand("");
+                db.Database.ExecuteSqlCommand("exec sp_actualiza_capacitaciones_curriculums @id_capacitacion_curriculum = {0} , @id_capacitacion = {1} , @id_tipo_capacitacion = {2} , @id_estado_capacitacion = {3} ," +
+                    "@id_institucion = {4} , @horas_capacitacion = {5} , @descripcion_capacitacion = {6} , @ano_inicio_capacitacion_curriculum = {7} , @ano_termino_capacitacion_curriculum = {8}" ,
+                    id , edita_capacitacion.id_capacitacion , edita_capacitacion.id_tipo_capacitacion , edita_capacitacion.id_estado_capacitacion ,edita_capacitacion.id_institucion ,edita_capacitacion.horas_capacitacion ,
+                    edita_capacitacion.descripcion_capacitacion ,edita_capacitacion.ano_inicio_capacitacion_curriculum , edita_capacitacion.ano_termino_capacitacion_curriculum);
 
-                return Json(new { success = false, exp_c = new { caca = "caca" } }, JsonRequestBehavior.AllowGet);
+                return Json(new { success = true, exp_c = new { caca = "caca" } }, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception ex)

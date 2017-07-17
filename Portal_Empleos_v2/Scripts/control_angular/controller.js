@@ -26,7 +26,7 @@ app.controller('PopupCtrl', ['$scope', '$filter', '$http', 'mantenedor_total', f
         r_c.then(function (successResponse) {
             if (successResponse.data.success == true) {
                 $scope.departamentos = successResponse.data.ciudades;
-              
+                $scope.departamentos_filter = {};
                 $scope.departamentos_filter = $filter('filter')($scope.departamentos, { id_region: pais });
                 //$scope.load_datos = false;
             }
@@ -48,6 +48,7 @@ app.controller('PopupCtrl', ['$scope', '$filter', '$http', 'mantenedor_total', f
         r_co.then(function (successResponse) {
             if (successResponse.data.success == true) {
                 $scope.provincias = successResponse.data.comunas;
+                $scope.provincias_filter = {};
                 $scope.provincias_filter = $filter('filter')($scope.provincias, { id_ciudad: depto });
             }
             else {
@@ -113,6 +114,7 @@ app.controller('HomeCtrl', ['$scope', '$http', 'mantenedor_total', function ($sc
             $scope.load_datos = false;
         });
     };
+
     $scope.foto_persona = function () {
         $scope.ver_foto = true;
         $scope.error_foto = true;
@@ -131,6 +133,7 @@ app.controller('HomeCtrl', ['$scope', '$http', 'mantenedor_total', function ($sc
             $scope.ver_foto = false;
         });
     };
+
     $scope.identificacion_persona = function () {
         $scope.carga_i_p = true;
         $scope.error_ip = true;
@@ -142,7 +145,6 @@ app.controller('HomeCtrl', ['$scope', '$http', 'mantenedor_total', function ($sc
                 $scope.dif = true;
         },
         function (errorResponse) {
-
             $scope.carga_i_p = false;
             $scope.error_ip = false;
         });
@@ -162,408 +164,315 @@ app.controller('HomeCtrl', ['$scope', '$http', 'mantenedor_total', function ($sc
         function (errorResponse) {
             $scope.carga_r_h = false;
             $scope.error_r_h = false;
+            console.log("error rellena habilidad");
         });
     };
+
     $scope.rellenar_grado_habilidad = function () {
-
-
-        $http.get('/Curriculum_mant/rellenar_grado_habilidad').then(
-        function (successResponse) {
-            if (successResponse.data.success == true) {
-                console.log('successwerwer');
+        $scope.carga_r_gh = true;
+        $scope.error_r_gh = true;
+        $scope.dif_r_gh = false;
+        var r_gh = mantenedor_total.obtener_datos('/Curriculum_mant/rellenar_grado_habilidad');
+        r_gh.then(function (successResponse) {
                 $scope.rellenar_grado_h = successResponse.data.rellenar_grado_ha;
-                console.log(successResponse.data.rellenar_grado_h);
-
-            }
-            else {
-                $scope.rellenar_grado_h = null;
-
-                console.log("bla bla blawerwer");
-            }
+                $scope.carga_r_gh = false;
+                $scope.dif_r_gh = true; 
         },
         function (errorResponse) {
-
-            console.log("error my friendwerwer");
+            $scope.carga_r_gh = false;
+            $scope.error_r_gh = false;
+            console.log("error rellena grado habilidad");
         });
     };
 
     $scope.rellenar_idioma = function () {
-
-
-        $http.get('/Curriculum_mant/rellenar_idiomas').then(
-        function (successResponse) {
-            if (successResponse.data.success == true) {
-                console.log('successwerwer');
+        $scope.carga_r_i = true;
+        $scope.error_r_i = true;
+        $scope.dif_r_i = false;
+        var r_i = mantenedor_total.obtener_datos('/Curriculum_mant/rellenar_idiomas');
+       r_i.then(function (successResponse) {
                 $scope.rellenar_id = successResponse.data.rellenar_idioma;
-                console.log(successResponse.data.rellenar_id);
-
-            }
-            else {
-                $scope.rellenar_id = null;
-
-                console.log("bla bla blawerwer");
-            }
+                $scope.carga_r_gh = false;
+                $scope.dif_r_gh = true;
         },
         function (errorResponse) {
-
-            console.log("error my friendwerwer");
+            $scope.carga_r_gh = false;
+            $scope.error_r_gh = false;
+            console.log("error rellena idiomas");
         });
     };
+
     $scope.rellenar_nivel_idiomas = function () {
-
-
-        $http.get('/Curriculum_mant/rellenar_nivel_idiomas').then(
-        function (successResponse) {
-            if (successResponse.data.success == true) {
-                console.log('successwerwer');
+        $scope.carga_r_ni = true;
+        $scope.error_r_ni = true;
+        $scope.dif_r_ni = false;
+        var r_ni = mantenedor_total.obtener_datos('/Curriculum_mant/rellenar_nivel_idiomas');
+        r_ni.then(function (successResponse) {
                 $scope.rellenar_n_id = successResponse.data.rellenar_n_idioma;
-                console.log(successResponse.data.rellenar_n_id);
-
-            }
-            else {
-                $scope.rellenar_n_id = null;
-
-                console.log("bla bla blawerwer");
-            }
+                $scope.carga_r_ni = false;
+                $scope.dif_r_ni = true;
         },
         function (errorResponse) {
-
-            console.log("error my friendwerwer");
+            $scope.carga_r_ni = false;
+            $scope.error_r_ni = false;
+            console.log("error rellena nivel idiomas");
         });
     };
+
     $scope.rellenar_profesiones = function () {
-
-
-        $http.get('/Curriculum_mant/rellenar_profesiones').then(
-        function (successResponse) {
-            if (successResponse.data.success == true) {
-                console.log('successwerwer');
-                $scope.rellenar_pro = successResponse.data.rellenar_p;
-                console.log(successResponse.data.rellenar_pro);
-
-            }
-            else {
-                $scope.rellenar_pro = null;
-
-                console.log("bla bla blawerwer");
-            }
+        $scope.carga_r_p = true;
+        $scope.error_r_p = true;
+        $scope.dif_r_p = false;
+        var r_p = mantenedor_total.obtener_datos('/Curriculum_mant/rellenar_profesiones');
+       r_p.then(function (successResponse) {
+           $scope.rellenar_pro = successResponse.data.rellenar_p;
+           $scope.carga_r_p= false;
+           $scope.dif_r_p = true;
         },
         function (errorResponse) {
-
-            console.log("error my friendwerwer");
+            $scope.carga_r_p = false;
+            $scope.error_r_p = false;
+            console.log("error rellena profesiones");
         });
     };
+
     $scope.rellenar_softwares = function () {
-
-
-        $http.get('/Curriculum_mant/rellenar_software').then(
-        function (successResponse) {
-            if (successResponse.data.success == true) {
-                console.log('successwerwer');
+        $scope.carga_r_s = true;
+        $scope.error_r_s = true;
+        $scope.dif_r_s = false;
+        var r_s = mantenedor_total.obtener_datos('/Curriculum_mant/rellenar_software');
+        r_s.then(function (successResponse) {
                 $scope.rellenar_soft = successResponse.data.rellenar_s;
-                console.log(successResponse.data.rellenar_soft);
-
-            }
-            else {
-                $scope.rellenar_soft = null;
-
-                console.log("bla bla blawerwer");
-            }
+                $scope.carga_r_s = false;
+                $scope.dif_r_s = true;
         },
         function (errorResponse) {
-
-            console.log("error my friendwerwer");
+            $scope.carga_r_s = false;
+            $scope.error_r_s = false;
+            console.log("error rellena softwares");
         });
     };
+
     $scope.rellenar_grado_softwares = function () {
-
-
-        $http.get('/Curriculum_mant/rellenar_grado_software').then(
-        function (successResponse) {
-            if (successResponse.data.success == true) {
-                console.log('successwerwer');
+        $scope.carga_r_gs = true;
+        $scope.error_r_gs = true;
+        $scope.dif_r_gs = false;
+        var r_gs = mantenedor_total.obtener_datos('/Curriculum_mant/rellenar_grado_software');
+        r_gs.then(function (successResponse) {
                 $scope.rellenar_g_soft = successResponse.data.rellenar_g_s;
-                console.log(successResponse.data.rellenar_g_soft);
-
-            }
-            else {
-                $scope.rellenar_g_sof = null;
-
-                console.log("bla bla blawerwer");
-            }
+                $scope.carga_r_gs = false;
+                $scope.dif_r_gs = true;
         },
         function (errorResponse) {
-
-            console.log("error my friendwerwer");
+            $scope.carga_r_gs = false;
+            $scope.error_r_gs = false;
+            console.log("error rellena grado softwares");
         });
     };
+
     $scope.rellenar_instituciones = function () {
-
-
-        $http.get('/Curriculum_mant/rellenar_institucion').then(
-        function (successResponse) {
-            if (successResponse.data.success == true) {
-                console.log('successwerwer');
+        $scope.carga_r_in = true;
+        $scope.error_r_in = true;
+        $scope.dif_r_in = false;
+        var r_in = mantenedor_total.obtener_datos('/Curriculum_mant/rellenar_institucion');
+        r_in.then(function (successResponse) {
                 $scope.rellenar_insti = successResponse.data.rellenar_ints;
-                console.log(successResponse.data.rellenar_insti);
-
-            }
-            else {
-                $scope.rellenar_insti = null;
-
-                console.log("bla bla blawerwer");
-            }
+                $scope.carga_r_in = false;
+                $scope.dif_r_in = true;
         },
         function (errorResponse) {
-
-            console.log("error my friendwerwer");
+            $scope.carga_r_in = false;
+            $scope.error_r_in = false;
+            console.log("error rellena instituciones");
         });
     };
+
     $scope.rellenar_capacitacion = function () {
-
-
-        $http.get('/Curriculum_mant/rellenar_capacitacion').then(
-        function (successResponse) {
-            if (successResponse.data.success == true) {
-                console.log('successwerwer');
-                $scope.rellenar_capa = successResponse.data.rellenar_cap;
-                console.log(successResponse.data.rellenar_capa);
-
-            }
-            else {
-                $scope.rellenar_capa = null;
-
-                console.log("bla bla blawerwer");
-            }
+        $scope.carga_r_c = true;
+        $scope.error_r_c = true;
+        $scope.dif_r_c = false;
+        var r_c = mantenedor_total.obtener_datos('/Curriculum_mant/rellenar_capacitacion');
+        r_c.then(function (successResponse) {
+            $scope.rellenar_capa = successResponse.data.rellenar_cap;
+            $scope.carga_r_c= false;
+            $scope.dif_r_c = true;
         },
         function (errorResponse) {
-
-            console.log("error my friendwerwer");
+            $scope.carga_r_c = false;
+            $scope.error_r_c = false;
+            console.log("error rellena capacitacion");
         });
     };
+
     $scope.rellenar_estado_capacitacion = function () {
-
-
-        $http.get('/Curriculum_mant/rellenar_estado_capacitacion').then(
-        function (successResponse) {
-            if (successResponse.data.success == true) {
-                console.log('successwerwer');
+        $scope.carga_r_ec = true;
+        $scope.error_r_ec = true;
+        $scope.dif_r_ec = false;
+        var r_ec = mantenedor_total.obtener_datos('/Curriculum_mant/rellenar_estado_capacitacion');
+       r_ec.then(function (successResponse) {
                 $scope.rellenar_e_capa = successResponse.data.rellenar_e_cap;
-                console.log(successResponse.data.rellenar_e_capa);
-
-            }
-            else {
-                $scope.rellenar_e_capa = null;
-
-                console.log("bla bla blawerwer");
-            }
+                $scope.carga_r_ec = false;
+                $scope.dif_r_ec = true;
         },
         function (errorResponse) {
-
-            console.log("error my friendwerwer");
+            $scope.carga_r_ec = false;
+            $scope.error_r_ec = false;
+            console.log("error rellena estado capacitacion");
         });
     };
+
     $scope.rellenar_estudios = function () {
-
-
-        $http.get('/Curriculum_mant/rellenar_estudios').then(
-        function (successResponse) {
-            if (successResponse.data.success == true) {
-                console.log('successwerwer');
+        $scope.carga_r_es = true;
+        $scope.error_r_es = true;
+        $scope.dif_r_es = false;
+        var r_es = mantenedor_total.obtener_datos('/Curriculum_mant/rellenar_estudios');
+        r_es.then(function (successResponse) {
                 $scope.rellenar_es = successResponse.data.rellenar_est;
-                console.log(successResponse.data.rellenar_es);
-
-            }
-            else {
-                $scope.rellenar_es = null;
-
-                console.log("bla bla blawerwer");
-            }
+                $scope.carga_r_es = false;
+                $scope.dif_r_es = true;
         },
         function (errorResponse) {
-
-            console.log("error my friendwerwer");
+            $scope.carga_r_es = false;
+            $scope.error_r_es = false;
+            console.log("error rellena estudios");
         });
     };
+
     $scope.rellenar_tipo_estudios = function () {
-
-
-        $http.get('/Curriculum_mant/rellenar_tipo_estudios').then(
-        function (successResponse) {
-            if (successResponse.data.success == true) {
-                console.log('successwerwer');
+        $scope.carga_r_tes = true;
+        $scope.error_r_tes = true;
+        $scope.dif_r_tes = false;
+        var r_tes = mantenedor_total.obtener_datos('/Curriculum_mant/rellenar_tipo_estudios');
+       r_tes.then(function (successResponse) {
                 $scope.rellenar_t_es = successResponse.data.rellenar_t_est;
-                console.log(successResponse.data.rellenar_t_es);
-
-            }
-            else {
-                $scope.rellenar_t_es = null;
-
-                console.log("bla bla blawerwer");
-            }
+                $scope.carga_r_tes = false;
+                $scope.dif_r_tes = true;
         },
         function (errorResponse) {
-
-            console.log("error my friendwerwer");
+            $scope.carga_r_tes = false;
+            $scope.error_r_tes = false;
+            console.log("error rellena tipo estudios");
         });
     };
+
     $scope.rellenar_estado_estudios = function () {
-
-
-        $http.get('/Curriculum_mant/rellenar_estado_estudios').then(
-        function (successResponse) {
-            if (successResponse.data.success == true) {
-                console.log('successwerwer');
+        $scope.carga_r_ees = true;
+        $scope.error_r_ees = true;
+        $scope.dif_r_ees = false;
+        var r_ees = mantenedor_total.obtener_datos('/Curriculum_mant/rellenar_estado_estudios');
+        r_ess.then(function (successResponse) {
                 $scope.rellenar_e_es = successResponse.data.rellenar_e_est;
-                console.log(successResponse.data.rellenar_e_capa);
-
-            }
-            else {
-                $scope.rellenar_e_capa = null;
-
-                console.log("bla bla blawerwer");
-            }
+                $scope.carga_r_ees = false;
+                $scope.dif_r_ees = true;
         },
         function (errorResponse) {
-
-            console.log("error my friendwerwer");
+            $scope.carga_r_ees = false;
+            $scope.error_r_ees = false;
+            console.log("error rellena estado estudios");
         });
     };
+
     $scope.rellenar_cargo_experiencias = function () {
-
-
-        $http.get('/Curriculum_mant/rellenar_cargo_exp').then(
-        function (successResponse) {
-            if (successResponse.data.success == true) {
-                console.log('successwerwer');
+        $scope.carga_r_cex = true;
+        $scope.error_r_cex = true;
+        $scope.dif_r_cex = false;
+        var r_cex = mantenedor_total.obtener_datos('/Curriculum_mant/rellenar_cargo_exp');
+        r_cex.then(function (successResponse) {
                 $scope.rellenar_cargo_exp = successResponse.data.rellenar_c_exp;
-                console.log(successResponse.data.rellenar_cargo_exp);
-
-            }
-            else {
-                $scope.rellenar_cargo_exp = null;
-
-                console.log("bla bla blawerwer");
-            }
+                $scope.carga_r_cex = false;
+                $scope.dif_r_cex = true;
         },
         function (errorResponse) {
-
-            console.log("error my friendwerwer");
+            $scope.carga_r_cex = false;
+            $scope.error_r_cex = false;
+            console.log("error rellena cargo experiencias");
         });
-
     };
+
     $scope.rellenar_area_experiencias = function () {
-
-
-        $http.get('/Curriculum_mant/rellenar_area_exp').then(
-        function (successResponse) {
-            if (successResponse.data.success == true) {
-                console.log('successwerwer');
-                $scope.rellenar_area_exp = successResponse.data.rellenar_a_exp;
-                console.log(successResponse.data.rellenar_area_exp);
-
-            }
-            else {
-                $scope.rellenar_area_exp = null;
-
-                console.log("bla bla blawerwer");
-            }
+        $scope.carga_r_aex = true;
+        $scope.error_r_aex = true;
+        $scope.dif_r_aex = false;
+        var r_aex = mantenedor_total.obtener_datos('/Curriculum_mant/rellenar_area_exp');
+       aex.then(function (successResponse) {
+           $scope.rellenar_area_exp = successResponse.data.rellenar_a_exp;
+           $scope.carga_r_aex = false;
+           $scope.dif_r_aex = true;
         },
         function (errorResponse) {
-
-            console.log("error my friendwerwer");
+            $scope.carga_r_aex = false;
+            $scope.error_r_aex = false;
+            console.log("error rellena area experiencias");
         });
     };
+
     $scope.rellenar_genero = function () {
-
-
-        $http.get('/Curriculum_mant/rellenar_genero').then(
-        function (successResponse) {
-            if (successResponse.data.success == true) {
-                console.log('successwerwer');
-                $scope.rellenar_ge = successResponse.data.rellenar_g;
-                console.log(successResponse.data.rellenar_ge);
-
-            }
-            else {
-                $scope.rellenar_ge = null;
-
-                console.log("bla bla blawerwer");
-            }
+        $scope.carga_r_ge = true;
+        $scope.error_r_ge = true;
+        $scope.dif_r_ge = false;
+        var r_ge = mantenedor_total.obtener_datos('/Curriculum_mant/rellenar_genero');
+        r_ge.then(function (successResponse) {
+            $scope.rellenar_ge = successResponse.data.rellenar_g;
+            $scope.carga_r_ge = false;
+            $scope.dif_r_ge = true;
         },
         function (errorResponse) {
-
-            console.log("error my friendwerwer");
+            $scope.carga_r_ge = false;
+            $scope.error_r_ge = false;
+            console.log("error rellena genero");
         });
     };
+
     $scope.rellenar_discapacidad = function () {
-
-
-        $http.get('/Curriculum_mant/rellenar_discapacidad').then(
-        function (successResponse) {
-            if (successResponse.data.success == true) {
-                console.log('successwerwer');
+        $scope.carga_r_di = true;
+        $scope.error_r_di = true;
+        $scope.dif_r_di = false;
+        var r_di = mantenedor_total.obtener_datos('/Curriculum_mant/rellenar_discapacidad');
+        r_di.then(function (successResponse) {
                 $scope.rellenar_dis = successResponse.data.rellenar_d;
-                console.log(successResponse.data.rellenar_dis);
-
-            }
-            else {
-                $scope.rellenar_dis = null;
-
-                console.log("bla bla blawerwer");
-            }
+                $scope.carga_r_di = false;
+                $scope.dif_r_di = true;
         },
         function (errorResponse) {
-
-            console.log("error my friendwerwer");
+            $scope.carga_r_di = false;
+            $scope.error_r_di = false;
+            console.log("error rellena discapacidad");
         });
     };
+
     $scope.rellenar_region = function () {
-
-
-        $http.get('/Curriculum_mant/rellenar_region').then(
-        function (successResponse) {
-            if (successResponse.data.success == true) {
-                console.log('successwerwer');
+        $scope.carga_r_reg = true;
+        $scope.error_r_reg = true;
+        $scope.dif_r_reg = false;
+        var r_reg = mantenedor_total.obtener_datos('/Curriculum_mant/rellenar_region');
+        r_reg.then(function (successResponse) {
                 $scope.rellenar_reg = successResponse.data.rellenar_r;
-                console.log(successResponse.data.rellenar_reg);
-
-            }
-            else {
-                $scope.rellenar_reg = null;
-
-                console.log("bla bla blawerwer");
-            }
+                $scope.carga_r_reg = false;
+                $scope.dif_r_reg = true;
         },
         function (errorResponse) {
-
-            console.log("error my friendwerwer");
+            $scope.carga_r_reg = false;
+            $scope.error_r_reg = false;
+            console.log("error rellena region");
         });
     };
+
     $scope.rellenar_ciudad = function (id) {
-
-        console.log(id);
-
-        $http.get('/Curriculum_mant/rellenar_ciudad').then(id,
-        function (successResponse) {
-            if (successResponse.data.success == true) {
-                console.log('successwerwer');
+        $scope.carga_r_ci = true;
+        $scope.error_r_ci = true;
+        $scope.dif_r_ci = false;
+        var r_ci = mantenedor_total.obtener_datos('/Curriculum_mant/rellenar_ciudad');
+        r_ci.then(id, function (successResponse) {
                 $scope.rellenar_city = successResponse.data.rellenar_c;
-                console.log(successResponse.data.rellenar_city);
-
-            }
-            else {
-                $scope.rellenar_city = null;
-
-                console.log("bla bla blawerwer");
-            }
+                $scope.carga_r_ci = false;
+                $scope.dif_r_ci = true
         },
         function (errorResponse) {
-
-            console.log("error my friendwerwer");
+            $scope.carga_r_ci = false;
+            $scope.error_r_ci = false;
+            console.log("error rellena ciudad");
         });
     };
-
 
     $scope.descripcion_curriculum = function () {
 
@@ -572,13 +481,12 @@ app.controller('HomeCtrl', ['$scope', '$http', 'mantenedor_total', function ($sc
         $http.get('/Curriculum_mant/vista_descripcion_curriculum').then(
         function (successResponse) {
             if (successResponse.data.success == true) {
-                console.log("lol2");
                 $scope.ver_desc = false;
                 $scope.desc_curriculum = successResponse.data.desc_c;
 
 
             } else {
-                $scope.desc_curriculum = "";
+             
                 $scope.ver_desc = false;
                 console.log("bla bla bla");
             }
@@ -599,10 +507,8 @@ app.controller('HomeCtrl', ['$scope', '$http', 'mantenedor_total', function ($sc
         $http.get('/Curriculum_mant/vista_experiencias_laborales_curriculum').then(
         function (successResponse) {
             if (successResponse.data.success == true) {
-                console.log("exp load");
                 $scope.ver_exp = false;
                 $scope.exp_curriculum = successResponse.data.exp_c;
-                console.log(successResponse.data.exp_c);
 
             } else {
                 $scope.exp_curriculum = "";
@@ -788,12 +694,6 @@ app.controller('HomeCtrl', ['$scope', '$http', 'mantenedor_total', function ($sc
             console.log("error my friend2");
         });
     };
-
-
-
-
-
-
 }]);
 
 
@@ -852,7 +752,7 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
             direccion_curriculum: $scope.update_direccion_curriculum,
             id_tipo_persona: $scope.update_id_tipo_persona,
             sueldo_esperado: $scope.update_sueldo_esperado,
-            id_discapacidad_persona: $scope.update_id_discapacidad_persona,
+
             correo_electronico_persona: $scope.update_correo_electronico_persona,
             telefono_curriculum_1: $scope.update_telefono_curriculum_1,
             telefono_curriculum_2: $scope.update_telefono_curriculum_2,
@@ -1194,8 +1094,7 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
 
             if (successResponse.data.success == true) {
                 
-                $scope.actualizar_descripcion = {};
-                $scope.desc_curriculum = {};
+           
                 $scope.respuesta = successResponse.data.respuesta;
                 $scope.closeDialog();
 
@@ -1358,18 +1257,13 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
             $scope.respuesta = successResponse.data.respuesta;
             $scope.closeDialog();
             $scope.experiencias_laborales_curriculum();
-        },
-        function (errorResponse) {
-            console.log('error edita experiencia laboral');
-        });
-
-
-    };
+        }
+    )};
     $scope.editar_estudios = function (a) {
     
         var edita_estudios = {
 
-
+          
             id_estudio: $scope.update_id_estudio,
             id_tipo_estudio: $scope.update_id_tipo_estudio,
             id_estado_estudio: $scope.update_id_estado_estudio,
@@ -1380,8 +1274,9 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
 
         var edit_es = { 'edita_estudios': edita_estudios };
 
-        $http.post('/Curriculum_mant/edita_estudios/' + a, edit_es).then(
-        function (successResponse) {
+        console.log(edita_estudios);
+        var upd_est = mantenedor_total.actualizar_datos('/Curriculum_mant/edita_estudios/', a, edit_es);
+        upd_est.then(function (successResponse) {
 
             if (successResponse.data.success == true) {
               
@@ -1391,7 +1286,7 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
 
             } else {
 
-                console.log("bla bla bla");
+                console.log("false editar estudios ");
             }
         }
 
@@ -1404,7 +1299,7 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
 
     };
     $scope.editar_capacitacion = function (a) {
-        // console.log($scope.edita_experiencia_laboral);
+    
         var edita_capacitacion = {
             descripcion_capacitacion: $scope.update_descripcion_capacitacion,
             id_capacitacion: $scope.update_id_capacitacion,
