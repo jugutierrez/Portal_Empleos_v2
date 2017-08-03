@@ -1,75 +1,8 @@
 ﻿
-app.controller('PopupCtrl', ['$scope', '$filter', '$http', 'mantenedor_total', function ($scope, $filter, $http, mantenedor_total) {
-
-
-    var r_r = mantenedor_total.obtener_datos('/faq/rellenar_regiones');
-    r_r.then(function (successResponse) {
-        if (successResponse.data.success == true) {
-            $scope.paises = successResponse.data.regiones;
-            console.log($scope.paises);
-
-            //$scope.load_datos = false;
-        }
-        else {
-            //$scope.load_datos = false;
-        }
-    },
-    function (errorResponse) {
-        //$scope.error_datos = false;
-        //$scope.load_datos = false;
-    });
-
-   
-
-    $scope.updateDropDownDepartamentos = function (pais) {
-        var r_c = mantenedor_total.obtener_datos('/faq/rellenar_ciudades');
-        r_c.then(function (successResponse) {
-            if (successResponse.data.success == true) {
-                $scope.departamentos = successResponse.data.ciudades;
-                $scope.departamentos_filter = {};
-                $scope.departamentos_filter = $filter('filter')($scope.departamentos, { id_region: pais });
-                //$scope.load_datos = false;
-            }
-            else {
-                //$scope.load_datos = false;
-            }
-        },
-        function (errorResponse) {
-            //$scope.error_datos = false;
-            //$scope.load_datos = false;
-        });
-
-       
-       
-    }
-
-    $scope.updateDropDownProvincias = function (depto) {
-        var r_co = mantenedor_total.obtener_datos('/faq/rellenar_comunas');
-        r_co.then(function (successResponse) {
-            if (successResponse.data.success == true) {
-                $scope.provincias = successResponse.data.comunas;
-                $scope.provincias_filter = {};
-                $scope.provincias_filter = $filter('filter')($scope.provincias, { id_ciudad: depto });
-            }
-            else {
-                //$scope.load_datos = false;
-            }
-        },
-        function (errorResponse) {
-            //$scope.error_datos = false;
-            //$scope.load_datos = false;
-        });
-      
-        
-    }
-
-
-}]);
 
 app.controller('HomeCtrl', ['$scope', '$http', 'mantenedor_total', function ($scope, $http, mantenedor_total) {
 
 
-    $scope.desc_curriculum = {};
     $scope.prof_curriculum = {};
     $scope.exp_curriculum = {};
     $scope.est_curriculum = {};
@@ -186,18 +119,18 @@ app.controller('HomeCtrl', ['$scope', '$http', 'mantenedor_total', function ($sc
     };
 
     $scope.rellenar_idioma = function () {
-        $scope.carga_r_i = true;
-        $scope.error_r_i = true;
-        $scope.dif_r_i = false;
+        $scope.carga_r_id = true;
+        $scope.error_r_id = true;
+        $scope.dif_r_id = false;
         var r_i = mantenedor_total.obtener_datos('/Curriculum_mant/rellenar_idiomas');
        r_i.then(function (successResponse) {
                 $scope.rellenar_id = successResponse.data.rellenar_idioma;
-                $scope.carga_r_gh = false;
-                $scope.dif_r_gh = true;
+                $scope.carga_r_id = false;
+                $scope.dif_r_id = true;
         },
         function (errorResponse) {
-            $scope.carga_r_gh = false;
-            $scope.error_r_gh = false;
+            $scope.carga_r_id = false;
+            $scope.error_r_id = false;
             console.log("error rellena idiomas");
         });
     };
@@ -360,7 +293,7 @@ app.controller('HomeCtrl', ['$scope', '$http', 'mantenedor_total', function ($sc
         $scope.error_r_ees = true;
         $scope.dif_r_ees = false;
         var r_ees = mantenedor_total.obtener_datos('/Curriculum_mant/rellenar_estado_estudios');
-        r_ess.then(function (successResponse) {
+        r_ees.then(function (successResponse) {
                 $scope.rellenar_e_es = successResponse.data.rellenar_e_est;
                 $scope.carga_r_ees = false;
                 $scope.dif_r_ees = true;
@@ -394,7 +327,7 @@ app.controller('HomeCtrl', ['$scope', '$http', 'mantenedor_total', function ($sc
         $scope.error_r_aex = true;
         $scope.dif_r_aex = false;
         var r_aex = mantenedor_total.obtener_datos('/Curriculum_mant/rellenar_area_exp');
-       aex.then(function (successResponse) {
+       r_aex.then(function (successResponse) {
            $scope.rellenar_area_exp = successResponse.data.rellenar_a_exp;
            $scope.carga_r_aex = false;
            $scope.dif_r_aex = true;
@@ -423,7 +356,7 @@ app.controller('HomeCtrl', ['$scope', '$http', 'mantenedor_total', function ($sc
         });
     };
 
-    $scope.rellenar_discapacidad = function () {
+    /*$scope.rellenar_discapacidad = function () {
         $scope.carga_r_di = true;
         $scope.error_r_di = true;
         $scope.dif_r_di = false;
@@ -438,65 +371,23 @@ app.controller('HomeCtrl', ['$scope', '$http', 'mantenedor_total', function ($sc
             $scope.error_r_di = false;
             console.log("error rellena discapacidad");
         });
-    };
+    };*/
 
-    $scope.rellenar_region = function () {
-        $scope.carga_r_reg = true;
-        $scope.error_r_reg = true;
-        $scope.dif_r_reg = false;
-        var r_reg = mantenedor_total.obtener_datos('/Curriculum_mant/rellenar_region');
-        r_reg.then(function (successResponse) {
-                $scope.rellenar_reg = successResponse.data.rellenar_r;
-                $scope.carga_r_reg = false;
-                $scope.dif_r_reg = true;
-        },
-        function (errorResponse) {
-            $scope.carga_r_reg = false;
-            $scope.error_r_reg = false;
-            console.log("error rellena region");
-        });
-    };
-
-    $scope.rellenar_ciudad = function (id) {
-        $scope.carga_r_ci = true;
-        $scope.error_r_ci = true;
-        $scope.dif_r_ci = false;
-        var r_ci = mantenedor_total.obtener_datos('/Curriculum_mant/rellenar_ciudad');
-        r_ci.then(id, function (successResponse) {
-                $scope.rellenar_city = successResponse.data.rellenar_c;
-                $scope.carga_r_ci = false;
-                $scope.dif_r_ci = true
-        },
-        function (errorResponse) {
-            $scope.carga_r_ci = false;
-            $scope.error_r_ci = false;
-            console.log("error rellena ciudad");
-        });
-    };
 
     $scope.descripcion_curriculum = function () {
-
-        $scope.ver_desc = true;
+        $scope.carga_desc = true;
         $scope.error_desc = false;
-        $http.get('/Curriculum_mant/vista_descripcion_curriculum').then(
-        function (successResponse) {
-            if (successResponse.data.success == true) {
-                $scope.ver_desc = false;
+        $scope.dif_desc = false;
+        var d_c = mantenedor_total.obtener_datos('/Curriculum_mant/vista_descripcion_curriculum');
+        d_c.then( function (successResponse) {
                 $scope.desc_curriculum = successResponse.data.desc_c;
-
-
-            } else {
-             
-                $scope.ver_desc = false;
-                console.log("bla bla bla");
-            }
+                $scope.carga_desc = false;
+                $scope.dif_desc = true;
         },
         function (errorResponse) {
-            $scope.ver_desc = false;
+            $scope.carga_desc = false;
             $scope.error_desc = true;
-
-
-            console.log("error my friend");
+            console.log("error descripcion curriculum");
         });
     };
 
@@ -701,27 +592,13 @@ app.controller('HomeCtrl', ['$scope', '$http', 'mantenedor_total', function ($sc
 app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_total', function ($scope, $http, $filter, $mdDialog, mantenedor_total) {
 
     $scope.respuesta_cuestionario_multiple = [];
-    $scope.update_p = {};
     $scope.datos_oferta = {};
     $scope.newEmployee1 = [];
     $scope.newEmployee2 = [];
-    $scope.agrega_idioma = {};
-    $scope.elimina_idioma = {};
    
 
     $scope.abremodal = function (url, id) {
-        $mdDialog.show({
-            clickOutsideToClose: true,
-            scope: $scope,
-            preserveScope: true,
-            fullscreen: true,
-            templateUrl: url + id,
-            controller: function DialogController($scope, $mdDialog) {
-                $scope.closeDialog = function () {
-                    $mdDialog.hide();
-                }
-            }
-        });
+        mantenedor_total.modal(url,id ,$scope);
     };
 
 
@@ -738,49 +615,6 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
         });
     };
 
-
-    $scope.actualizar_datos_persona = function () {
-
-        var Employee = {
-
-            nombre_persona: $scope.update_nombre_persona,
-            apellido_paterno_persona: $scope.update_apellido_paterno_persona,
-            apellido_materno_persona: $scope.update_apellido_materno_persona,
-            id_tipo_identificacion_persona: $scope.update_id_tipo_identificacion_persona,
-            fecha_nacimiento_persona: $scope.update_fecha_nacimiento_persona,
-            identificacion_persona: $scope.update_identificacion_persona,
-            direccion_curriculum: $scope.update_direccion_curriculum,
-            id_tipo_persona: $scope.update_id_tipo_persona,
-            sueldo_esperado: $scope.update_sueldo_esperado,
-
-            correo_electronico_persona: $scope.update_correo_electronico_persona,
-            telefono_curriculum_1: $scope.update_telefono_curriculum_1,
-            telefono_curriculum_2: $scope.update_telefono_curriculum_2,
-            id_comuna: $scope.update_id_comuna
-            
-        };
-   
-
-
-        console.log(Employee);
-        $scope.closeDialog();
-        /* console.log($scope.datos_per);
-        var update = { 'datos_per': $scope.update_p};
-        $http.post('/Curriculum_mant/actualiza_datos_persona_curriculum', update).then(
-        function (successResponse) {
-        if (successResponse.data.success == true) {
-        console.log("lol2");
-        console.log(successResponse.data.resp);
-        
-        } else {
-        console.log(successResponse.data.resp);
-        }
-        },
-        function (errorResponse) {
-        
-        console.log("plop");
-        });*/
-    };
 
     $scope.agregar_idioma = function () {
         var add_idioma = { 'nuevo_idioma': $scope.agrega_idioma };
@@ -1009,14 +843,14 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
     $scope.eliminar_capacitacion = function () {
         var id_capacitacion = $scope.elimina_capacitacion.id;
         var del_cap = mantenedor_total.borrar_datos('/Curriculum_mant/eliminar_capacitaciones_curriculum/', id_capacitacion);
-       del_cap.then(function (successResponse) {
-           $scope.respuesta = successResponse.data.respuesta;
-           $scope.closeDialog();
-           $scope.capacitaciones_curriculum();
+        del_cap.then(function (successResponse) {
+            $scope.respuesta = successResponse.data.respuesta;
+            $scope.closeDialog();
+            $scope.capacitaciones_curriculum();
         },
-        function (errorResponse) {
-            console.log('error eliminar capacitacion');
-        });
+         function (errorResponse) {
+             console.log('error eliminar capacitacion');
+         });
     };
 
     $scope.crear_cuenta_persona = function () {
@@ -1025,10 +859,7 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
         add_cuen.then(function (successResponse) {
             if (successResponse.data.success == true) {
                 $scope.respuesta = successResponse.data.respuesta;
-                var $active = $('.nav-tabs li.active');
-                $active.addClass('disabled');
-                $active.next().removeClass('disabled');
-                nextTab($active);
+                $scope.closeDialog();
             }
             else {
                 console.log("error no agrego ");
@@ -1041,12 +872,14 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
 
     $scope.recordar_cuenta_persona = function () {
         console.log($scope.recordar_cuenta_personas);
+       //var rut = $scope.recordar_cuenta_personas.identificacion_persona;
         var rec_cuenta = { 'recordar_cuenta_personas': $scope.recordar_cuenta_personas };
-        var rec_cuen = mantenedor_total.agregar_datos('/cuenta/recordar_cuenta_persona', rec_cuenta);
+        var rec_cuen = mantenedor_total.envia_correo(0, rec_cuenta);
+        debugger;
         rec_cuen.then(function (successResponse) {
             $scope.respuesta = successResponse.data.respuesta;
             $scope.closeDialog();
-            $scope.capacitaciones_curriculum();
+        
         },
         function (errorResponse) {
             console.log('error recordar cuenta');
@@ -1084,6 +917,7 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
             console.log(':C');
         });
     };
+
     $scope.actualiza_descripcion = function () {
         console.log($scope.actualizar_descripcion);
 
@@ -1097,8 +931,6 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
            
                 $scope.respuesta = successResponse.data.respuesta;
                 $scope.closeDialog();
-
-
                 $scope.descripcion_curriculum();
 
             } else {
@@ -1116,34 +948,54 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
 
     };
 
+    $scope.rellenar_ciudad = function (id) {
+        $scope.carga_r_reg = true;
+        $scope.error_r_reg = true;
+        $scope.dif_r_reg = false;
+        var r_reg = mantenedor_total.obtener_datos('/faq/rellenar_ciudades/' + id);
+        r_reg.then(function (successResponse) {
+            $scope.ciudades = successResponse.data.ciudades;
+            $scope.carga_r_reg = false;
+            $scope.dif_r_reg = true;
+        },
+        function (errorResponse) {
+            $scope.carga_r_reg = false;
+            $scope.error_r_reg = false;
+            console.log("error rellena ciudad");
+        });
+    };
+
+    $scope.rellenar_comuna = function (id) {
+        $scope.carga_r_ci = true;
+        $scope.error_r_ci = true;
+        $scope.dif_r_ci = false;
+        var r_ci = mantenedor_total.obtener_datos('/faq/rellenar_comunas/' + id);
+        r_ci.then(function (successResponse) {
+            $scope.comunas = successResponse.data.comunas;
+            $scope.carga_r_ci = false;
+            $scope.dif_r_ci = true
+        },
+        function (errorResponse) {
+            $scope.carga_r_ci = false;
+            $scope.error_r_ci = false;
+            console.log("error rellena comuna");
+        });
+    };
+
     $scope.listar_datos_personas = function () {
 
         $http.get('/Curriculum_mant/datos_persona_curriculum').then(
         function (successResponse) {
             if (successResponse.data.success == true) {
-                console.log('success');
-                $scope.datos_per = successResponse.data.datos_p;
-                var record = successResponse.data.datos_p;
-
-                $scope.update_nombre_persona = record.nombre_persona;
-                $scope.update_apellido_paterno_persona = record.apellido_paterno_persona;
-                $scope.update_apellido_materno_persona = record.apellido_materno_persona;
-                $scope.update_id_tipo_identificacion_persona = record.id_tipo_identificacion_persona;
-                $scope.date = record.fecha_nacimiento_persona.replace('/Date(', '').replace(')/', '');
-                $scope.update_fecha_nacimiento_persona = $filter('date')($scope.date, 'yyyy-MM-dd');
-                $scope.update_identificacion_persona = record.identificacion_persona;
-                $scope.update_direccion_curriculum = record.direccion_curriculum;
-                $scope.update_id_tipo_persona = record.id_tipo_persona;
-                $scope.update_sueldo_esperado = record.sueldo_esperado;
-                $scope.update_correo_electronico_persona = record.correo_electronico_persona;
-                $scope.update_telefono_curriculum_1 = record.telefono_curriculum_1;
-                $scope.update_telefono_curriculum_2 = record.telefono_curriculum_2;
-                $scope.update_id_comuna = record.id_comuna;
-                $scope.update_id_ciudad = record.id_ciudad;
-                $scope.update_id_region = record.id_region;
+                
+                // var record = successResponse.data.datos_p;
+                $scope.update_p = successResponse.data.datos_p;
       
-          
-
+                $scope.date = $scope.update_p.fecha_nacimiento_persona.replace('/Date(', '').replace(')/', '');
+                $scope.update_p.fecha_nacimiento_persona = $filter('date')($scope.date, 'yyyy-MM-dd');
+               
+                $scope.rellenar_ciudad($scope.update_p.id_region);
+                $scope.rellenar_comuna($scope.update_p.id_ciudad);
             }
             else {
 
@@ -1224,22 +1076,52 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
         var d_c = mantenedor_total.obtener_datos('/Curriculum_mant/detalle_capacitaciones_curriculum/' + a);
         d_c.then(function (successResponse) {
           
-                var record2 = successResponse.data.ca_c;
-                $scope.update_descripcion_capacitacion = record2.descripcion_capacitacion;
-                $scope.update_id_capacitacion = record2.id_capacitacion;
-                $scope.fecha_inicio = record2.ano_inicio_capacitacion_curriculum.replace('/Date(', '').replace(')/', '');
-                $scope.update_ano_inicio_capacitacion_curriculum = $filter('date')($scope.fecha_inicio, 'dd-MM-yyyy');
-                $scope.fecha_termino = record2.ano_termino_capacitacion_curriculum.replace('/Date(', '').replace(')/', '');
-                $scope.update_ano_termino_capacitacion_curriculum = $filter('date')($scope.fecha_termino, 'dd-MM-yyyy');
-                $scope.update_id_estado_capacitacion = record2.id_estado_capacitacion;
-                $scope.update_horas_capacitacion = record2.horas_capacitacion;
-                $scope.update_id_tipo_capacitacion = record2.id_tipo_capacitacion;
-                $scope.update_id_institucion = record2.id_institucion;
+            var record2 = successResponse.data.ca_c;
+            $scope.update_descripcion_capacitacion = record2.descripcion_capacitacion;
+            $scope.update_id_capacitacion = record2.id_capacitacion;
+            $scope.fecha_inicio = record2.ano_inicio_capacitacion_curriculum.replace('/Date(', '').replace(')/', '');
+            $scope.update_ano_inicio_capacitacion_curriculum = $filter('date')($scope.fecha_inicio, 'dd-MM-yyyy');
+            $scope.fecha_termino = record2.ano_termino_capacitacion_curriculum.replace('/Date(', '').replace(')/', '');
+            $scope.update_ano_termino_capacitacion_curriculum = $filter('date')($scope.fecha_termino, 'dd-MM-yyyy');
+            $scope.update_id_estado_capacitacion = record2.id_estado_capacitacion;
+            $scope.update_horas_capacitacion = record2.horas_capacitacion;
+            $scope.update_id_tipo_capacitacion = record2.id_tipo_capacitacion;
+            $scope.update_id_institucion = record2.id_institucion;
         },
         function (errorResponse) {
             console.log("error detalle capacitaciones");
         });
     };
+
+
+    $scope.actualizar_datos_persona = function (id) {
+
+
+        var actualiza_persona = {
+
+            nombre_persona: $scope.update_p.nombre_persona,
+            apellido_paterno_persona: $scope.update_p.apellido_paterno_persona,
+            apellido_materno_persona: $scope.update_p.apellido_materno_persona,
+            id_tipo_identificacion_persona: $scope.update_p.id_tipo_identificacion_persona,
+            fecha_nacimiento_persona: $scope.update_p.fecha_nacimiento_persona,
+            identificacion_persona: $scope.update_p.identificacion_persona,
+            direccion_curriculum: $scope.update_p.direccion_curriculum,
+            id_tipo_persona: $scope.update_p.id_tipo_persona,
+            sueldo_esperado: $scope.update_p.sueldo_esperado,
+            correo_electronico_persona: $scope.update_p.correo_electronico_persona,
+            telefono_curriculum_1: $scope.update_p.telefono_curriculum_1,
+            telefono_curriculum_2: $scope.update_p.telefono_curriculum_2,
+            id_comuna: $scope.update_p.id_comuna
+
+        };
+        var edit_per = { 'datos_per': actualiza_persona };
+        var upd_per = mantenedor_total.actualizar_datos('/Curriculum_mant/actualiza_datos_persona_curriculum/', id, edit_per);
+        upd_per.then(function (successResponse) {
+            $scope.respuesta = successResponse.data.respuesta;
+            $scope.closeDialog();
+            $scope.datos_persona();
+        }
+    )};
 
     $scope.editar_experiencia_laboral = function (id) {
         var edita_experiencia_laboral = {
@@ -1259,6 +1141,8 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
             $scope.experiencias_laborales_curriculum();
         }
     )};
+
+
     $scope.editar_estudios = function (a) {
     
         var edita_estudios = {
@@ -1273,8 +1157,6 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
         };
 
         var edit_es = { 'edita_estudios': edita_estudios };
-
-        console.log(edita_estudios);
         var upd_est = mantenedor_total.actualizar_datos('/Curriculum_mant/edita_estudios/', a, edit_es);
         upd_est.then(function (successResponse) {
 
@@ -1310,14 +1192,7 @@ app.controller('data1', ['$scope', '$http', '$filter', '$mdDialog', 'mantenedor_
             id_tipo_capacitacion: $scope.update_id_tipo_capacitacion,
             id_institucion: $scope.update_id_institucion
         };
-
-
-
-
-
-
         var edit_cap = { 'edita_capacitacion': edita_capacitacion };
-
         $http.post('/Curriculum_mant/edita_capacitaciones/' + a, edit_cap).then(
         function (successResponse) {
 
@@ -1386,7 +1261,6 @@ app.controller('control_detalle_ofertas', ['$scope', '$http', function ($scope, 
         $http.get('/Ofertas_Control/vista_datos_detalle_oferta/' + id_oferta).then(
         function (successResponse) {
             if (successResponse.data.success == true) {
-                console.log("izi");
                 $scope.ver_det_of = false;
                 $scope.ver_detalle_oferta = successResponse.data.det_of_c;
 
@@ -1806,10 +1680,13 @@ app.controller('micuenta', ['$scope', '$http', function ($scope, $http) {
 
 }]);
 
-app.controller('soporte', ['$scope', '$http', function ($scope, $http) {
+app.controller('soporte', ['$scope', '$http' , 'mantenedor_total', function ($scope, $http , mantenedor_total) {
 
-
-
+   
+    
+    $scope.abremodal = function (url, id) {
+        mantenedor_total.modal(url, id, $scope);
+    };
 
     $scope.soporte_men = function () {
         console.log($scope.soporte_datos);
@@ -1869,3 +1746,77 @@ app.directive('fileModel', ['$parse', function ($parse) {
 
 
 
+app.controller('PopupCtrl', ['$scope', '$filter', '$http', 'mantenedor_total', function ($scope, $filter, $http, mantenedor_total) {
+
+
+    var r_r = mantenedor_total.obtener_datos('/faq/rellenar_regiones');
+    r_r.then(function (successResponse) {
+        if (successResponse.data.success == true) {
+            $scope.regiones = successResponse.data.regiones;
+
+
+
+        }
+        else {
+            //$scope.load_datos = false;
+        }
+    },
+    function (errorResponse) {
+        //$scope.error_datos = false;
+        //$scope.load_datos = false;
+    });
+
+
+
+    $scope.updateDropDownDepartamentos = function (a) {
+        if (a == null)
+        {
+
+            $scope.ciudades = {};
+            $scope.comunas = {};
+        }
+        else {
+            var r_c = mantenedor_total.obtener_datos('/faq/rellenar_ciudades/' + a);
+            r_c.then(function (successResponse) {
+
+                $scope.ciudades = successResponse.data.ciudades;
+
+                //$scope.departamentos_filter = $filter('filter')($scope.departamentos, { id_region: pais });
+                //$scope.load_datos = false;
+
+            },
+            function (errorResponse) {
+                //$scope.error_datos = false;
+                //$scope.load_datos = false;
+            });
+
+        }
+
+    }
+
+    $scope.updateDropDownProvincias = function (a) {
+        if (a == null)
+        {
+ 
+            $scope.comunas = {};
+        }
+        else {
+            var r_co = mantenedor_total.obtener_datos('/faq/rellenar_comunas/' + a);
+            r_co.then(function (successResponse) {
+
+                $scope.comunas = successResponse.data.comunas;
+
+                // $scope.comunas_filter = $filter('filter')($scope.comuna, { id_ciudad: a });
+
+            },
+            function (errorResponse) {
+                //$scope.error_datos = false;
+                //$scope.load_datos = false;
+            });
+
+
+        }
+    }
+
+
+}]);

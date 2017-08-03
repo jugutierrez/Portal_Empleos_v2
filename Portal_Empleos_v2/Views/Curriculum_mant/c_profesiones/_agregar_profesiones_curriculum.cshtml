@@ -19,14 +19,25 @@
                                 </li>
                                 <li class="list-group-item">
 
-                                    <div class="form-group" ng-init="rellenar_profesiones()">
-
-                                        <select ng-model="agrega_profesion.id_profesion" class="form-control input-lg" ng-options="r_pro.id_profesion as r_pro.nombre_profesion for r_pro in rellenar_pro" required>
-                                            <option value="">---Seleccione---</option>
-                                            <option value=""></option>
-                                        </select>
+                                    <div ng-if="carga_r_p">
+                                        <div layout="row" layout-sm="column" layout-align="space-around">
+                                            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                                        </div>
                                     </div>
-                                </li>
+                                    <div ng-if="!error_r_p">
+                                        error viejo no cargo ...
+
+                                    </div>
+                                    <div ng-show="dif_r_p">
+                                        <div class="form-group" ng-init="rellenar_profesiones()">
+
+                                            <select ng-model="agrega_profesion.id_profesion" class="form-control input-lg" ng-options="r_pro.id_profesion as r_pro.nombre_profesion for r_pro in rellenar_pro" required>
+                                                <option value="">---Seleccione---</option>
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                        </div>
+</li>
                                 <li class="list-group-item">
                                     <div class="row">
                                         <div class="col-md-12">

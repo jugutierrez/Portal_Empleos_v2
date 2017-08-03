@@ -15,51 +15,72 @@
                 <form name="mainForm" data-ng-submit="agregar_experiencia_laboral()" data-ng-controller="data1" ng-model="agrega_experiencia_laboral">
                     <div class="row">
                         <div class="col-md-6">
+                  
+                                <div class="form-group">
+                                    <label class="control-label" for="exampleInputEmail1">Cargo</label>
+                                    <input class="form-control input-lg" id="nombre_experiencia_laboral_curriculum" name="nombre_experiencia_laboral_curriculum" placeholder="EJ:Juan"
+                                           type="text" ng-model="agrega_experiencia_laboral.nombre_experiencia_laboral" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="control-label" for="exampleInputPassword1">Empresa</label>
+                                    <input class="form-control input-lg" id="empresa_experiencia_laboral" name="empresa_experiencia_laboral_curriculum"
+                                           placeholder="EJ: Ascencio" type="text" ng-model="agrega_experiencia_laboral.empresa_experiencia_laboral" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="exampleInputPassword1">Fecha inicio</label>
 
-                            <div class="form-group">
-                                <label class="control-label" for="exampleInputEmail1">Cargo</label>
-                                <input class="form-control input-lg" id="nombre_experiencia_laboral_curriculum" name="nombre_experiencia_laboral_curriculum" placeholder="EJ:Juan"
-                                       type="text" ng-model="agrega_experiencia_laboral.nombre_experiencia_laboral" required>
+                                    <input type="date" class="form-control input-lg" id="exampleInput" name="input" ng-model="agrega_experiencia_laboral.ano_inicio_experiencia_laboral"
+                                           placeholder="yyyy-MM-dd" min="1950-01-01" max="{{currentdate}}" required />
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label" for="exampleInputPassword1">Empresa</label>
-                                <input class="form-control input-lg" id="empresa_experiencia_laboral" name="empresa_experiencia_laboral_curriculum"
-                                       placeholder="EJ: Ascencio" type="text" ng-model="agrega_experiencia_laboral.empresa_experiencia_laboral" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label" for="exampleInputPassword1">Fecha inicio</label>
-
-                                <input type="date" class="form-control input-lg" id="exampleInput" name="input" ng-model="agrega_experiencia_laboral.ano_inicio_experiencia_laboral"
-                                       placeholder="yyyy-MM-dd" min="1950-01-01" max="{{currentdate}}" required />
-                            </div>
-                        </div>
                         <div class="col-md-6">
 
-
-
-                            <div class="form-group" ng-init="rellenar_cargo_experiencias()">
-                                <label class="control-label" for="exampleInputPassword1">Tipo de cargo</label>
-                                <select ng-model="agrega_experiencia_laboral.id_cargo_experiencia_laboral" class="form-control input-lg" ng-options="r_c_exp.id_cargo_experiencia_laboral as r_c_exp.nombre_cargo_experiencia_laboral for r_c_exp in rellenar_cargo_exp" required>
-                                    <option value="">---Seleccione---</option>
-                                    <option value=""></option>
-                                </select>
+                            <div ng-if="carga_r_cex">
+                                <div layout="row" layout-sm="column" layout-align="space-around">
+                                    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                                </div>
                             </div>
+                            <div ng-if="!error_r_cex">
+                                error viejo no cargo ...
 
-
-                            <div class="form-group" ng-init="rellenar_area_experiencias()">
-                                <label class="control-label" for="exampleInputPassword1">Area de Trabajo</label>
-                                <select ng-model="agrega_experiencia_laboral.id_area_experiencia_laboral" class="form-control input-lg" ng-options="r_a_exp.id_area_experiencia_laboral as r_a_exp.nombre_area_experiencia_laboral for r_a_exp in rellenar_area_exp" required>
-                                    <option value="">---Seleccione---</option>
-                                    <option value=""></option>
-                                </select>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label" for="exampleInputPassword1">Fecha termino</label>
+                            <div ng-show="dif_r_cex">
 
-                                <input type="date" class="form-control input-lg" id="exampleInput" name="input" ng-model="agrega_experiencia_laboral.ano_termino_experiencia_laboral"
-                                       placeholder="yyyy-MM-dd" min="1950-01-01" max="{{currentdate}}" required />
+                                <div class="form-group" ng-init="rellenar_cargo_experiencias()">
+                                    <label class="control-label" for="exampleInputPassword1">Tipo de cargo</label>
+                                    <select ng-model="agrega_experiencia_laboral.id_cargo_experiencia_laboral" class="form-control input-lg" ng-options="r_c_exp.id_cargo_experiencia_laboral as r_c_exp.nombre_cargo_experiencia_laboral for r_c_exp in rellenar_cargo_exp" required>
+                                        <option value="">---Seleccione---</option>
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                                </div>
+
+                            <div ng-if="carga_r_aex">
+                                <div layout="row" layout-sm="column" layout-align="space-around">
+                                    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                                </div>
                             </div>
-                        </div>
+                            <div ng-if="!error_r_aex">
+                                error viejo no cargo ...
+
+                            </div>
+                            <div ng-show="dif_r_aex">
+                                <div class="form-group" ng-init="rellenar_area_experiencias()">
+                                    <label class="control-label" for="exampleInputPassword1">Area de Trabajo</label>
+                                    <select ng-model="agrega_experiencia_laboral.id_area_experiencia_laboral" class="form-control input-lg" ng-options="r_a_exp.id_area_experiencia_laboral as r_a_exp.nombre_area_experiencia_laboral for r_a_exp in rellenar_area_exp" required>
+                                        <option value="">---Seleccione---</option>
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="exampleInputPassword1">Fecha termino</label>
+
+                                    <input type="date" class="form-control input-lg" id="exampleInput" name="input" ng-model="agrega_experiencia_laboral.ano_termino_experiencia_laboral"
+                                           placeholder="yyyy-MM-dd" min="1950-01-01" max="{{currentdate}}" required />
+                                </div>
+                            </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="control-label" for="exampleInputEmail1">Ingrese su Presentacion</label>

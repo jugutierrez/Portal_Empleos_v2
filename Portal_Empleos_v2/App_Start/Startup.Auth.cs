@@ -24,11 +24,12 @@ namespace Portal_Empleos_v2
             // Configurar cookie de inicio de sesión
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
-                ExpireTimeSpan = TimeSpan.FromMinutes(30),
+                ExpireTimeSpan = TimeSpan.FromMinutes(1),
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/login/index"),
-                
-                LogoutPath = new PathString("/login/LogOff")
+                LoginPath = new PathString("/login/index")
+               
+               
+               
                // Provider = new CookieAuthenticationProvider
                 //{
                     // Permite a la aplicación validar la marca de seguridad cuando el usuario inicia sesión.

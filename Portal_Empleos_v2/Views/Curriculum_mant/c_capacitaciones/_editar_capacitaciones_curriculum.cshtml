@@ -15,74 +15,89 @@
                     <div class="row">
                         <div class="col-md-6">
 
-
-                            <div class="form-group" ng-init="rellenar_capacitacion()">
-                                <label class="control-label" for="exampleInputPassword1">Tipo Capacitacion</label>
-                                <select ng-model="update_id_capacitacion" class="form-control input-lg" ng-options="r_t_c.id_capacitacion as r_t_c.nombre_capacitacion for r_t_c in rellenar_capa" required>
-                                    <option value="">---Seleccione---</option>
-                                    <option value=""></option>
-                                </select>
-
-                               @* <md-input-container>
-
-        <md-select ng-model="update_id_capacitacion" md-placeholder="Seleccione...">
-            <md-option><em>---Seleccione---</em></md-option>
-            <md-option ng-repeat="r_t_c in rellenar_capa track by $index" ng-value="r_t_c.id_capacitacion" ng-disabled="$index === 1">
-                {{r_t_c.nombre_capacitacion}}
-            </md-option>
-        </md-select>
-    </md-input-container>*@
+                            <div ng-if="carga_r_c">
+                                <div layout="row" layout-sm="column" layout-align="space-around">
+                                    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                                </div>
                             </div>
+                            <div ng-if="!error_r_c">
+                                error viejo no cargo ...
 
-                            <div class="form-group" ng-init="rellenar_estado_capacitacion()">
-                                <label class="control-label" for="exampleInputPassword1">Situacion</label>
-                                <select ng-model="update_id_estado_capacitacion" class="form-control input-lg" ng-options="r_e_c.id_estado_capacitacion as r_e_c.nombre_estado_capacitacion for r_e_c in rellenar_e_capa" required>
-                                    <option value="">---Seleccione---</option>
-                                    <option value=""></option>
-                                </select>
                             </div>
+                            <div ng-show="dif_r_c">
+                                <div class="form-group" ng-init="rellenar_capacitacion()">
+                                    <label class="control-label" for="exampleInputPassword1">Tipo Capacitacion</label>
+                                    <select ng-model="update_id_capacitacion" class="form-control input-lg" ng-options="r_t_c.id_capacitacion as r_t_c.nombre_capacitacion for r_t_c in rellenar_capa" required>
+                                        <option value="">---Seleccione---</option>
+                                        <option value=""></option>
+                                    </select>
 
-                            <div class="form-group">
-                           
-                                <label class="control-label" for="exampleInputPassword1"> Fecha Inicio:</label>
+                
+                                </div>
+                                </div>
 
-                                <input type="datetime" class="form-control input-lg" id="exampleInput" name="input" ng-model="update_ano_inicio_capacitacion_curriculum"
-                                       placeholder="yyyy-MM-dd" min="1950-01-01" max="{{currentdate}}" required />
-                     
+                            <div ng-if="carga_r_ec">
+                                <div layout="row" layout-sm="column" layout-align="space-around">
+                                    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                                </div>
                             </div>
-                        </div>
+                            <div ng-if="!error_r_ec">
+                                error viejo no cargo ...
+
+                            </div>
+                            <div ng-show="dif_r_ec">
+                                <div class="form-group" ng-init="rellenar_estado_capacitacion()">
+                                    <label class="control-label" for="exampleInputPassword1">Situacion</label>
+                                    <select ng-model="update_id_estado_capacitacion" class="form-control input-lg" ng-options="r_e_c.id_estado_capacitacion as r_e_c.nombre_estado_capacitacion for r_e_c in rellenar_e_capa" required>
+                                        <option value="">---Seleccione---</option>
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                                </div>
+                                <div class="form-group">
+
+                                    <label class="control-label" for="exampleInputPassword1"> Fecha Inicio:</label>
+
+                                    <input type="datetime" class="form-control input-lg" id="exampleInput" name="input" ng-model="update_ano_inicio_capacitacion_curriculum"
+                                           placeholder="yyyy-MM-dd" min="1950-01-01" max="{{currentdate}}" required />
+
+                                </div>
+                            </div>
                         <div class="col-md-6">
 
-                            <div class="form-group" ng-init="rellenar_instituciones()">
-                                <label class="control-label" for="exampleInputPassword1">Institucion</label>
-                                <select ng-model="update_id_institucion" class="form-control input-lg" ng-options="r_in.id_institucion as r_in.nombre_institucion for r_in in rellenar_insti" required>
-                                    <option value="">---Seleccione---</option>
-                                    <option value=""></option>
-                                </select>
-                               @*<md-input-container>
-        <label>Institucion</label>
-        <md-select ng-model="update_id_institucion">
-            <md-option><em>---Seleccione---</em></md-option>
-            <md-option ng-repeat="r_in in rellenar_insti track by $index" ng-value="r_in.id_institucion" ng-disabled="$index === 1">
-                {{r_in.nombre_institucion}}
-            </md-option>
-        </md-select>
-    </md-input-container>*@ 
+                            <div ng-if="carga_r_in">
+                                <div layout="row" layout-sm="column" layout-align="space-around">
+                                    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label" for="exampleInputPassword1">Horas Capacitacion:</label>
-                                <input class="form-control input-lg" id="direccion_curriculum" name="direccion_curriculum"
-                                       placeholder="EJ: 20" type="text" ng-model="update_horas_capacitacion" onkeypress="return soloNumeros(event)" maxlength="4" required>
+                            <div ng-if="!error_r_in">
+                                error viejo no cargo ...
+
                             </div>
+                            <div ng-show="dif_r_in">
+                                <div class="form-group" ng-init="rellenar_instituciones()">
+                                    <label class="control-label" for="exampleInputPassword1">Institucion</label>
+                                    <select ng-model="update_id_institucion" class="form-control input-lg" ng-options="r_in.id_institucion as r_in.nombre_institucion for r_in in rellenar_insti" required>
+                                        <option value="">---Seleccione---</option>
+                                        <option value=""></option>
+                                    </select>
 
-                            <div class="form-group">
-                                <label class="control-label" for="exampleInputPassword1"> Fecha termino:</label>
+                                </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="exampleInputPassword1">Horas Capacitacion:</label>
+                                    <input class="form-control input-lg" id="direccion_curriculum" name="direccion_curriculum"
+                                           placeholder="EJ: 20" type="text" ng-model="update_horas_capacitacion" onkeypress="return soloNumeros(event)" maxlength="4" required>
+                                </div>
 
-                                <input type="datetime" class="form-control input-lg" id="exampleInput" name="input" ng-model="update_ano_termino_capacitacion_curriculum"
-                                       placeholder="yyyy-MM-dd" min="1950-01-01" max="{{currentdate}}" required />
+                                <div class="form-group">
+                                    <label class="control-label" for="exampleInputPassword1"> Fecha termino:</label>
+
+                                    <input type="datetime" class="form-control input-lg" id="exampleInput" name="input" ng-model="update_ano_termino_capacitacion_curriculum"
+                                           placeholder="yyyy-MM-dd" min="1950-01-01" max="{{currentdate}}" required />
+                                </div>
+
                             </div>
-
-                        </div>
 
 
                         <div class="col-xs-12">

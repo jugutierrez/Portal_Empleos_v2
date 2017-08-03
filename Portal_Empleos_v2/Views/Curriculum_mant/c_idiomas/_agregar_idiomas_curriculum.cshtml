@@ -16,29 +16,49 @@
                                     <h3>Seleccione un idioma</h3>
                                 </li>
                                 <li class="list-group-item">
-
-                                    <div class="form-group" ng-init="rellenar_idioma()">
-
-                                        <select ng-model="agrega_idioma.id_idioma" class="form-control input-lg" ng-options="r_i.id_idioma as r_i.nombre_idioma for r_i in rellenar_id" required>
-                                            <option value="">---Seleccione---</option>
-                                            <option value=""></option>
-                                        </select>
+                                    <div ng-if="carga_r_id">
+                                        <div layout="row" layout-sm="column" layout-align="space-around">
+                                            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                                        </div>
                                     </div>
-                                </li>
+                                    <div ng-if="!error_r_id">
+                                        error viejo no cargo ...
+
+                                    </div>
+                                    <div ng-show="dif_r_id">
+                                        <div class="form-group" ng-init="rellenar_idioma()">
+
+                                            <select ng-model="agrega_idioma.id_idioma" class="form-control input-lg" ng-options="r_i.id_idioma as r_i.nombre_idioma for r_i in rellenar_id" required>
+                                                <option value="">---Seleccione---</option>
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                    </div>
+</li>
                                 <li class="list-group-item">
                                     <h3>Seleccione un nivel de uso</h3>
                                 </li>
                                 <li class="list-group-item">
 
-
-                                    <div class="form-group" ng-init="rellenar_nivel_idiomas()">
-
-                                        <select ng-model="agrega_idioma.id_nivel_idioma" class="form-control input-lg" ng-options="r_n_i.id_nivel_idioma as r_n_i.nombre_nivel_idioma for r_n_i in rellenar_n_id" required>
-                                            <option value="">---Seleccione---</option>
-                                            <option value=""></option>
-                                        </select>
+                                    <div ng-if="carga_r_ni">
+                                        <div layout="row" layout-sm="column" layout-align="space-around">
+                                            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                                        </div>
                                     </div>
-                                </li>
+                                    <div ng-if="!error_r_ni">
+                                        error viejo no cargo ...
+
+                                    </div>
+                                    <div ng-show="dif_r_ni">
+                                        <div class="form-group" ng-init="rellenar_nivel_idiomas()">
+
+                                            <select ng-model="agrega_idioma.id_nivel_idioma" class="form-control input-lg" ng-options="r_n_i.id_nivel_idioma as r_n_i.nombre_nivel_idioma for r_n_i in rellenar_n_id" required>
+                                                <option value="">---Seleccione---</option>
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                        </div>
+</li>
                                 <li class="list-group-item">
                                     <div class="row">
                                         <div class="col-md-12">

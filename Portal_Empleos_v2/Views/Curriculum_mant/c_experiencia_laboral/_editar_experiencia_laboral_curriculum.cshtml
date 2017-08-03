@@ -39,31 +39,51 @@
                         <div class="col-md-6">
 
 
-
-
-                            <div class="form-group" ng-init="rellenar_cargo_experiencias()">
-                                <label class="control-label" for="exampleInputPassword1">Tipo de cargo</label>
-                                <select ng-model="update_id_cargo_experiencia_laboral" class="form-control input-lg" ng-options="r_c_exp.id_cargo_experiencia_laboral as r_c_exp.nombre_cargo_experiencia_laboral for r_c_exp in rellenar_cargo_exp" required>
-                                    <option value="">---Seleccione---</option>
-                                    <option value=""></option>
-                                </select>
+                            <div ng-if="carga_r_cex">
+                                <div layout="row" layout-sm="column" layout-align="space-around">
+                                    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                                </div>
                             </div>
-                            <div class="form-group" ng-init="rellenar_area_experiencias()">
-                                <label class="control-label" for="exampleInputPassword1">Area de Trabajo</label>
-                                <select ng-model="update_id_area_experiencia_laboral" class="form-control input-lg" ng-options="r_a_exp.id_area_experiencia_laboral as r_a_exp.nombre_area_experiencia_laboral for r_a_exp in rellenar_area_exp" required>
-                                    <option value="">---Seleccione---</option>
-                                    <option value=""></option>
-                                </select>
+                            <div ng-if="!error_r_cex">
+                                error viejo no cargo ...
+
                             </div>
+                            <div ng-show="dif_r_cex">
 
+                                <div class="form-group" ng-init="rellenar_cargo_experiencias()">
+                                    <label class="control-label" for="exampleInputPassword1">Tipo de cargo</label>
+                                    <select ng-model="update_id_cargo_experiencia_laboral" class="form-control input-lg" ng-options="r_c_exp.id_cargo_experiencia_laboral as r_c_exp.nombre_cargo_experiencia_laboral for r_c_exp in rellenar_cargo_exp" required>
+                                        <option value="">---Seleccione---</option>
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                                </div>
+                                <div ng-if="carga_r_aex">
+                                    <div layout="row" layout-sm="column" layout-align="space-around">
+                                        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                                    </div>
+                                </div>
+                                <div ng-if="!error_r_aex">
+                                    error viejo no cargo ...
 
-                            <div class="form-group">
-                                <label class="control-label" for="exampleInputPassword1">Fecha termino</label>
+                                </div>
+                                <div ng-show="dif_r_aex">
+                                    <div class="form-group" ng-init="rellenar_area_experiencias()">
+                                        <label class="control-label" for="exampleInputPassword1">Area de Trabajo</label>
+                                        <select ng-model="update_id_area_experiencia_laboral" class="form-control input-lg" ng-options="r_a_exp.id_area_experiencia_laboral as r_a_exp.nombre_area_experiencia_laboral for r_a_exp in rellenar_area_exp" required>
+                                            <option value="">---Seleccione---</option>
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
 
-                                <input type="datetime" class="form-control input-lg" id="exampleInput" name="input" ng-model="update_ano_termino_experiencia_laboral"
-                                       placeholder="yyyy-MM-dd" min="1950-01-01" max="{{currentdate}}" required />
+                                <div class="form-group">
+                                    <label class="control-label" for="exampleInputPassword1">Fecha termino</label>
+
+                                    <input type="datetime" class="form-control input-lg" id="exampleInput" name="input" ng-model="update_ano_termino_experiencia_laboral"
+                                           placeholder="yyyy-MM-dd" min="1950-01-01" max="{{currentdate}}" required />
+                                </div>
                             </div>
-                        </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="control-label" for="exampleInputEmail1">Ingrese su Presentacion</label>
@@ -80,10 +100,9 @@
 
                                     </div>
                                     <div class="form-group ">
-                                        <div ng-controller="data1">
-
+                                      
                                             <a href="" class="btn  btn-block btn-danger btn-lg" ng-click="closeDialog()">Cancelar</a>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>

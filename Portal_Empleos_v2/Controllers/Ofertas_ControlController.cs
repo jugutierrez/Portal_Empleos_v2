@@ -14,7 +14,7 @@ namespace Portal_Empleos_v2.Controllers
     {
         public int itemsPerPage = 5;
         private PersonaDBContext db = new PersonaDBContext();
-        // GET: Ofertas_Control
+        mail m = new mail();
         
         public ActionResult Index()
         {
@@ -428,12 +428,15 @@ namespace Portal_Empleos_v2.Controllers
                     }
 
                 }
-          
-               int bol = db.Database.SqlQuery<int>("select id_postulacion from postulaciones where id_persona = {0} and id_oferta = {1}", id_persona, datos_oferta.id_oferta).Count();
+              
+                int bol = db.Database.SqlQuery<int>("select id_postulacion from postulaciones where id_persona = {0} and id_oferta = {1}", id_persona, datos_oferta.id_oferta).Count();
                 if (bol == 0)
                     {
                         db.Database.ExecuteSqlCommand("Exec sp_inserta_postulacion_cuestionario @id_persona = {0}, @id_oferta  = {1}, @id_cuestionario ={2} , @ids_pregunta_1 = {3} , @ids_respuestas_1 = {4} , @ids_pregunta_2 = {5} , @texto_respuesta_2 = {6} ", id_persona, datos_oferta.id_oferta, datos_oferta.id_cuestionario, a1, a2, b1, b2);
-                        return Json(new { success = true, responseText = "Te postulaste exitosamente" }, JsonRequestBehavior.AllowGet);
+
+                    var k = db.personas.Find(id_persona);
+                    m.enviar_correo(null, k.correo_electronico_persona, 2);
+                    return Json(new { success = true, responseText = "Te postulaste exitosamente" }, JsonRequestBehavior.AllowGet);
                     }
                     else
                     {

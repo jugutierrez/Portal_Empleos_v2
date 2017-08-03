@@ -150,10 +150,11 @@ namespace Portal_Empleos_v2.Controllers
         {
             try
             {
-                if (Session.Contents.Count < 1)
+                if (Request.IsAuthenticated)
                 {
-                    return RedirectToAction("LogOff", "login");
+                    return PartialView("_vista_termino_sesion");
                 }
+              
                 ViewBag.id = id;
                 return PartialView("c_foto/_editar_foto_curriculum");
             }
@@ -254,7 +255,11 @@ namespace Portal_Empleos_v2.Controllers
         {
             try
             {
-                db.Database.ExecuteSqlCommand("");
+                db.Database.ExecuteSqlCommand("exec sp_actualiza_persona_curriculum @id_persona = {0} , @nombre_persona = {1} , @apellido_materno_persona = {2} , @apellido_paterno_persona = {3} , " +
+                    " @identificacion_persona = {4} , @correo_electronico_persona = {5} , @fecha_nacimiento_persona = {6} , @id_comuna ={7} , @id_tipo_identificacion_persona = {8} ,@id_tipo_persona = {9} , "+
+                    "@direccion_curriculum = {10} , @telefono_curriculum_1 = {11} , @telefono_curriculum_2 = {12} ,@sueldo_esperado = {13} , @id_curriculum = {14}" , Convert.ToInt32(Session["persona_id"]), datos_per.nombre_persona , datos_per.apellido_materno_persona,
+                    datos_per.apellido_paterno_persona , datos_per.identificacion_persona ,datos_per.correo_electronico_persona , datos_per.fecha_nacimiento_persona , datos_per.id_comuna , datos_per.id_tipo_identificacion_persona,
+                    datos_per.id_tipo_persona , datos_per.direccion_curriculum , datos_per.telefono_curriculum_1 , datos_per.telefono_curriculum_2,datos_per.sueldo_esperado , Convert.ToInt32(Session["curriculum_id"]));
 
                 return Json(new { success = true, datos_p = datos_per }, JsonRequestBehavior.AllowGet);
 
@@ -275,17 +280,14 @@ namespace Portal_Empleos_v2.Controllers
             {
            
          
-                curriculums curriculum = db.curriculums.Find(Convert.ToInt32(Session["curriculum_id"]));
+                var c = db.curriculums.Find(Convert.ToInt32(Session["curriculum_id"]));
 
-                if (curriculum.descripcion_curriculum.Length > 0)
+                if (String.IsNullOrEmpty(c.descripcion_curriculum))
                 {
 
-                    return Json(new { success = true, desc_c = curriculum.descripcion_curriculum }, JsonRequestBehavior.AllowGet);
+                    return Json(new { success = true, desc_c = "" }, JsonRequestBehavior.AllowGet);
                 }
-                else
-                {
-                    return Json(new { success = false, desc_c = curriculum.descripcion_curriculum }, JsonRequestBehavior.AllowGet);
-                }
+                return Json(new { success = true, desc_c = c.descripcion_curriculum }, JsonRequestBehavior.AllowGet);
             }
 
             catch (Exception ex)
@@ -299,10 +301,15 @@ namespace Portal_Empleos_v2.Controllers
         {
             try
             {
+                /*
+                if (!Request.IsAuthenticated)
+                {
+                    return PartialView("_vista_termino_sesion");
+                }
                 if (Session.Contents.Count < 1)
                 {
                     return RedirectToAction("LogOff", "login");
-                }
+                }*/
 
                 return PartialView("c_descripcion/_editar_descripcion_curriculum");
             }
@@ -1894,9 +1901,24 @@ namespace Portal_Empleos_v2.Controllers
 
         public ActionResult actualiza_descripcion( modelo_actualiza_descripcion actualizar_descripcion)
         {
+            try
+            {
+                if (!Request.IsAuthenticated)
+                {
+                    return RedirectToAction("LogOff", "login");
+                }
+                if (Session.Contents.Count < 1)
+                {
+                    return RedirectToAction("LogOff", "login");
+                }
+                db.Database.ExecuteSqlCommand("UPDATE curriculums SET descripcion_curriculum = {0}  WHERE id_curriculum = {1}", actualizar_descripcion.descripcion_curriculum, Convert.ToInt32(Session["curriculum_id"]));
 
-            db.Database.ExecuteSqlCommand("UPDATE curriculums SET descripcion_curriculum = {0}  WHERE id_curriculum = {1}",actualizar_descripcion.descripcion_curriculum , Convert.ToInt32(Session["curriculum_id"]));
-            return Json(new { success = true, rellenar_g = actualizar_descripcion }, JsonRequestBehavior.AllowGet);
+                return Json(new { success = true, respuesta = actualizar_descripcion }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
         }
 
      

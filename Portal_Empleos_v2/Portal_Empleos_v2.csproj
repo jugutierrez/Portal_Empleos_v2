@@ -1246,6 +1246,10 @@
     <Content Include="Views\Emails\_ViewStart.cshtml" />
     <Content Include="Views\Emails\Web.config" />
     <Content Include="Views\Curriculum_mant\c_experiencia_laboral\referencia_laboral\_eliminar_referencia_laboral_curriculum.cshtml" />
+    <Content Include="Views\login\_recuperar_credenciales.cshtml" />
+    <Content Include="Views\login\_registrarse.cshtml" />
+    <Content Include="Views\Emails\recupera_contraseña_correo.cshtml" />
+    <Content Include="Views\Shared\_vista_termino_sesion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

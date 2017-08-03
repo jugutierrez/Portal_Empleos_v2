@@ -11,7 +11,7 @@ namespace Portal_Empleos_v2.Controllers
     public class cuentaController : Controller
     {
         private PersonaDBContext db = new PersonaDBContext();
-
+        mail ms = new Portal_Empleos_v2.mail();
         [Authorize]
         public ActionResult Index()
         {
@@ -88,12 +88,14 @@ namespace Portal_Empleos_v2.Controllers
             try{
                 db.Database.ExecuteSqlCommand("exec sp_inserta_persona_curriculum  @nombre_persona  = {0}, @apellido_paterno_persona = {1} ,@apellido_materno_persona = {2} , "+
                 "@identificacion_persona ={3} , @digito_verificador_identificacion_persona = {4}, @correo_electronico_persona  = {5}, @fecha_nacimiento_persona = {6} , @clave_persona = {7} ," +
-                " @id_comuna = {8} , @id_tipo_identificacion_persona  = {9}, @id_discapacidad_persona = {10}, @id_tipo_persona = {11}, @direccion_curriculum = {12} ,@telefono_curriculum_1  ={13}, " + 
-                " @telefono_curriculum_2 = {14},@sueldo_esperado = {15}" ,datos_cuenta_personas.nombre_persona ,datos_cuenta_personas.apellido_paterno_persona ,datos_cuenta_personas.apellido_materno_persona ,
+                " @id_comuna = {8} , @id_tipo_identificacion_persona  = {9}, @id_tipo_persona = {10}, @direccion_curriculum = {11} ,@telefono_curriculum_1  ={12}, " + 
+                " @telefono_curriculum_2 = {13},@sueldo_esperado = {14}" ,datos_cuenta_personas.nombre_persona ,datos_cuenta_personas.apellido_paterno_persona ,datos_cuenta_personas.apellido_materno_persona ,
                datos_cuenta_personas.identificacion_persona , datos_cuenta_personas.digito_verificador_identificacion_persona , datos_cuenta_personas.correo_electronico_persona ,
                datos_cuenta_personas.fecha_nacimiento_persona , datos_cuenta_personas.clave_persona_1 , datos_cuenta_personas.id_comuna , datos_cuenta_personas.id_tipo_identificacion_persona ,
-               datos_cuenta_personas.id_discapacidad_persona , datos_cuenta_personas.id_tipo_persona ,datos_cuenta_personas.direccion_curriculum , datos_cuenta_personas.telefono_curriculum_1 ,
+               datos_cuenta_personas.id_tipo_persona ,datos_cuenta_personas.direccion_curriculum , datos_cuenta_personas.telefono_curriculum_1 ,
                datos_cuenta_personas.telefono_curriculum_2 ,datos_cuenta_personas.sueldo_esperado);
+
+                ms.enviar_correo(null, datos_cuenta_personas.correo_electronico_persona, 0);
 
                 return Json(new { success = true, respuesta = new { caca = "caca" } }, JsonRequestBehavior.AllowGet);
             }
@@ -109,9 +111,10 @@ namespace Portal_Empleos_v2.Controllers
         {
             try
             {
-                mail ms = new Portal_Empleos_v2.mail();
-                
-              ms.Correo_recupera_credenciales(recordar_cuenta_personas.correo_electronico_persona,recordar_cuenta_personas.identificacion_persona,recordar_cuenta_personas.digito_identificacion_persona,"juan","123123");
+           
+               // ms.enviar_correo(null, recordar_cuenta_personas.correo_electronico_persona, 0);
+            
+               // ms.Correo_recupera_credenciales(recordar_cuenta_personas.correo_electronico_persona,recordar_cuenta_personas.identificacion_persona,recordar_cuenta_personas.digito_identificacion_persona,"juan","123123");
 
                 return Json(new { success = true, respuesta = new { caca = "caca" } }, JsonRequestBehavior.AllowGet);
             }

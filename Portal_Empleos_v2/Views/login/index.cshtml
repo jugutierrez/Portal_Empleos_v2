@@ -31,18 +31,23 @@
                         @Html.TextBox("clave_persona", null, new { @class = "form-control", @placeholder = "Ingrese su Contraseña", @type = "password", @maxlength = "20" })
 
                     </div>
-                    <div class="text-center">
+                    <div class="text-center" ng-controller="soporte">
                         <button type="submit" class="btn btn-block btn-lg btn-info">Ingresar</button>
                         <hr>
                         <p>
 
 
-                            <h3>@Html.ActionLink("¿Olvido sus Credenciales?", "recordar_credenciales", "login", routeValues: null, htmlAttributes: new { @class = "text-info" })</h3>
+                            <h2>
+                            <a ng-click="abremodal('../login/recordar_credenciales' , '')" class = "text-info">¿Olvido sus Credenciales?</a>
+                            </h2>
 
                         </p>
                         <hr>
                         <p>
-                            <h2> @Html.ActionLink("Registrarse", "vista_registro", "login", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "text-info" })</h2>
+                            <h2>
+                           
+                                <a ng-click="abremodal('../login/vista_registro' , '')" class="text-info">Registrarse</a>
+                            </h2>
                         </p>
                     </div>
                     <hr>

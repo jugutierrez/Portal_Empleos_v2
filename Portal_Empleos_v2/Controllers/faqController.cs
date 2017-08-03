@@ -39,14 +39,14 @@ namespace Portal_Empleos_v2.Controllers
           List <regiones> k =  db.regiones.ToList();
             return Json(new { success = true, regiones = k }, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult rellenar_ciudades()
+        public ActionResult rellenar_ciudades(int id)
         {
-            List<ciudades> ke = db.ciudades.ToList();
+            List<ciudades> ke = db.Database.SqlQuery<ciudades>("select * from ciudades where id_region = {0}",id).ToList();
             return Json(new { success = true, ciudades = ke }, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult rellenar_comunas()
+        public ActionResult rellenar_comunas(int id)
         {
-            List<comunas> k = db.comunas.ToList();
+            List<comunas> k = db.Database.SqlQuery<comunas>("select * from comunas where id_ciudad = {0}", id).ToList();
             return Json(new { success = true, comunas = k }, JsonRequestBehavior.AllowGet);
         }
 

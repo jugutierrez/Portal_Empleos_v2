@@ -16,9 +16,7 @@
                             <h2 class="text-center">Descripcion y presentacion Curriculum</h2>
                             <hr>
                             <ul class="list-group">
-                                <li class="list-group-item">
-                                    <h3 class="text-center">Modifique su presentacion&nbsp;</h3>
-                                </li>
+                             
                                 <li class="list-group-item">
                                     <div class="col-md-12">
 
@@ -29,31 +27,20 @@
                                                 <md-progress-circular md-mode="indeterminate"></md-progress-circular>
                                             </div>
                                         </div>
-                                        <div ng-if="!ver_desc && desc_curriculum.length <= 0">
-                                            No se Encontraron resultados ...
-
-                                        </div>
-                                        <div ng-if="!ver_desc && error_desc">
-                                            baia ...
-
-                                        </div>
-                                        <div ng-show="desc_curriculum.length > 0">
-                                            <ul class="list-group">
-                                                <li class="list-group-item list-group-item-info"><h5 class="text-muted">{{::desc_curriculum}}</h5></li>
-                                            </ul>
-
-                                        </div>
-
 
                                     </div>
-                                    <md-input-container class="md-block">
-                                        <h3>Mi Presentacion (Maximo De Caracteres: 500)</h3>
-                                        <hr />
-                                        <textarea ng-model="actualizar_descripcion.descripcion_curriculum" ng_init="actualizar_descripcion.descripcion_curriculum = desc_curriculum" md-maxlength="500" maxlength="500" rows="5" md-select-on-focus></textarea>
 
 
-                                    </md-input-container>
 
+
+                                        <md-input-container class="md-block">
+                                            <h3>Mi Presentacion (Maximo De Caracteres: 500)</h3>
+                                            <hr />
+                                            <textarea ng-model="actualizar_descripcion.descripcion_curriculum" ng_init="actualizar_descripcion.descripcion_curriculum = desc_curriculum" md-maxlength="500" maxlength="500" rows="5" md-select-on-focus></textarea>
+
+
+                                        </md-input-container>
+                                    
 
 
                                 </li>

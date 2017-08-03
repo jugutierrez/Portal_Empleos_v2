@@ -34,6 +34,8 @@ namespace Portal_Empleos_v2.Models
 
             public string nombre_direccion { get; set; }
 
+        public int oferta_inclusiva { get; set; }
+
 
 
 

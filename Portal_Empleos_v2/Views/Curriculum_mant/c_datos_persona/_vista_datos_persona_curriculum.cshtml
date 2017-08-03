@@ -34,7 +34,7 @@
                         <div class="col-md-12">
                             Nombre Completo:
                             <ul class="list-group">
-                                <li class="list-group-item"> {{::datos_per.nombre_persona}} {{::datos_per.apellido_paterno_persona}} {{::datos_per.apellido_materno_persona}}</li>
+                                <li class="list-group-item"> {{datos_per.nombre_persona}} {{datos_per.apellido_paterno_persona}} {{datos_per.apellido_materno_persona}}</li>
                             </ul>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                         <div class="col-md-6">
                             Tipo identificacion:
                             <ul class="list-group">
-                                <li class="list-group-item">{{::datos_per.nombre_tipo_identificacion_persona}}</li>
+                                <li class="list-group-item">{{datos_per.nombre_tipo_identificacion_persona}}</li>
                             </ul>
                         </div>
                     </div>
@@ -56,19 +56,19 @@
                         <div class="col-md-4">
                             Region:
                             <ul class="list-group">
-                                <li class="list-group-item">{{::datos_per.nombre_region}}</li>
+                                <li class="list-group-item">{{datos_per.nombre_region}}</li>
                             </ul>
                         </div>
                         <div class="col-md-4">
                             Ciudad:
                             <ul class="list-group">
-                                <li class="list-group-item">{{::datos_per.nombre_ciudad}}</li>
+                                <li class="list-group-item">{{datos_per.nombre_ciudad}}</li>
                             </ul>
                         </div>
                         <div class="col-md-4">
                             Comuna:
                             <ul class="list-group">
-                                <li class="list-group-item">{{::datos_per.nombre_comuna}}</li>
+                                <li class="list-group-item">{{datos_per.nombre_comuna}}</li>
                             </ul>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                         <div class="col-md-12">
                             Direccion:
                             <ul class="list-group">
-                                <li class="list-group-item">{{::datos_per.direccion_curriculum}}</li>
+                                <li class="list-group-item">{{datos_per.direccion_curriculum}}</li>
                             </ul>
                         </div>
                     </div>
@@ -84,13 +84,13 @@
                         <div class="col-md-6">
                             Fecha de Nacimiento:
                             <ul class="list-group">
-                                <li class="list-group-item">{{::datos_per.fecha_nacimiento_persona.replace('/Date(','').replace(')/','') | date:'dd-MM-yyyy'}}</li>
+                                <li class="list-group-item">{{datos_per.fecha_nacimiento_persona.replace('/Date(','').replace(')/','') | date:'dd-MM-yyyy'}}</li>
                             </ul>
                         </div>
                         <div class="col-md-6">
                             Sexo:
                             <ul class="list-group">
-                                <li class="list-group-item">{{::datos_per.nombre_tipo_persona}}</li>
+                                <li class="list-group-item">{{datos_per.nombre_tipo_persona}}</li>
                             </ul>
                         </div>
                     </div>
@@ -99,7 +99,7 @@
                         <div class="col-md-12">
                             Correo Electronico:
                             <ul class="list-group">
-                                <li class="list-group-item">{{::datos_per.correo_electronico_persona}}</li>
+                                <li class="list-group-item">{{datos_per.correo_electronico_persona}}</li>
                             </ul>
                         </div>
 
@@ -108,19 +108,19 @@
                         <div class="col-md-4">
                             Sueldo esperado:
                             <ul class="list-group">
-                                <li class="list-group-item">${{::datos_per.sueldo_esperado}}</li>
+                                <li class="list-group-item">${{datos_per.sueldo_esperado}}</li>
                             </ul>
                         </div>
                         <div class="col-md-4">
                             Numero Contacto:
                             <ul class="list-group">
-                                <li class="list-group-item">{{::datos_per.telefono_curriculum_1}}</li>
+                                <li class="list-group-item">{{datos_per.telefono_curriculum_1}}</li>
                             </ul>
                         </div>
                         <div class="col-md-4">
                             Otro Contacto(Opcional):
                             <ul class="list-group">
-                                <li class="list-group-item">{{::datos_per.telefono_curriculum_2}}</li>
+                                <li class="list-group-item">{{datos_per.telefono_curriculum_2}}</li>
                             </ul>
                         </div>
                     </div>

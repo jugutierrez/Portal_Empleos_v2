@@ -17,28 +17,48 @@
                                     <h3>Seleccione un software</h3>
                                 </li>
                                 <li class="list-group-item">
-
-                                    <div class="form-group" ng-init="rellenar_softwares()">
-
-                                        <select ng-model="agrega_software.id_software" class="form-control input-lg" ng-options="r_soft.id_software as r_soft.nombre_software for r_soft in rellenar_soft" required>
-                                            <option value="">---Seleccione---</option>
-                                            <option value=""></option>
-                                        </select>
+                                    <div ng-if="carga_r_s">
+                                        <div layout="row" layout-sm="column" layout-align="space-around">
+                                            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                                        </div>
                                     </div>
-                                </li>
+                                    <div ng-if="!error_r_s">
+                                        error viejo no cargo ...
+
+                                    </div>
+                                    <div ng-show="dif_r_s">
+                                        <div class="form-group" ng-init="rellenar_softwares()">
+
+                                            <select ng-model="agrega_software.id_software" class="form-control input-lg" ng-options="r_soft.id_software as r_soft.nombre_software for r_soft in rellenar_soft" required>
+                                                <option value="">---Seleccione---</option>
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                        </div>
+</li>
                                 <li class="list-group-item">
                                     <h3>Seleccione un nivel de uso</h3>
                                 </li>
                                 <li class="list-group-item">
-
-                                    <div class="form-group" ng-init="rellenar_grado_softwares()">
-
-                                        <select ng-model="agrega_software.id_grado_conocimiento_software" class="form-control input-lg" ng-options="r_g_soft.id_grado_conocimiento_software as r_g_soft.nombre_grado_conocimiento_software for r_g_soft in rellenar_g_soft" required>
-                                            <option value="">---Seleccione---</option>
-                                            <option value=""></option>
-                                        </select>
+                                    <div ng-if="carga_r_gs">
+                                        <div layout="row" layout-sm="column" layout-align="space-around">
+                                            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                                        </div>
                                     </div>
-                                </li>
+                                    <div ng-if="!error_r_gs">
+                                        error viejo no cargo ...
+
+                                    </div>
+                                    <div ng-show="dif_r_gs">
+                                        <div class="form-group" ng-init="rellenar_grado_softwares()">
+
+                                            <select ng-model="agrega_software.id_grado_conocimiento_software" class="form-control input-lg" ng-options="r_g_soft.id_grado_conocimiento_software as r_g_soft.nombre_grado_conocimiento_software for r_g_soft in rellenar_g_soft" required>
+                                                <option value="">---Seleccione---</option>
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                        </div>
+</li>
                                 <li class="list-group-item">
                                     <div class="row">
                                         <div class="col-md-12">
